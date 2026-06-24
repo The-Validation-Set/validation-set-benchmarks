@@ -1,0 +1,23 @@
+# dependencies
+node_modules/
+
+# remotion / build output
+out/
+build/
+dist/
+.remotion/
+
+# media assets (bring your own; not committed)
+public/*.mp4
+public/*.mov
+public/*.wav
+public/*.mp3
+
+# os / editor
+.DS_Store
+*.log
+
+# stray local test files
+.ovtest
+.ovsrc
+.writetest

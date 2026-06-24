@@ -1,0 +1,192 @@
+{
+  "episode": {
+    "id": "EP002",
+    "format": "tuesday_blueprint",
+    "working_title": "I Built the Local Rig and Benchmarked It vs the Cloud",
+    "publish_target": "2026-06-04"
+  },
+  "snapshot": {
+    "locked_at_utc": "2026-06-03T23:08:21Z",
+    "source": "measured",
+    "note": "Fair fight: Ollama llama3.2:3b LOCAL (8GB Mac) vs the same model on a free Google Colab Tesla T4 -- throughput + latency MEASURED on both. Cost callback: local (hardware + measured-throughput electricity) vs managed API rent (Sonnet-class, claude-sonnet-4-6) at 150,000,000 tok/mo -- the managed side is a PRICE MODEL (rate VERIFIED Jun 2026), not a live call. Cloud GPU $/1M is MODELED at a $0.35/hr T4 rental rate; the T4 throughput was measured free on Colab."
+  },
+  "topic": "Local rig vs cloud GPU (same model), plus the cost vs managed API",
+  "bench_config": {
+    "local_model": "llama3.2:3b",
+    "ollama_url": "http://localhost:11434",
+    "cloud_model": "llama3.2:3b",
+    "cloud_ollama_url": "colab-free-tesla-t4",
+    "managed_provider": "anthropic",
+    "managed_model": "claude-sonnet-4-6",
+    "num_prompts": 5,
+    "runs": 3,
+    "max_tokens": 512,
+    "measurement_host": "macOS-26.3.2-arm64-arm-64bit-Mach-O",
+    "cloud_measurement_host": "Google Colab NVIDIA Tesla T4 (re-measured 2026-06-04)"
+  },
+  "assumptions": {
+    "local_power_watts": 30.0,
+    "local_power_source": "modeled",
+    "electricity_usd_per_kwh": 0.17,
+    "local_hardware_usd_onetime": 2500.0,
+    "cloud_gpu_usd_per_hour": 0.35,
+    "managed_blended_usd_per_1m": 4.0,
+    "agent_tokens_per_month": 150000000.0
+  },
+  "results": {
+    "local": {
+      "tokens_per_sec": 16.47,
+      "ttft_ms": 964.53,
+      "latency_ms_avg": 14605.7,
+      "total_output_tokens": 3320,
+      "usd_per_1m_tokens_electricity_modeled": 0.086
+    },
+    "cloud_vm": {
+      "tokens_per_sec": 70.93,
+      "ttft_ms": 6458.68,
+      "latency_ms_avg": 3586.8,
+      "total_output_tokens": 3180,
+      "usd_per_1m_tokens_gpu_modeled": 1.3707
+    },
+    "managed": {
+      "tokens_per_sec": null,
+      "usd_per_1m_tokens_blended": 4.0,
+      "projected_usd_per_year": 7200.0
+    }
+  },
+  "chart_bars": {
+    "title": "Same model, head-to-head: Local rig vs Cloud GPU",
+    "localLabel": "Local (llama3.2:3b)",
+    "cloudLabel": "Cloud T4 (llama3.2:3b)",
+    "metrics": [
+      {
+        "label": "Tokens / sec",
+        "local": 16.47,
+        "cloud": 70.93,
+        "unit": "tok/s",
+        "better": "higher",
+        "decimals": 1
+      },
+      {
+        "label": "Latency (avg)",
+        "local": 14605.7,
+        "cloud": 3586.8,
+        "unit": "ms",
+        "better": "lower",
+        "decimals": 0
+      },
+      {
+        "label": "$ / 1M tokens",
+        "local": 0.086,
+        "cloud": 1.3707,
+        "unit": "$",
+        "better": "lower",
+        "decimals": 2
+      }
+    ]
+  },
+  "cost_compare": {
+    "title": "12-Month Cost: Managed API rent vs Local rig (measured power)",
+    "unit": "USD",
+    "x_labels": [
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6",
+      "M7",
+      "M8",
+      "M9",
+      "M10",
+      "M11",
+      "M12"
+    ],
+    "series": [
+      {
+        "label": "Managed API (anthropic, cumulative)",
+        "kind": "cloud",
+        "values": [
+          0.0,
+          600.0,
+          1200.0,
+          1800.0,
+          2400.0,
+          3000.0,
+          3600.0,
+          4200.0,
+          4800.0,
+          5400.0,
+          6000.0,
+          6600.0,
+          7200.0
+        ]
+      },
+      {
+        "label": "Local rig (hardware + measured electricity)",
+        "kind": "local",
+        "values": [
+          2500.0,
+          2512.9,
+          2525.8,
+          2538.71,
+          2551.61,
+          2564.51,
+          2577.41,
+          2590.32,
+          2603.22,
+          2616.12,
+          2629.02,
+          2641.92,
+          2654.83
+        ]
+      }
+    ],
+    "breakout_index": 5
+  },
+  "hero_metrics": [
+    {
+      "id": "local_tok_s",
+      "label": "Local throughput",
+      "value": "16",
+      "context": "tok/s on llama3.2:3b",
+      "kind": "rate"
+    },
+    {
+      "id": "cloud_tok_s",
+      "label": "Cloud GPU throughput",
+      "value": "71",
+      "context": "tok/s, same model on a free Colab T4",
+      "kind": "rate"
+    },
+    {
+      "id": "managed_year1",
+      "label": "Managed API rent",
+      "value": "$7,200/yr",
+      "context": "at 150M tok/mo (the EP001 number)",
+      "kind": "currency"
+    },
+    {
+      "id": "breakeven",
+      "label": "Local break-even",
+      "value": "~Month 5",
+      "context": "rig pays for itself vs managed rent",
+      "kind": "month"
+    }
+  ],
+  "eyebrow": "DATA_MEASURED // LOCAL 8GB MAC vs CLOUD T4",
+  "integrity_notes": [
+    "tokens/sec + latency (LOCAL and CLOUD_VM) are MEASURED via Ollama telemetry, same model both sides; LOCAL on an 8GB Mac, CLOUD on a free Google Colab Tesla T4.",
+    "local $/1M is MODELED electricity at 30.0W / $0.17/kWh; cloud_vm $/1M is MODELED at the T4 rental rate ($0.35/hr, VERIFIED Jun 2026: RunPod ~$0.40/hr) divided by its MEASURED throughput (the Colab T4 was free).",
+    "cloud latency is the WARM mean of 14 calls; the one-time ~92s cold-start model-load call (first of 15) is excluded. Local Mac was already warm, so both are warm-state. Cloud 70.9 tok/s REPRODUCED last night's 71.5 (two independent Colab T4 runs).",
+    "cost_compare managed line is a PRICE MODEL: $4.0/1M blended x 150M tok/mo = $7,200/yr. VERIFIED: this = a Sonnet-class API (claude-sonnet-4-6 @ $3/$15 per 1M in/out) on an input-heavy agent mix (~10:1) -> ~$4.1/1M. The cheapest model (claude-haiku-4-5 @ $1/$5) at the same mix is ~$1.4/1M (~$2,500/yr); $4/1M is therefore a Sonnet-class, conservative figure.",
+    "hardware is one-time and shown as the flat base of the local line, never folded into per-token $."
+  ],
+  "sources_to_cite": [
+    "Anthropic pricing (verified 2026-04-29): claude-sonnet-4-6 $3 / $15 per 1M (in/out); claude-haiku-4-5 $1 / $5. The $4/1M blend = a Sonnet-class, input-heavy coding agent.",
+    "T4 rental $0.35/hr (MODELED; verified Jun 2026: RunPod T4 ~$0.40/hr, market $0.13-0.60/hr). Throughput measured FREE on a Google Colab Tesla T4.",
+    "Ollama model tag: llama3.2:3b",
+    "measurement hosts: LOCAL macOS-26.3.2-arm64 ; CLOUD Google Colab NVIDIA Tesla T4"
+  ]
+}

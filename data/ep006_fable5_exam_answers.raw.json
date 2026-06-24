@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "episode": "EP006",
+    "captured_utc": "2026-06-10",
+    "subject_model": "Claude Fable 5 (claude-fable-5), via Claude desktop (Cowork) sub-agent contexts",
+    "method": "Each of the 15 eval_tasks.json prompts was sent VERBATIM to a fresh, isolated agent context running Fable 5 — a cold context per task, so the subject never sees the answer key, the repo, or any prior task. Two independent passes (A, B) for a stability check. The orchestrating session never answered any task itself (it has seen eval_tasks.json, so it is contaminated and is not the subject).",
+    "wrapper_text_verbatim": "You are being asked a single question. Reply with only your answer — no preamble, no tool use, no file access.\n\n",
+    "wrapper_note": "The wrapper exists to suppress the agent harness's tool use so the comparison to EP004's tool-less local models stays fair. It is the ONLY text added to each task prompt, and is identical for every task and pass.",
+    "harness_artifact_note": "The agent harness appends a summary line beginning 'result:' to many returned messages (usually trailing; once interleaved before the final answer line in pass B of math_team_loc). These lines are capture-path artifacts, not the subject's answer text: the task prompts never ask for such a line, and EP004's local models were graded on bare model output with no equivalent wrapper. They are preserved verbatim here; the adapter grades BOTH raw and with all 'result:'-labelled lines removed, and reports both outcomes. Diagnosed effect: the word 'total' inside the harness summary is an answer-cue for run_quality's number extractor, which then reads '3' from '(3 engineers...' — a wrapper line flipping a grade the model's own text passes.",
+    "timing_note": "wall_ms is end-to-end harness wall time (includes multi-second agent startup overhead). It is NOT model generation speed and must never be compared to EP004 tok/s figures.",
+    "sampling_note": "No temperature control is available through this capture path (unlike EP004's temperature-0 Ollama calls). Reproducibility is instead evidenced by the two-pass stability check."
+  },
+  "passes": {
+    "A": {
+      "math_throughput": {"content": "600000", "wall_ms": 4477, "agent_id": "af37eda6a20d3cb7f"},
+      "math_team_loc": {"content": "Each engineer: 40 lines/hour × 6 hours/day = 240 lines/day. Over 5 days: 240 × 5 = 1,200 lines per engineer. Team of 3: 1,200 × 3 = 3,600.\n\n3600\n\nresult: The team writes 3,600 total lines of code (3 engineers × 40 lines/hr × 6 hrs/day × 5 days).", "wall_ms": 9164, "agent_id": "a33e784d2bd216139"},
+      "math_token_cost": {"content": "7", "wall_ms": 9361, "agent_id": "ab47e515ed424c04d"},
+      "math_gen_time": {"content": "60", "wall_ms": 4744, "agent_id": "a18a327ddc2de1369"},
+      "reason_race_order": {"content": "D", "wall_ms": 4218, "agent_id": "a72a7a00b6a294132"},
+      "reason_largest_power": {"content": "A", "wall_ms": 4031, "agent_id": "aad3779ba17543964"},
+      "reason_units": {"content": "C", "wall_ms": 5003, "agent_id": "a061d7202d4f80946"},
+      "code_sum_to_n": {"content": "```python\ndef solve(n):\n    if n < 1:\n        return 0\n    return n * (n + 1) // 2\n```", "wall_ms": 8787, "agent_id": "a4ca6e7e6ad08cc74"},
+      "code_count_vowels": {"content": "```python\ndef count_vowels(s):\n    return sum(1 for c in s.lower() if c in \"aeiou\")\n```\n\nresult: Provided `count_vowels(s)` — returns the count of a/e/i/o/u in `s`, case-insensitive, via a lowercase membership check.", "wall_ms": 12682, "agent_id": "af1e91fb8eb30f4a9"},
+      "code_palindrome": {"content": "```python\ndef is_palindrome(s):\n    cleaned = [c.lower() for c in s if c.isalnum()]\n    return cleaned == cleaned[::-1]\n```", "wall_ms": 4928, "agent_id": "a103c6950f7c05397"},
+      "code_two_sum": {"content": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for j, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], j]\n        seen[num] = j\n```\n\nresult: Provided a Python `two_sum(nums, target)` function using a hash map for O(n) lookup, returning indices [i, j] with i < j.", "wall_ms": 12062, "agent_id": "abcd9ae2867597476"},
+      "format_extract_person": {"content": "{\"name\": \"Maria\", \"age\": 34}", "wall_ms": 14566, "agent_id": "a206addada401ef58"},
+      "format_sentiment": {"content": "{\"sentiment\": \"negative\"}", "wall_ms": 6895, "agent_id": "ac2d6cd385664883b"},
+      "format_prime_array": {"content": "[11, 13, 17, 19]", "wall_ms": 5807, "agent_id": "a546c269284ad0ec5"},
+      "extract_http_code": {"content": "503", "wall_ms": 4566, "agent_id": "af1683892a0112190"}
+    },
+    "B": {
+      "math_throughput": {"content": "600000", "wall_ms": 3998, "agent_id": "a427eacc26bc2cfbc"},
+      "math_team_loc": {"content": "Each engineer writes 40 lines/hour × 6 hours/day = 240 lines per day. Over 5 days, that's 240 × 5 = 1,200 lines per engineer. With 3 engineers: 1,200 × 3 = 3,600 lines.\n\nresult: The team writes 3600 total lines of code (3 engineers × 40 lines/hr × 6 hrs/day × 5 days).\n\n3600", "wall_ms": 7098, "agent_id": "a9f8be0368eca5ca9"},
+      "math_token_cost": {"content": "7", "wall_ms": 4114, "agent_id": "ac7c816541d3d05c6"},
+      "math_gen_time": {"content": "60", "wall_ms": 5063, "agent_id": "a50a150d38511c4d7"},
+      "reason_race_order": {"content": "D", "wall_ms": 15596, "agent_id": "a59eb0cfbf037f210"},
+      "reason_largest_power": {"content": "A", "wall_ms": 13406, "agent_id": "a40c48b0349662d03"},
+      "reason_units": {"content": "C\n\nresult: C — 8 GB = 8192 MB, and 8192 / 512 = 16 caches.", "wall_ms": 6310, "agent_id": "aae6c99445e26468f"},
+      "code_sum_to_n": {"content": "```python\ndef solve(n):\n    if n < 1:\n        return 0\n    return n * (n + 1) // 2\n```", "wall_ms": 7249, "agent_id": "a59736fd533d8e83d"},
+      "code_count_vowels": {"content": "```python\ndef count_vowels(s):\n    return sum(1 for c in s.lower() if c in \"aeiou\")\n```\n\nresult: Provided a Python `count_vowels(s)` function that counts vowels case-insensitively using a generator over the lowercased string.", "wall_ms": 5246, "agent_id": "a288154edacdc3ccb"},
+      "code_palindrome": {"content": "```python\ndef is_palindrome(s):\n    cleaned = [c.lower() for c in s if c.isalnum()]\n    return cleaned == cleaned[::-1]\n```\n\nresult: Provided `is_palindrome(s)` Python function that checks palindromes ignoring case and non-alphanumeric characters.", "wall_ms": 14136, "agent_id": "a980c4e25c3b4ce4f"},
+      "code_two_sum": {"content": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for j, num in enumerate(nums):\n        complement = target - num\n        if complement in seen:\n            return [seen[complement], j]\n        seen[num] = j\n```\n\nresult: Provided `two_sum(nums, target)` — a hash-map solution returning indices [i, j] with i < j in O(n) time.", "wall_ms": 10606, "agent_id": "a05d47d43ddb48a35"},
+      "format_extract_person": {"content": "{\"name\": \"Maria\", \"age\": 34}", "wall_ms": 14300, "agent_id": "a4831c86890fe21d1"},
+      "format_sentiment": {"content": "{\"sentiment\": \"negative\"}", "wall_ms": 10793, "agent_id": "ac7210faa4380a44e"},
+      "format_prime_array": {"content": "[11, 13, 17, 19]", "wall_ms": 5887, "agent_id": "a20a93f6c8072e947"},
+      "extract_http_code": {"content": "503", "wall_ms": 5185, "agent_id": "a82f35ccc4fa81ab8"}
+    }
+  },
+  "extra_passes": {
+    "math_team_loc": [
+      {"pass": "C", "content": "Each engineer writes 40 lines/hour × 6 hours/day = 240 lines per day. Over 5 days, that's 240 × 5 = 1,200 lines per engineer. With 3 engineers: 1,200 × 3 = 3,600 lines.\n\n3600\n\nresult: The team writes 3,600 total lines of code (3 engineers × 40 lines/hr × 6 hrs/day × 5 days).", "wall_ms": 11605, "agent_id": "aa0e472e549ce3832", "why": "captured after the pass-B grading anomaly was diagnosed as a harness artifact; 2 extra passes ordered for the contested task only"},
+      {"pass": "D", "content": "Each engineer writes 40 lines/hour × 6 hours/day = 240 lines per day. Over 5 days, that's 240 × 5 = 1,200 lines per engineer. With 3 engineers: 1,200 × 3 = 3,600 lines.\n\n3600\n\nresult: The team writes 3,600 total lines of code (40 lines/hr × 6 hrs × 5 days × 3 engineers).", "wall_ms": 6066, "agent_id": "a32574ed2dc5d8f69", "why": "second extra pass; in all 4 passes the model's own text computes 3,600 and ends its answer with 3600 on its own line as the prompt asks"}
+    ]
+  }
+}

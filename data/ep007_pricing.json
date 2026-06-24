@@ -1,0 +1,34 @@
+{
+ "note": "EP007 pricing INPUTS. Every number must be re-checked at its URL before the recording run \u2014 published rates drift and this channel does not bake stale dollars into a render. Set verified_on when you check.",
+ "verified_on": "2026-06-12 (groq VERIFIED from live pricing page; other lanes still UNVERIFIED - fill or drop before render)",
+ "hosted": {
+  "groq": {
+   "model": "llama-3.1-8b-instant",
+   "usd_per_1m_in": 0.05,
+   "usd_per_1m_out": 0.08,
+   "source_url": "https://groq.com/pricing",
+   "_fill": "VERIFIED 2026-06-12 from https://groq.com/pricing (llama-3.1-8b-instant 128k, 840 TPS listed). Re-glance before recording; rates were stable.",
+   "speed_tps_listed": 840
+  },
+  "openrouter": {
+   "model": "meta-llama/llama-3.1-8b-instruct",
+   "usd_per_1m_in": null,
+   "usd_per_1m_out": null,
+   "source_url": "https://openrouter.ai/models/meta-llama/llama-3.1-8b-instruct",
+   "_fill": "take the cheapest reliable provider row"
+  },
+  "google": {
+   "model": "gemini-2.5-flash-lite",
+   "usd_per_1m_in": null,
+   "usd_per_1m_out": null,
+   "source_url": "https://ai.google.dev/pricing",
+   "_fill": "reference lane only (different model class) \u2014 never the same-model fair fight"
+  }
+ },
+ "gpu_vm": {
+  "usd_per_hour_t4": null,
+  "usd_per_hour_l4": null,
+  "source_url": "https://cloud.google.com/compute/gpus-pricing",
+  "_fill": "spot/on-demand for your region; the $300 credits make the MEASURED run free either way"
+ }
+}

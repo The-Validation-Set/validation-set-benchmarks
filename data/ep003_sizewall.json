@@ -1,0 +1,30 @@
+{
+  "episode": { "id": "EP003" },
+  "mode": "size_wall",
+  "locked_at_utc": "2026-06-06T02:03:57Z",
+  "measurement_host": "macOS-26.3.2-arm64-arm-64bit-Mach-O",
+  "results": [
+    {
+      "model": "llama3.2:3b",
+      "swap_before_mb": 5085.1,
+      "ok": true,
+      "tok_s": 20.95,
+      "latency_ms": 6562.0,
+      "output_tokens": 64,
+      "swap_after_mb": 5085.1,
+      "swap_delta_mb": 0.0
+    },
+    {
+      "model": "llama3.1:8b",
+      "swap_before_mb": 5085.1,
+      "ok": false,
+      "error": "TimeoutError: timed out",
+      "swap_after_mb": 3020.2,
+      "swap_delta_mb": -2064.9
+    }
+  ],
+  "integrity_notes": [
+    "tok/s + swap MEASURED per model on the 8 GB box; a non-OK row is the real memory wall (swap-death / load failure), captured verbatim.",
+    "8B (4.9 GB) on an 8 GB machine swap-thrashes: a 64-token request that finished in 6.5 s on the 3B did NOT return within the 600 s client timeout. The practical model-size ceiling on this rig is the 3B; the popular 8B is already past the wall."
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "episode": "EP009 runtime + chip showdown",
+    "provenance": "MEASURED on this rig (run by the author; sandbox numbers don't count)",
+    "rig": {
+      "platform": "macOS-26.3.2-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "python": "3.13.9"
+    },
+    "generated": "2026-06-22T21:22:58",
+    "seed": 9,
+    "model": "llama3.2:3b",
+    "gen_tokens_target": 256,
+    "prices": {
+      "as_of": "2026-06-18",
+      "uk_electricity_gbp_per_kwh": 0.2611,
+      "uk_electricity_src": "https://www.ofgem.gov.uk/news/changes-energy-price-cap-between-1-july-and-30-september-2026",
+      "gbp_usd": 1.27,
+      "cloud_usd_per_hr": {
+        "RunPod RTX 4090": 0.34,
+        "RunPod L4": 0.39,
+        "RunPod A100 80GB": 1.39,
+        "RunPod H100": 2.89,
+        "Lambda A100": 1.99,
+        "Lambda H100": 2.49
+      },
+      "cloud_src": "https://www.runpod.io/pricing , https://lambda.ai/pricing"
+    },
+    "cost_model": "cloud $/1M = $/hr / (tok_s*3600) * 1e6 ; local $/1M = (watts/1000 * GBP/kWh * GBP_USD) / (tok_s*3600) * 1e6"
+  },
+  "runtimes": [
+    {
+      "lane": "ollama",
+      "tok_s": 23.95,
+      "p50_ms": 277.1,
+      "gen_tokens": 256,
+      "notes": "ollama /api/generate eval counters"
+    },
+    {
+      "lane": "mlx",
+      "tok_s": 23.8,
+      "p50_ms": null,
+      "gen_tokens": 257,
+      "notes": "mlx-lm wall-clock decode (incl. prompt eval)"
+    }
+  ],
+  "chips": [
+    {
+      "lane": "Mac (local, electricity)",
+      "basis": "electricity",
+      "tok_s": 23.95,
+      "watts": 30.0,
+      "usd_per_1m": 0.1154
+    },
+    {
+      "lane": "RunPod RTX 4090",
+      "basis": "rental",
+      "usd_per_hr": 0.34,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    },
+    {
+      "lane": "RunPod L4",
+      "basis": "rental",
+      "usd_per_hr": 0.39,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    },
+    {
+      "lane": "RunPod A100 80GB",
+      "basis": "rental",
+      "usd_per_hr": 1.39,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    },
+    {
+      "lane": "RunPod H100",
+      "basis": "rental",
+      "usd_per_hr": 2.89,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    },
+    {
+      "lane": "Lambda A100",
+      "basis": "rental",
+      "usd_per_hr": 1.99,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    },
+    {
+      "lane": "Lambda H100",
+      "basis": "rental",
+      "usd_per_hr": 2.49,
+      "tok_s": 0.0,
+      "usd_per_1m": null
+    }
+  ]
+}

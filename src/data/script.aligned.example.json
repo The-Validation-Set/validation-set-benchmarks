@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "title": "EXAMPLE — Local vs Cloud AI, by the dollar (synthetic demo script)",
+    "description": "A synthetic, public example of the aligned-script schema the render engine consumes. The numbers here are illustrative placeholders, NOT measured results — swap in your own aligned script (with real data from /data) to render a real episode. Each block's spoken_text is the digit-free first voiceover line that the alignment step matches against Whisper word-timings."
+  },
+  "timeline": [
+    {
+      "paragraph_id": 1,
+      "visual_cue": "STAT_CALLOUT",
+      "spoken_text": "Here is the number that starts the whole argument.",
+      "visual_data": {
+        "id": "the_bill",
+        "label": "managed API · one always-on agent",
+        "value": "$7,200/yr",
+        "context": "illustrative placeholder — bring your own measured figure"
+      },
+      "visual_start_time": 0.0,
+      "visual_end_time": 6.0
+    },
+    {
+      "paragraph_id": 2,
+      "visual_cue": "CODE_HIGHLIGHT",
+      "spoken_text": "The whole test is small enough to read in one breath.",
+      "visual_data": {
+        "language": "python",
+        "code": "for host in (local, cloud):\n    t = time.perf_counter()\n    out = run(model, prompts)        # same model, both sides\n    tok_s = out.tokens / (time.perf_counter() - t)\n    report(host, tok_s, out.latency_ms, cost(host, out.tokens))",
+        "highlight_line": 3
+      },
+      "visual_start_time": 6.0,
+      "visual_end_time": 16.0
+    },
+    {
+      "paragraph_id": 3,
+      "visual_cue": "CHART_BARS",
+      "spoken_text": "On raw speed, it is not even close.",
+      "visual_data": {
+        "title": "Same model, two machines (illustrative)",
+        "localLabel": "Local · 8GB laptop",
+        "cloudLabel": "Cloud · rented GPU",
+        "metrics": [
+          { "label": "Throughput", "local": 16.5, "cloud": 70.9, "unit": "tok/s", "better": "higher", "decimals": 1 },
+          { "label": "Latency", "local": 33552, "cloud": 433, "unit": "ms", "better": "lower", "decimals": 0 }
+        ]
+      },
+      "visual_start_time": 16.0,
+      "visual_end_time": 26.0
+    },
+    {
+      "paragraph_id": 4,
+      "visual_cue": "CHART_COMPARE",
+      "spoken_text": "But speed was never the bill.",
+      "visual_data": {
+        "title": "12-month cost: rent vs own (illustrative)",
+        "unit": "$",
+        "x_labels": ["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8"],
+        "series": [
+          { "label": "Cloud API", "kind": "cloud", "values": [600, 1200, 1800, 2400, 3000, 3600, 4200, 4800] },
+          { "label": "Your rig", "kind": "local", "values": [2500, 2505, 2510, 2515, 2520, 2525, 2530, 2535] }
+        ],
+        "breakout_index": 4
+      },
+      "visual_start_time": 26.0,
+      "visual_end_time": 38.0
+    },
+    {
+      "paragraph_id": 5,
+      "visual_cue": "CHART_QUALITY",
+      "spoken_text": "Cheap and fast is worthless if the answers are wrong.",
+      "visual_data": {
+        "title": "Speed vs verifiable accuracy (illustrative)",
+        "usable_floor_tok_s": 6,
+        "models": ["3B", "8B", "14B"],
+        "accuracy_pct": [80, 87, 0],
+        "tok_s": [25.6, 6.3, 0],
+        "usable": [true, true, false],
+        "timeouts": [0, 0, 15]
+      },
+      "visual_start_time": 38.0,
+      "visual_end_time": 50.0
+    },
+    {
+      "paragraph_id": 6,
+      "visual_cue": "STAT_CALLOUT",
+      "spoken_text": "So match the tool to the job, and own what you run all day.",
+      "visual_data": {
+        "id": "verdict",
+        "label": "the verdict",
+        "value": "size it to the job",
+        "context": "full data + code in this repo — reproduce it yourself"
+      },
+      "visual_start_time": 50.0,
+      "visual_end_time": 58.0
+    }
+  ]
+}

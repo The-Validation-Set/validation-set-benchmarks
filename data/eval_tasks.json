@@ -1,0 +1,99 @@
+{
+  "name": "validation-set-quality-eval-v1",
+  "description": "EP004 quality eval. Fixed, VERIFIABLE agent-style tasks: every task has a deterministic grader (a number, a letter, a JSON shape, or code that must pass asserts) so 'quality' is MEASURED, not vibe-graded or judged by another LLM. Same tasks hit every model at temperature 0 so the score is reproducible. Spread of difficulty across math / reasoning / code / format-following / extraction so the set discriminates a 3B from an 8B from a 14B. Freeze this file once a video is recorded against it.",
+  "max_tokens": 512,
+  "temperature": 0,
+  "grading": "Answer-extraction is deliberately lenient (we take the LAST number, the JSON object/array even if fenced, the final A-D letter) so we score REASONING, not format pedantry -- except the 'format' bucket, where producing clean JSON IS the skill. See run_quality.py for the exact graders.",
+  "tasks": [
+    {
+      "id": "math_throughput",
+      "bucket": "math",
+      "prompt": "A server processes 1,250 requests per minute. How many requests does it process in 8 hours? Reply with just the number.",
+      "check": { "type": "numeric", "answer": 600000 }
+    },
+    {
+      "id": "math_team_loc",
+      "bucket": "math",
+      "prompt": "A team has 3 engineers. Each writes 40 lines of code per hour and works 6 hours a day. Over 5 working days, how many total lines of code does the whole team write? Think it through, then give the final number on its own line.",
+      "check": { "type": "numeric", "answer": 3600 }
+    },
+    {
+      "id": "math_token_cost",
+      "bucket": "math",
+      "prompt": "An API costs $0.002 per 1,000 tokens. You process 3.5 million tokens. What is the total cost in dollars? Reply with only the number, no dollar sign.",
+      "check": { "type": "numeric", "answer": 7 }
+    },
+    {
+      "id": "math_gen_time",
+      "bucket": "math",
+      "prompt": "A GPU generates 70 tokens per second. How many seconds does it take to generate 4,200 tokens? Reply with only the number.",
+      "check": { "type": "numeric", "answer": 60 }
+    },
+    {
+      "id": "reason_race_order",
+      "bucket": "reasoning",
+      "prompt": "Four people finished a race. Ana finished before Ben. Carl finished after Ben but before Dana. Who finished last?\n(A) Ana  (B) Ben  (C) Carl  (D) Dana\nAnswer with a single letter.",
+      "check": { "type": "choice", "answer": "D" }
+    },
+    {
+      "id": "reason_largest_power",
+      "bucket": "reasoning",
+      "prompt": "Which value is the largest?\n(A) 2^10  (B) 10^3  (C) 3^6  (D) 5^4\nAnswer with a single letter.",
+      "check": { "type": "choice", "answer": "A" }
+    },
+    {
+      "id": "reason_units",
+      "bucket": "reasoning",
+      "prompt": "A process holds a 512 MB cache and you have 8 GB of RAM. Roughly how many such caches fit in RAM if nothing else used memory? (1 GB = 1024 MB.)\n(A) 4  (B) 8  (C) 16  (D) 64\nAnswer with a single letter.",
+      "check": { "type": "choice", "answer": "C" }
+    },
+    {
+      "id": "code_sum_to_n",
+      "bucket": "code",
+      "prompt": "Write a Python function `solve(n)` that returns the sum of all integers from 1 to n inclusive (and 0 if n < 1). Reply with only the code.",
+      "check": { "type": "code", "entry": "solve", "cases": [[[5], 15], [[100], 5050], [[1], 1], [[0], 0]] }
+    },
+    {
+      "id": "code_count_vowels",
+      "bucket": "code",
+      "prompt": "Write a Python function `count_vowels(s)` that returns the number of vowels (a, e, i, o, u, case-insensitive) in the string s. Reply with only the code.",
+      "check": { "type": "code", "entry": "count_vowels", "cases": [[["hello"], 2], [["AEIOU"], 5], [["xyz"], 0], [["Programming"], 3]] }
+    },
+    {
+      "id": "code_palindrome",
+      "bucket": "code",
+      "prompt": "Write a Python function `is_palindrome(s)` that returns True if s is a palindrome ignoring case and any non-alphanumeric characters, otherwise False. Reply with only the code.",
+      "check": { "type": "code", "entry": "is_palindrome", "cases": [[["A man, a plan, a canal: Panama"], true], [["race a car"], false], [[""], true], [["Was it a car or a cat I saw?"], true]] }
+    },
+    {
+      "id": "code_two_sum",
+      "bucket": "code",
+      "prompt": "Write a Python function `two_sum(nums, target)` that returns the indices [i, j] with i < j of the two numbers in the list nums that add up to target. Assume exactly one solution exists. Reply with only the code.",
+      "check": { "type": "code", "entry": "two_sum", "cases": [[[[2, 7, 11, 15], 9], [0, 1]], [[[3, 2, 4], 6], [1, 2]], [[[3, 3], 6], [0, 1]]] }
+    },
+    {
+      "id": "format_extract_person",
+      "bucket": "format",
+      "prompt": "Extract the person's details from this sentence and return ONLY a JSON object with keys \"name\" (string) and \"age\" (integer). No prose, no code fence.\nSentence: Maria is a 34-year-old data scientist.",
+      "check": { "type": "json_obj", "equals": { "name": "maria", "age": 34 } }
+    },
+    {
+      "id": "format_sentiment",
+      "bucket": "format",
+      "prompt": "Classify the sentiment of the text. Return ONLY a JSON object {\"sentiment\": \"positive\" | \"negative\" | \"neutral\"}. No prose.\nText: The deployment failed twice and support never replied.",
+      "check": { "type": "json_obj", "equals": { "sentiment": "negative" } }
+    },
+    {
+      "id": "format_prime_array",
+      "bucket": "format",
+      "prompt": "Return ONLY a JSON array of the prime numbers strictly between 10 and 20, in ascending order. No prose, no code fence.",
+      "check": { "type": "json_arr", "equals": [11, 13, 17, 19] }
+    },
+    {
+      "id": "extract_http_code",
+      "bucket": "extract",
+      "prompt": "Reply with ONLY the numeric HTTP status code that means \"Service Unavailable\".",
+      "check": { "type": "numeric", "answer": 503 }
+    }
+  ]
+}

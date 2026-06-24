@@ -1,0 +1,98 @@
+{
+  "metadata": {
+    "episode": "EP005",
+    "topic": "Claude Fable 5 / Mythos 5 launch (newsjack)",
+    "retrieved": "2026-06-09",
+    "sources": [
+      "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "https://venturebeat.com/technology/anthropic-brings-mythos-to-the-masses-with-claude-fable-5-its-most-powerful-generally-available-model-ever",
+      "https://techcrunch.com/2026/06/09/anthropic-released-claude-fable-5-its-most-powerful-model-publicly-days-after-warning-ai-is-getting-too-dangerous/"
+    ],
+    "_note": "All figures verified against the Anthropic announcement on launch day. Gemini-suggested 'SWE-Bench Pro 80.3% vs 69.2% vs 58.6%' numbers were NOT found in any primary source and are EXCLUDED as likely hallucinated. Do not add benchmark numbers that are not in the sources above."
+  },
+  "pricing_compare": {
+    "x_labels": ["Input $/M tokens", "Output $/M tokens"],
+    "series": [
+      { "label": "Claude Fable 5", "values": [10, 50] },
+      { "label": "Claude Opus 4.8", "values": [5, 25] }
+    ],
+    "unit": "USD per million tokens",
+    "note": "Fable 5 is exactly 2× Opus 4.8 on both axes; less than half the price of Mythos Preview."
+  },
+  "cards": {
+    "stripe_hook": {
+      "id": "stripe_hook",
+      "label": "Stripe · early access",
+      "value": "2 months → 1 day",
+      "context": "codebase-wide migration a whole team would have done by hand"
+    },
+    "two_models": {
+      "id": "two_models",
+      "label": "Fable 5 + Mythos 5",
+      "value": "1 model, 2 names",
+      "context": "same weights · the safeguards are the only difference"
+    },
+    "price_multiple": {
+      "id": "price_multiple",
+      "label": "price vs Opus 4.8",
+      "value": "2×",
+      "context": "$10 in / $50 out per million tokens"
+    },
+    "hex_analytics": {
+      "id": "hex_analytics",
+      "label": "Hex core analytics benchmark",
+      "value": "90%+",
+      "context": "first model past 90 · a 10-point jump over Opus",
+      "kind": "rate"
+    },
+    "stripe_scale": {
+      "id": "stripe_scale",
+      "label": "Ruby codebase migrated in one day",
+      "value": "50M lines",
+      "context": "vs 2+ months for a whole team by hand"
+    },
+    "memory_gain": {
+      "id": "memory_gain",
+      "label": "memory benefit vs Opus 4.8",
+      "value": "3x",
+      "context": "Slay the Spire with file-based notes · reached the final act 3× more often"
+    },
+    "fallback_rate": {
+      "id": "fallback_rate",
+      "label": "sessions hit the safety fallback",
+      "value": "<5%",
+      "context": "cyber · bio/chem · distillation → answered by Opus 4.8 instead",
+      "kind": "rate"
+    },
+    "bug_bounty": {
+      "id": "bug_bounty",
+      "label": "external red-teaming, zero universal jailbreaks",
+      "value": "1,000+ hrs",
+      "context": "public bug bounty on the launch safeguards"
+    },
+    "free_window": {
+      "id": "free_window",
+      "label": "last day Fable 5 is included on Pro/Max/Team",
+      "value": "June 22",
+      "context": "from June 23 it costs usage credits"
+    },
+    "ep001_tiein": {
+      "id": "ep001_tiein",
+      "label": "one cloud agent per year (EP001, measured)",
+      "value": "$7,200",
+      "context": "and that was at Opus-class prices - the frontier tier just doubled"
+    },
+    "verdict": {
+      "id": "verdict",
+      "label": "the frontier premium",
+      "value": "2×",
+      "context": "worth it for long-horizon agent work · local still wins the always-on jobs"
+    },
+    "outro": {
+      "id": "outro",
+      "label": "The Validation Set · EP006",
+      "value": "I grade it",
+      "context": "Fable 5 sits the same 15-task exam as the local models"
+    }
+  }
+}

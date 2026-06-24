@@ -1,0 +1,541 @@
+{
+  "episode": {
+    "id": "EP004",
+    "working_title": "Runs at once isn't runs well — the quality test",
+    "locked_at_utc": "2026-06-07T18:55:44Z"
+  },
+  "mode": "quality",
+  "bench_config": {
+    "models": [
+      "llama3.2:3b",
+      "llama3.1:8b"
+    ],
+    "ollama_url": "http://localhost:11434",
+    "tasks_file": "eval_tasks.json",
+    "num_tasks": 15,
+    "max_tokens": 512,
+    "temperature": 0.0,
+    "per_request_timeout_s": 300.0,
+    "usable_floor_tok_s": 6.0,
+    "measurement_host": "macOS-26.3.2-arm64-arm-64bit-Mach-O"
+  },
+  "per_model": [
+    {
+      "model": "llama3.2:3b",
+      "accuracy_pct": 80.0,
+      "correct": 12,
+      "total": 15,
+      "completed": 15,
+      "timeouts": 0,
+      "by_bucket": {
+        "math": {
+          "correct": 1,
+          "total": 4,
+          "pct": 25.0
+        },
+        "reasoning": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "code": {
+          "correct": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "format": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "extract": {
+          "correct": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "tok_s_mean": 25.57,
+      "latency_ms_mean": 2302.0,
+      "swap_before_mb": 2309.8,
+      "swap_after_mb": 2269.8,
+      "swap_delta_mb": -40.0,
+      "usable": true,
+      "usd_per_1m_tokens_electricity_modeled": 0.0554,
+      "results": [
+        {
+          "id": "math_throughput",
+          "bucket": "math",
+          "completed": true,
+          "correct": false,
+          "tok_s": 28.94,
+          "latency_ms": 3164.0,
+          "output_tokens": 4,
+          "answer_excerpt": "10,800"
+        },
+        {
+          "id": "math_team_loc",
+          "bucket": "math",
+          "completed": true,
+          "correct": true,
+          "tok_s": 22.42,
+          "latency_ms": 7072.0,
+          "output_tokens": 150,
+          "answer_excerpt": "To find the total number of lines of code written by the team, we need to calculate the number of lines each engineer writes per day and then multiply that by t"
+        },
+        {
+          "id": "math_token_cost",
+          "bucket": "math",
+          "completed": true,
+          "correct": false,
+          "tok_s": 29.9,
+          "latency_ms": 609.0,
+          "output_tokens": 4,
+          "answer_excerpt": "18.75"
+        },
+        {
+          "id": "math_gen_time",
+          "bucket": "math",
+          "completed": true,
+          "correct": false,
+          "tok_s": 42.96,
+          "latency_ms": 509.0,
+          "output_tokens": 2,
+          "answer_excerpt": "63"
+        },
+        {
+          "id": "reason_race_order",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 24.64,
+          "latency_ms": 844.0,
+          "output_tokens": 9,
+          "answer_excerpt": "The correct answer is D) Dana."
+        },
+        {
+          "id": "reason_largest_power",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 26.07,
+          "latency_ms": 750.0,
+          "output_tokens": 7,
+          "answer_excerpt": "The correct answer is A."
+        },
+        {
+          "id": "reason_units",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 21.14,
+          "latency_ms": 5056.0,
+          "output_tokens": 92,
+          "answer_excerpt": "To find the number of caches that can fit in RAM, we need to divide the total amount of RAM by the size of each cache. Total RAM = 8 GB = 8 x 1024 MB = 8192 MB "
+        },
+        {
+          "id": "code_sum_to_n",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 19.1,
+          "latency_ms": 2089.0,
+          "output_tokens": 30,
+          "answer_excerpt": "```python def solve(n): return sum(range(1, n + 1)) if n >= 1 else 0 ```"
+        },
+        {
+          "id": "code_count_vowels",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 19.52,
+          "latency_ms": 4619.0,
+          "output_tokens": 76,
+          "answer_excerpt": "```python def count_vowels(s): \"\"\" Returns the number of vowels in the given string. Args: s (str): The input string. Returns: int: The number of vowels in the "
+        },
+        {
+          "id": "code_palindrome",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 20.44,
+          "latency_ms": 2311.0,
+          "output_tokens": 36,
+          "answer_excerpt": "```python def is_palindrome(s): s = ''.join(c for c in s if c.isalnum()).lower() return s == s[::-1] ```"
+        },
+        {
+          "id": "code_two_sum",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 20.06,
+          "latency_ms": 3892.0,
+          "output_tokens": 67,
+          "answer_excerpt": "```python def two_sum(nums, target): num_dict = {} for i, num in enumerate(nums): complement = target - num if complement in num_dict: return [num_dict[compleme"
+        },
+        {
+          "id": "format_extract_person",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 21.44,
+          "latency_ms": 1172.0,
+          "output_tokens": 13,
+          "answer_excerpt": "{\"name\": \"Maria\", \"age\": 34}"
+        },
+        {
+          "id": "format_sentiment",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 23.11,
+          "latency_ms": 896.0,
+          "output_tokens": 8,
+          "answer_excerpt": "{\"sentiment\": \"negative\"}"
+        },
+        {
+          "id": "format_prime_array",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 21.85,
+          "latency_ms": 1149.0,
+          "output_tokens": 13,
+          "answer_excerpt": "[11, 13, 17, 19]"
+        },
+        {
+          "id": "extract_http_code",
+          "bucket": "extract",
+          "completed": true,
+          "correct": true,
+          "tok_s": 42.02,
+          "latency_ms": 399.0,
+          "output_tokens": 2,
+          "answer_excerpt": "503"
+        }
+      ]
+    },
+    {
+      "model": "llama3.1:8b",
+      "accuracy_pct": 86.7,
+      "correct": 13,
+      "total": 15,
+      "completed": 15,
+      "timeouts": 0,
+      "by_bucket": {
+        "math": {
+          "correct": 2,
+          "total": 4,
+          "pct": 50.0
+        },
+        "reasoning": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "code": {
+          "correct": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "format": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "extract": {
+          "correct": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "tok_s_mean": 6.28,
+      "latency_ms_mean": 14854.0,
+      "swap_before_mb": 2269.8,
+      "swap_after_mb": 4324.0,
+      "swap_delta_mb": 2054.2,
+      "usable": true,
+      "usd_per_1m_tokens_electricity_modeled": 0.2256,
+      "results": [
+        {
+          "id": "math_throughput",
+          "bucket": "math",
+          "completed": true,
+          "correct": false,
+          "tok_s": 4.86,
+          "latency_ms": 13818.0,
+          "output_tokens": 6,
+          "answer_excerpt": "60,000,000"
+        },
+        {
+          "id": "math_team_loc",
+          "bucket": "math",
+          "completed": true,
+          "correct": true,
+          "tok_s": 4.53,
+          "latency_ms": 29426.0,
+          "output_tokens": 125,
+          "answer_excerpt": "Let's break this down step by step: 1. Each engineer writes 40 lines of code per hour. 2. They work 6 hours a day, so each engineer writes: 40 lines/hour x 6 ho"
+        },
+        {
+          "id": "math_token_cost",
+          "bucket": "math",
+          "completed": true,
+          "correct": false,
+          "tok_s": 8.25,
+          "latency_ms": 2391.0,
+          "output_tokens": 4,
+          "answer_excerpt": "2.7"
+        },
+        {
+          "id": "math_gen_time",
+          "bucket": "math",
+          "completed": true,
+          "correct": true,
+          "tok_s": 7.47,
+          "latency_ms": 2099.0,
+          "output_tokens": 2,
+          "answer_excerpt": "60"
+        },
+        {
+          "id": "reason_race_order",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 10.16,
+          "latency_ms": 2348.0,
+          "output_tokens": 3,
+          "answer_excerpt": "(D)"
+        },
+        {
+          "id": "reason_largest_power",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 4.8,
+          "latency_ms": 29209.0,
+          "output_tokens": 131,
+          "answer_excerpt": "## Step 1: Calculate the values of each option. First, let's calculate the value of each option given: - Option A: \\(2^{10} = 1024\\) - Option B: \\(10^3 = 1000\\)"
+        },
+        {
+          "id": "reason_units",
+          "bucket": "reasoning",
+          "completed": true,
+          "correct": true,
+          "tok_s": 6.04,
+          "latency_ms": 37085.0,
+          "output_tokens": 206,
+          "answer_excerpt": "## Step 1: Convert the size of RAM from GB to MB. First, we need to convert the size of RAM from gigabytes (GB) to megabytes (MB). We know that 1 GB = 1024 MB. "
+        },
+        {
+          "id": "code_sum_to_n",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 6.16,
+          "latency_ms": 18701.0,
+          "output_tokens": 103,
+          "answer_excerpt": "```python def solve(n): \"\"\" Returns the sum of all integers from 1 to n inclusive. If n is less than 1, returns 0. Args: n (int): The upper limit for the sum. R"
+        },
+        {
+          "id": "code_count_vowels",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 1.7,
+          "latency_ms": 44540.0,
+          "output_tokens": 71,
+          "answer_excerpt": "```python def count_vowels(s): \"\"\" Returns the number of vowels in the given string. Args: s (str): The input string. Returns: int: The number of vowels in the "
+        },
+        {
+          "id": "code_palindrome",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 2.42,
+          "latency_ms": 17023.0,
+          "output_tokens": 36,
+          "answer_excerpt": "```python def is_palindrome(s): s = ''.join(c for c in s if c.isalnum()).lower() return s == s[::-1] ```"
+        },
+        {
+          "id": "code_two_sum",
+          "bucket": "code",
+          "completed": true,
+          "correct": true,
+          "tok_s": 5.05,
+          "latency_ms": 14557.0,
+          "output_tokens": 63,
+          "answer_excerpt": "```python def two_sum(nums, target): num_dict = {} for i, num in enumerate(nums): complement = target - num if complement in num_dict: return [num_dict[compleme"
+        },
+        {
+          "id": "format_extract_person",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 8.05,
+          "latency_ms": 4296.0,
+          "output_tokens": 17,
+          "answer_excerpt": "{ \"name\": \"Maria\", \"age\": 34 }"
+        },
+        {
+          "id": "format_sentiment",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 8.66,
+          "latency_ms": 2823.0,
+          "output_tokens": 8,
+          "answer_excerpt": "{\"sentiment\": \"negative\"}"
+        },
+        {
+          "id": "format_prime_array",
+          "bucket": "format",
+          "completed": true,
+          "correct": true,
+          "tok_s": 9.64,
+          "latency_ms": 3065.0,
+          "output_tokens": 13,
+          "answer_excerpt": "[11, 13, 17, 19]"
+        },
+        {
+          "id": "extract_http_code",
+          "bucket": "extract",
+          "completed": true,
+          "correct": true,
+          "tok_s": 6.48,
+          "latency_ms": 1429.0,
+          "output_tokens": 2,
+          "answer_excerpt": "503"
+        }
+      ]
+    }
+  ],
+  "quality_frontier": {
+    "title": "Quality vs speed on one 8GB rig: which model can you actually use?",
+    "usable_floor_tok_s": 6.0,
+    "models": [
+      "3B",
+      "8B"
+    ],
+    "model_tags": [
+      "llama3.2:3b",
+      "llama3.1:8b"
+    ],
+    "accuracy_pct": [
+      80.0,
+      86.7
+    ],
+    "tok_s": [
+      25.57,
+      6.28
+    ],
+    "usable": [
+      true,
+      true
+    ],
+    "timeouts": [
+      0,
+      0
+    ]
+  },
+  "accuracy_bars": {
+    "title": "Verifiable accuracy by model (same 15 tasks, temperature 0)",
+    "unit": "%",
+    "x_labels": [
+      "3B",
+      "8B"
+    ],
+    "series": [
+      {
+        "label": "tasks correct",
+        "kind": "quality",
+        "values": [
+          80.0,
+          86.7
+        ]
+      }
+    ]
+  },
+  "hero_metrics": [
+    {
+      "id": "fits_best",
+      "label": "Smartest model the rig can serve",
+      "value": "8B",
+      "context": "87% correct @ ~6 tok/s (usable)",
+      "kind": "count"
+    },
+    {
+      "id": "small_acc",
+      "label": "3B accuracy",
+      "value": "80%",
+      "context": "the model that fits, @ ~26 tok/s",
+      "kind": "rate"
+    },
+    {
+      "id": "big_acc",
+      "label": "8B accuracy",
+      "value": "87%",
+      "context": "~6 tok/s — usable",
+      "kind": "rate"
+    },
+    {
+      "id": "quality_gap",
+      "label": "Quality left on the table",
+      "value": "+7 pts",
+      "context": "8B vs 3B — if you had the RAM",
+      "kind": "count"
+    },
+    {
+      "id": "usable_floor",
+      "label": "Usable-speed floor",
+      "value": "6 tok/s",
+      "context": "the EP003 line, reused to split 'smart enough to use' from 'too slow'",
+      "kind": "rate"
+    }
+  ],
+  "cards": {
+    "small": {
+      "id": "small_acc",
+      "label": "3B accuracy",
+      "value": "80%",
+      "context": "~26 tok/s · fast enough to use",
+      "kind": "rate"
+    },
+    "mid": {
+      "id": "mid_acc",
+      "label": "8B accuracy",
+      "value": "87%",
+      "context": "~6 tok/s · fast enough to use",
+      "kind": "rate"
+    },
+    "fits_best": {
+      "id": "fits_best",
+      "label": "Smartest model the rig can serve",
+      "value": "8B",
+      "context": "87% @ ~6 tok/s — the only one fast enough",
+      "kind": "rate"
+    },
+    "gap": {
+      "id": "gap",
+      "label": "What the bigger model adds",
+      "value": "+7 pts",
+      "context": "8B over 3B — for ~4× the wait",
+      "kind": "rate"
+    },
+    "usable_floor": {
+      "id": "usable_floor",
+      "label": "Usable-speed floor",
+      "value": "6 tok/s",
+      "context": "EP003's readable-speed line, reused for quality",
+      "kind": "rate"
+    }
+  },
+  "integrity_notes": [
+    "accuracy is MEASURED by deterministic graders (a number / an A-D letter / a JSON shape / code that must pass asserts) on the same 15 verifiable tasks; NO LLM-as-judge, no vibes.",
+    "temperature 0.0 -> the score is reproducible: re-run the script, get the same answers.",
+    "throughput (tok/s), latency and macOS swap are MEASURED per task on one 8GB Apple-Silicon rig.",
+    "'usable' = no timeouts AND mean >= 6 tok/s (the EP003 readable-speed floor, reused). A model can be SMART yet not usable here if it swap-thrashes below that floor — that gap is the episode.",
+    "answer-extraction is intentionally lenient (last number / fenced JSON / final letter) so we grade reasoning, not formatting — except the 'format' bucket, where clean JSON IS the graded skill.",
+    "model code is executed in an isolated subprocess with a short timeout (sandboxed); a crash = a fail."
+  ],
+  "eyebrow": "DATA_MEASURED // 18:55 UTC // QUALITY vs SPEED"
+}

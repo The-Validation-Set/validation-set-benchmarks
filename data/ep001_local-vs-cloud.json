@@ -1,0 +1,51 @@
+{
+  "episode": {
+    "id": "EP001",
+    "format": "tuesday_blueprint",
+    "working_title": "Your AI Agents Should Be Running Locally",
+    "publish_target": "2026-06-02"
+  },
+  "snapshot": {
+    "locked_at_utc": "2026-06-01T22:00:00Z",
+    "source": "manual",
+    "note": "Hand-built static snapshot (no automated puller yet). The series below is an explicit cost MODEL derived from the stated assumptions -- it is NOT measured telemetry. Freeze this file; the VO is recorded against these exact numbers and the render must read them unchanged."
+  },
+  "topic": "Cost of running an always-on AI agent: cloud API vs local hardware",
+  "assumptions": {
+    "workload": "1 always-on coding/agent assistant, heavy multi-step usage ~5M tokens/day (~150M tokens/month)",
+    "cloud_blended_usd_per_1m_tokens": 4.0,
+    "cloud_monthly_usd": 600,
+    "local_hardware_usd_onetime": 2500,
+    "local_power_usd_per_month": 40,
+    "horizon_months": 12
+  },
+  "series": {
+    "x_labels": ["M0","M1","M2","M3","M4","M5","M6","M7","M8","M9","M10","M11","M12"],
+    "cloud_cumulative_usd": [0,600,1200,1800,2400,3000,3600,4200,4800,5400,6000,6600,7200],
+    "local_cumulative_usd": [2500,2540,2580,2620,2660,2700,2740,2780,2820,2860,2900,2940,2980],
+    "unit": "USD"
+  },
+  "hero_metrics": [
+    { "id": "cloud_year1", "label": "Cloud API · one agent", "value": "$7,200/yr", "context": "~$600/mo at 150M tokens", "kind": "currency" },
+    { "id": "api_fees_eliminated", "label": "API fees after breakeven", "value": "100%", "context": "per-token fees go to $0 -- you own the hardware", "kind": "percent" },
+    { "id": "breakeven", "label": "Break-even", "value": "~Month 5", "context": "local rig pays for itself", "kind": "month" },
+    { "id": "year1_savings", "label": "Year 1 total", "value": "-$4,220", "context": "59% lower total cost vs cloud", "kind": "currency" }
+  ],
+  "flags": {
+    "isBreakout": true,
+    "breakout_at_index": 5,
+    "breakout_reason": "cloud cumulative cost crosses above local total cost of ownership"
+  },
+  "eyebrow": "DATA_LOCKED // 22:00 UTC // OLLAMA AGENT DEPLOYMENT",
+  "integrity_notes": [
+    "The series is a MODEL from the stated assumptions, not measured data. Surface the assumptions on-screen or in the description so we never imply it is observed telemetry.",
+    "'100%' refers ONLY to per-token API fees being eliminated, NOT total cost of ownership -- hardware ($2,500) and power (~$40/mo) are real and shown as the flat local line.",
+    "Intel Xeon 6+ 'Clearwater Forest' specs VERIFIED 2026-06-01 via multiple tech-press reports (Tom's Hardware, The Register, TechPowerUp): up to 288 cores, Intel 18A process, 576MB L3, launched at Computex on Jun 1 2026. NOTE: it is a data-center chip -- on screen we frame Intel as an industry signal, NOT the consumer rig the viewer runs (avoids implying enterprise hardware is required).",
+    "The on-screen Ollama version tag is a placeholder until pinned to the exact installed version."
+  ],
+  "sources_to_cite": [
+    "(pending) cloud API pricing page used for the $4/1M blended rate",
+    "(pending) exact Ollama version tag",
+    "Intel Xeon 6+ Clearwater Forest (288 cores, 18A): tomshardware.com, theregister.com (2026/06/01), techpowerup.com — verified 2026-06-01"
+  ]
+}

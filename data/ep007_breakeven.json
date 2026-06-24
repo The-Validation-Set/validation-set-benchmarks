@@ -1,0 +1,113 @@
+{
+  "episode": {
+    "id": "EP007",
+    "working_title": "Self-host vs API: the break-even, re-measured",
+    "locked_at_utc": "2026-06-14T18:05:11Z"
+  },
+  "mode": "breakeven",
+  "eyebrow": "DATA_MEASURED // 18:05 UTC // RENT vs OWN",
+  "bench_config": {
+    "workload": "workload.json",
+    "runs": 2,
+    "max_tokens": 512,
+    "local_model": "llama3.1:8b",
+    "pause_s_between_hosted_calls": 2.0
+  },
+  "lanes": {
+    "local": {
+      "label": "llama3.1:8b · owned rig",
+      "measured": {
+        "tok_s_median": 8.46,
+        "latency_ms_median": 33552.35,
+        "n_calls": 10,
+        "power_watts_used": 38.0
+      },
+      "modeled": {
+        "usd_per_1m_electricity": 0.3369,
+        "hardware_usd": 1500.0,
+        "amortize_months": 36
+      }
+    },
+    "groq": {
+      "label": "llama-3.1-8b-instant · groq API",
+      "same_model_class_as_local": true,
+      "measured": {
+        "tok_s_median": 472.3,
+        "latency_ms_median": 433.1,
+        "n_calls": 10
+      },
+      "pricing_input": {
+        "model": "llama-3.1-8b-instant",
+        "usd_per_1m_in": 0.05,
+        "usd_per_1m_out": 0.08,
+        "source_url": "https://groq.com/pricing",
+        "_fill": "VERIFIED 2026-06-12 from https://groq.com/pricing (llama-3.1-8b-instant 128k, 840 TPS listed). Re-glance before recording; rates were stable.",
+        "speed_tps_listed": 840
+      }
+    }
+  },
+  "headline": {
+    "vs": "groq",
+    "api_usd_per_1m_blended": 0.065,
+    "local_usd_per_1m_electricity": 0.3369,
+    "break_even_tokens_per_month": null,
+    "reference_tokens_per_month": 50000000.0,
+    "cumulative_12mo": {
+      "months": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "rent_usd": [
+        3.25,
+        6.5,
+        9.75,
+        13.0,
+        16.25,
+        19.5,
+        22.75,
+        26.0,
+        29.25,
+        32.5,
+        35.75,
+        39.0
+      ],
+      "own_usd": [
+        1516.85,
+        1533.69,
+        1550.54,
+        1567.38,
+        1584.22,
+        1601.07,
+        1617.91,
+        1634.76,
+        1651.61,
+        1668.45,
+        1685.3,
+        1702.14
+      ],
+      "crossover_month": null
+    }
+  },
+  "pricing_file": {
+    "path": "ep007_pricing.json",
+    "verified_on": "2026-06-12 (groq VERIFIED from live pricing page; other lanes still UNVERIFIED - fill or drop before render)",
+    "note": "EP007 pricing INPUTS. Every number must be re-checked at its URL before the recording run — published rates drift and this channel does not bake stale dollars into a render. Set verified_on when you check."
+  },
+  "integrity_notes": [
+    "tok/s, latency and (if --measure-power) wall power are MEASURED per prompt on the frozen workload.json; medians reported.",
+    "hosted lanes run the same prompts non-streamed; free-tier rate limits can inflate hosted latency — runs are paced and the pause is recorded in bench_config.",
+    "all $ figures are MODELED from inputs you can audit: electricity basis = EP002's helper on measured tok/s; API rates come from ep007_pricing.json, which carries a source URL and verified-on date next to every number.",
+    "break-even formula: tokens/month where API rent equals electricity + hardware/amortization; run `python run_breakeven.py --selftest` to verify the math against hand calculations.",
+    "the Google lane (if run) is a different model class — speed/price reference only, never the same-model fair fight."
+  ]
+}

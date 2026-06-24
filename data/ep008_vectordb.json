@@ -1,0 +1,91 @@
+{
+ "metadata": {
+  "episode": "EP008 vector-DB teardown",
+  "provenance": "MEASURED on this rig (run by the author; sandbox numbers don't count)",
+  "rig": {
+   "platform": "macOS-26.3.2-arm64-arm-64bit-Mach-O",
+   "machine": "arm64",
+   "python": "3.13.9"
+  },
+  "generated": "2026-06-14T20:51:56",
+  "seed": 8,
+  "corpus": "seeded clustered gaussians (64 centers), unit-norm, queries = perturbed db points"
+ },
+ "runs": [
+  {
+   "n": 10000,
+   "dim": 384,
+   "k": 10,
+   "n_queries": 200,
+   "lanes": {
+    "exact": {
+     "ingest_s": 0.0,
+     "p50_ms": 0.77,
+     "p95_ms": 1.07,
+     "recall_at_k": 1.0,
+     "notes": "numpy brute force = ground truth; the baseline nobody sells you",
+     "rss_mb_after": 135.1
+    },
+    "chroma": {
+     "ingest_s": 0.95,
+     "p50_ms": 0.39,
+     "p95_ms": 0.48,
+     "recall_at_k": 0.9695,
+     "notes": "embedded mode, default HNSW",
+     "rss_mb_after": 284.8
+    }
+   }
+  },
+  {
+   "n": 50000,
+   "dim": 384,
+   "k": 10,
+   "n_queries": 200,
+   "lanes": {
+    "exact": {
+     "ingest_s": 0.0,
+     "p50_ms": 5.01,
+     "p95_ms": 5.64,
+     "recall_at_k": 1.0,
+     "notes": "numpy brute force = ground truth; the baseline nobody sells you",
+     "rss_mb_after": 546.2
+    },
+    "chroma": {
+     "ingest_s": 6.1,
+     "p50_ms": 0.51,
+     "p95_ms": 0.75,
+     "recall_at_k": 0.766,
+     "notes": "embedded mode, default HNSW",
+     "rss_mb_after": 570.1
+    }
+   }
+  },
+  {
+   "n": 200000,
+   "dim": 384,
+   "k": 10,
+   "n_queries": 200,
+   "lanes": {
+    "exact": {
+     "ingest_s": 0.0,
+     "p50_ms": 22.85,
+     "p95_ms": 24.49,
+     "recall_at_k": 1.0,
+     "notes": "numpy brute force = ground truth; the baseline nobody sells you",
+     "rss_mb_after": 1072.0
+    },
+    "chroma": {
+     "ingest_s": 48.59,
+     "p50_ms": 0.9,
+     "p95_ms": 1.38,
+     "recall_at_k": 0.495,
+     "notes": "embedded mode, default HNSW",
+     "rss_mb_after": 1249.9
+    }
+   }
+  }
+ ],
+ "modeled": {
+  "note": "fill $/month at 1M/10M/100M from ep008_vectordb_pricing.json AFTER verifying each rate at its source_url -- no stale dollars"
+ }
+}

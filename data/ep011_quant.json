@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "episode": "EP011 \u2014 the quant that fits (measured)",
+    "provenance": "MEASURED on this rig (run by the author; sandbox numbers don't count)",
+    "rig": {
+      "platform": "macOS-26.3.2-arm64-arm-64bit-Mach-O",
+      "machine": "arm64",
+      "python": "3.13.9"
+    },
+    "generated": "2026-06-22",
+    "model": "llama3.1:8b",
+    "exam": "same 15-task graded exam as EP004 (temp 0, deterministic graders, no LLM-judge)",
+    "note": "Same 8B weights at three precisions on one 8GB rig. Only Q4 loads."
+  },
+  "quants": [
+    {
+      "name": "FP16",
+      "bits": 16,
+      "size_gb": 16.0,
+      "fits_8gb": false,
+      "loaded": false,
+      "note": "~16 GB > 8 GB; not loaded (stated outcome)"
+    },
+    {
+      "name": "Q8_0",
+      "bits": 8,
+      "size_gb": 8.5,
+      "fits_8gb": false,
+      "loaded": true,
+      "tok_s": 0.03,
+      "timed_out": true,
+      "note": "spilled to swap, ~0.03 tok/s, timed out"
+    },
+    {
+      "name": "Q4_K_M",
+      "bits": 4,
+      "size_gb": 4.8,
+      "fits_8gb": true,
+      "loaded": true,
+      "tok_s": 11.0,
+      "accuracy_pct": 87.0,
+      "correct": "13/15",
+      "misses": "both multi-step arithmetic"
+    }
+  ],
+  "deferred": {
+    "lane": "QAT (quantization-aware training)",
+    "needs_gb": 16,
+    "credit": "viewer @skmineforever",
+    "reason": "needs 16 GB > this 8 GB rig"
+  }
+}

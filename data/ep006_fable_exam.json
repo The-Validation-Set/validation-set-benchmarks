@@ -1,0 +1,754 @@
+{
+  "episode": {
+    "id": "EP006",
+    "working_title": "Fable 5 sits the cheap-rig exam — pricing the gap",
+    "locked_at_utc": "2026-06-11T23:46:13Z"
+  },
+  "mode": "fable_exam",
+  "eyebrow": "DATA_MEASURED // 23:46 UTC // SAME EXAM, FRONTIER BRAIN",
+  "capture_config": {
+    "subject": "Claude Fable 5 (claude-fable-5), via Claude desktop (Cowork) sub-agent contexts",
+    "method": "Each of the 15 eval_tasks.json prompts was sent VERBATIM to a fresh, isolated agent context running Fable 5 — a cold context per task, so the subject never sees the answer key, the repo, or any prior task. Two independent passes (A, B) for a stability check. The orchestrating session never answered any task itself (it has seen eval_tasks.json, so it is contaminated and is not the subject).",
+    "wrapper_text_verbatim": "You are being asked a single question. Reply with only your answer — no preamble, no tool use, no file access.\n\n",
+    "passes": 2,
+    "captured_utc": "2026-06-10",
+    "grader": "run_quality.grade() imported directly — identical code path to EP004"
+  },
+  "fable5": {
+    "model": "claude-fable-5",
+    "accuracy_pct": 100.0,
+    "correct": 15,
+    "total": 15,
+    "completed": 15,
+    "timeouts": 0,
+    "by_bucket": {
+      "math": {
+        "correct": 4,
+        "total": 4,
+        "pct": 100.0
+      },
+      "reasoning": {
+        "correct": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "code": {
+        "correct": 4,
+        "total": 4,
+        "pct": 100.0
+      },
+      "format": {
+        "correct": 3,
+        "total": 3,
+        "pct": 100.0
+      },
+      "extract": {
+        "correct": 1,
+        "total": 1,
+        "pct": 100.0
+      }
+    },
+    "results": [
+      {
+        "id": "math_throughput",
+        "bucket": "math",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4477
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 3998
+          }
+        ],
+        "answer_excerpt": "600000"
+      },
+      {
+        "id": "math_team_loc",
+        "bucket": "math",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": false,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": false,
+            "wall_ms": 9164
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": false,
+            "wall_ms": 7098
+          },
+          {
+            "pass": "C",
+            "correct": true,
+            "correct_raw_unstripped": false,
+            "wall_ms": 11605
+          },
+          {
+            "pass": "D",
+            "correct": true,
+            "correct_raw_unstripped": false,
+            "wall_ms": 6066
+          }
+        ],
+        "answer_excerpt": "Each engineer: 40 lines/hour × 6 hours/day = 240 lines/day. Over 5 days: 240 × 5 = 1,200 l"
+      },
+      {
+        "id": "math_token_cost",
+        "bucket": "math",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 9361
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4114
+          }
+        ],
+        "answer_excerpt": "7"
+      },
+      {
+        "id": "math_gen_time",
+        "bucket": "math",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4744
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5063
+          }
+        ],
+        "answer_excerpt": "60"
+      },
+      {
+        "id": "reason_race_order",
+        "bucket": "reasoning",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4218
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 15596
+          }
+        ],
+        "answer_excerpt": "D"
+      },
+      {
+        "id": "reason_largest_power",
+        "bucket": "reasoning",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4031
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 13406
+          }
+        ],
+        "answer_excerpt": "A"
+      },
+      {
+        "id": "reason_units",
+        "bucket": "reasoning",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5003
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 6310
+          }
+        ],
+        "answer_excerpt": "C"
+      },
+      {
+        "id": "code_sum_to_n",
+        "bucket": "code",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 8787
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 7249
+          }
+        ],
+        "answer_excerpt": "```python\ndef solve(n):\n    if n < 1:\n        return 0\n    return n * (n + 1) // 2\n```"
+      },
+      {
+        "id": "code_count_vowels",
+        "bucket": "code",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 12682
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5246
+          }
+        ],
+        "answer_excerpt": "```python\ndef count_vowels(s):\n    return sum(1 for c in s.lower() if c in \"aeiou\")\n```"
+      },
+      {
+        "id": "code_palindrome",
+        "bucket": "code",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4928
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 14136
+          }
+        ],
+        "answer_excerpt": "```python\ndef is_palindrome(s):\n    cleaned = [c.lower() for c in s if c.isalnum()]\n    re"
+      },
+      {
+        "id": "code_two_sum",
+        "bucket": "code",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 12062
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 10606
+          }
+        ],
+        "answer_excerpt": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for j, num in enumerate(nums):\n    "
+      },
+      {
+        "id": "format_extract_person",
+        "bucket": "format",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 14566
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 14300
+          }
+        ],
+        "answer_excerpt": "{\"name\": \"Maria\", \"age\": 34}"
+      },
+      {
+        "id": "format_sentiment",
+        "bucket": "format",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 6895
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 10793
+          }
+        ],
+        "answer_excerpt": "{\"sentiment\": \"negative\"}"
+      },
+      {
+        "id": "format_prime_array",
+        "bucket": "format",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5807
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5887
+          }
+        ],
+        "answer_excerpt": "[11, 13, 17, 19]"
+      },
+      {
+        "id": "extract_http_code",
+        "bucket": "extract",
+        "completed": true,
+        "correct": true,
+        "graded_same_across_passes": true,
+        "byte_identical_across_passes": true,
+        "per_pass": [
+          {
+            "pass": "A",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 4566
+          },
+          {
+            "pass": "B",
+            "correct": true,
+            "correct_raw_unstripped": true,
+            "wall_ms": 5185
+          }
+        ],
+        "answer_excerpt": "503"
+      }
+    ],
+    "stability": {
+      "passes": 2,
+      "tasks_graded_same_across_passes": 15,
+      "tasks_byte_identical_across_passes": 14,
+      "trailer_stripping_ever_changed_a_grade": true
+    },
+    "cost_modeled": {
+      "est_input_tokens": 1011,
+      "est_output_tokens": 192,
+      "usd_per_1m_in": 10.0,
+      "usd_per_1m_out": 50.0,
+      "exam_usd": 0.0197,
+      "usd_per_correct": 0.0013,
+      "basis": "token counts ESTIMATED at ~4 chars/token (no usage meter on the chat-plan capture path); prices from the launch post (ep005_fable5.json sources)"
+    }
+  },
+  "ep004_locals": [
+    {
+      "model": "llama3.2:3b",
+      "accuracy_pct": 80.0,
+      "correct": 12,
+      "total": 15,
+      "by_bucket": {
+        "math": {
+          "correct": 1,
+          "total": 4,
+          "pct": 25.0
+        },
+        "reasoning": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "code": {
+          "correct": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "format": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "extract": {
+          "correct": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "exam_electricity_usd_modeled": 2.8e-05,
+      "usd_per_correct_modeled": 2e-06,
+      "tok_s_mean": 25.57
+    },
+    {
+      "model": "llama3.1:8b",
+      "accuracy_pct": 86.7,
+      "correct": 13,
+      "total": 15,
+      "by_bucket": {
+        "math": {
+          "correct": 2,
+          "total": 4,
+          "pct": 50.0
+        },
+        "reasoning": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "code": {
+          "correct": 4,
+          "total": 4,
+          "pct": 100.0
+        },
+        "format": {
+          "correct": 3,
+          "total": 3,
+          "pct": 100.0
+        },
+        "extract": {
+          "correct": 1,
+          "total": 1,
+          "pct": 100.0
+        }
+      },
+      "exam_electricity_usd_modeled": 0.000178,
+      "usd_per_correct_modeled": 1.4e-05,
+      "tok_s_mean": 6.28
+    }
+  ],
+  "gap_analysis": {
+    "llama3.2:3b": {
+      "failed_tasks": [
+        "math_throughput",
+        "math_token_cost",
+        "math_gen_time"
+      ],
+      "fable_fixes": [
+        "math_gen_time",
+        "math_throughput",
+        "math_token_cost"
+      ]
+    },
+    "llama3.1:8b": {
+      "failed_tasks": [
+        "math_throughput",
+        "math_token_cost"
+      ],
+      "fable_fixes": [
+        "math_throughput",
+        "math_token_cost"
+      ]
+    }
+  },
+  "fable_vs_3b_usd_per_correct_ratio_modeled": 657.0,
+  "accuracy_bars": {
+    "title": "Same 15 tasks, same grader: cheap rig vs the frontier",
+    "unit": "%",
+    "x_labels": [
+      "3B",
+      "8B",
+      "Fable 5"
+    ],
+    "series": [
+      {
+        "label": "tasks correct",
+        "kind": "quality",
+        "values": [
+          80.0,
+          86.7,
+          100.0
+        ]
+      }
+    ]
+  },
+  "bucket_bars": {
+    "title": "Where the frontier actually buys accuracy (by task type)",
+    "unit": "%",
+    "x_labels": [
+      "math",
+      "reasoning",
+      "code",
+      "format",
+      "extract"
+    ],
+    "series": [
+      {
+        "label": "3B",
+        "kind": "quality",
+        "values": [
+          25.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0
+        ]
+      },
+      {
+        "label": "8B",
+        "kind": "quality",
+        "values": [
+          50.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0
+        ]
+      },
+      {
+        "label": "Fable 5",
+        "kind": "quality",
+        "values": [
+          100.0,
+          100.0,
+          100.0,
+          100.0,
+          100.0
+        ]
+      }
+    ]
+  },
+  "hero_metrics": [
+    {
+      "id": "fable_acc",
+      "label": "Fable 5 on the exam",
+      "value": "15/15",
+      "context": "100.0% — same grader as EP004",
+      "kind": "rate"
+    },
+    {
+      "id": "gap_3b",
+      "label": "Tasks the frontier fixes vs 3B",
+      "value": "3",
+      "context": "of the 15-task exam — all of them math",
+      "kind": "count"
+    },
+    {
+      "id": "exam_cost",
+      "label": "Fable's whole exam, at API prices",
+      "value": "$0.02",
+      "context": "MODELED · est. tokens × launch pricing",
+      "kind": "cost"
+    },
+    {
+      "id": "cost_ratio",
+      "label": "$/correct answer vs 3B electricity",
+      "value": "657.0×",
+      "context": "MODELED both sides · the price of the last 20%",
+      "kind": "cost"
+    }
+  ],
+  "remotion": {
+    "_note": "visual_data payloads shaped for existing cues (CHART_BARS / STAT_CALLOUT / CODE_HIGHLIGHT); the EP006 script data_refs these.",
+    "bucket_bars": {
+      "title": "Accuracy by task type — the rig's best 8B vs Fable 5",
+      "localLabel": "Llama 8B · 8GB rig",
+      "cloudLabel": "Claude Fable 5",
+      "metrics": [
+        {
+          "label": "math",
+          "local": 50.0,
+          "cloud": 100.0,
+          "better": "higher"
+        },
+        {
+          "label": "reasoning",
+          "local": 100.0,
+          "cloud": 100.0,
+          "better": "higher"
+        },
+        {
+          "label": "code",
+          "local": 100.0,
+          "cloud": 100.0,
+          "better": "higher"
+        },
+        {
+          "label": "format + extract",
+          "local": 100.0,
+          "cloud": 100.0,
+          "better": "higher"
+        }
+      ]
+    },
+    "cost_bars": {
+      "title": "What a correct answer costs (MODELED both sides)",
+      "localLabel": "Llama 8B · electricity",
+      "cloudLabel": "Fable 5 · API rates",
+      "metrics": [
+        {
+          "label": "$ per 1,000 correct answers",
+          "local": 0.014,
+          "cloud": 1.31,
+          "better": "lower",
+          "unit": "$",
+          "decimals": 2
+        },
+        {
+          "label": "$ per full 15-task exam",
+          "local": 0.0002,
+          "cloud": 0.02,
+          "better": "lower",
+          "unit": "$",
+          "decimals": 4
+        }
+      ]
+    },
+    "grader_code": {
+      "language": "python",
+      "code": "def grade(content, check):\n    kind = check.get(\"type\")\n    if kind == \"numeric\":\n        got = _extract_answer_number(content)\n        return got is not None and _num_eq(got, float(check[\"answer\"]))\n    if kind == \"choice\":\n        return _last_choice(content) == str(check[\"answer\"]).upper()\n    if kind == \"code\":\n        return _grade_code(content, check[\"entry\"], check[\"cases\"])\n    # a number, a letter, a JSON shape, or code that must pass asserts.",
+      "highlight_line": 5
+    },
+    "cards": {
+      "same_exam": {
+        "id": "same_exam",
+        "label": "The rematch",
+        "value": "Same 15 tasks",
+        "context": "same deterministic grader as the local exam — not one line rewritten"
+      },
+      "fresh_contexts": {
+        "id": "fresh_contexts",
+        "label": "Capture protocol",
+        "value": "30 cold starts",
+        "context": "15 tasks × 2 passes, one fresh context each — the subject never sees the answer key"
+      },
+      "fable_score": {
+        "id": "fable_score",
+        "label": "Fable 5 on the exam",
+        "value": "15/15",
+        "context": "100% — the locals scored 12 and 13"
+      },
+      "wrong_answer": {
+        "id": "wrong_answer",
+        "label": "Requests in 8 hours",
+        "value": "600,000 vs 10,800",
+        "context": "Fable's answer vs the 3B's — the kind of task that splits them"
+      },
+      "four_passes": {
+        "id": "four_passes",
+        "label": "The contested grade",
+        "value": "4/4 say 3,600",
+        "context": "a capture artifact tripped the grader once; the model's own text never wavered"
+      },
+      "exam_cost": {
+        "id": "exam_cost",
+        "label": "Fable's whole exam",
+        "value": "$0.02",
+        "context": "MODELED — estimated tokens × launch API prices"
+      },
+      "per_correct": {
+        "id": "per_correct",
+        "label": "Per correct answer vs 3B",
+        "value": "657×",
+        "context": "API rates vs local electricity — MODELED both sides"
+      },
+      "twelve_easy": {
+        "id": "twelve_easy",
+        "label": "What the cheap box already passes",
+        "value": "12 of 15",
+        "context": "the frontier premium buys the last three — and they're all math"
+      },
+      "verdict": {
+        "id": "verdict",
+        "label": "The split",
+        "value": "Rent genius · own the workhorse",
+        "context": "frontier for what the locals flunk; pennies for everything else"
+      },
+      "teaser": {
+        "id": "teaser",
+        "label": "Next episode",
+        "value": "The break-even",
+        "context": "self-host vs API — measured, token by token"
+      }
+    }
+  },
+  "integrity_notes": [
+    "accuracy is MEASURED by the SAME deterministic graders as EP004 (run_quality.grade imported, not re-implemented); no LLM-as-judge, no vibes.",
+    "capture path is the chat plan (free window), one fresh isolated context per task so the subject never sees the answer key or the repo; the orchestrating session is contaminated and answered nothing.",
+    "no temperature control on this path (EP004 locals ran temperature 0); stability evidenced instead by 2 independent passes — graded outcomes agreed on all tasks that count as correct, and a task only counts correct if every pass passes.",
+    "the verbatim wrapper line added to every prompt (to suppress agent tool use, keeping the no-tools comparison fair) is recorded in capture_config.",
+    "the capture harness labels its own summary lines 'result:'; those lines are removed before grading (model answer text is never deleted), every reply is graded BOTH raw and cleaned with both outcomes stored per pass, and the one task where the artifact flipped a raw grade (math_team_loc — the word 'total' in the harness line is an answer-cue) got 2 extra captured passes; the model's own text answers 3,600 in all 4.",
+    "Fable token counts are ESTIMATED (~4 chars/token) and priced at launch-post rates — labelled MODELED; local electricity $/token reuses EP004's measured basis.",
+    "capture wall-time includes agent startup overhead and is NOT generation speed — deliberately not charted."
+  ]
+}

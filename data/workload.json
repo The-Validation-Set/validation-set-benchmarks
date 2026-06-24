@@ -1,0 +1,27 @@
+{
+  "name": "validation-set-agent-bench-v1",
+  "description": "Fixed agent/coding-style prompts for a reproducible local-vs-cloud head-to-head. The same prompts hit the local Ollama model and the cloud API so throughput, latency and cost are measured on identical work. Freeze this file once a video is recorded against it.",
+  "max_tokens": 512,
+  "prompts": [
+    {
+      "id": "refactor",
+      "prompt": "Refactor this Python function to be O(n) and explain the change in two sentences:\n\ndef has_dup(xs):\n    for i in range(len(xs)):\n        for j in range(i+1, len(xs)):\n            if xs[i] == xs[j]:\n                return True\n    return False"
+    },
+    {
+      "id": "sql",
+      "prompt": "Write a single SQL query to find the top 3 customers by total order value in the last 90 days, given tables customers(id, name) and orders(id, customer_id, amount, created_at)."
+    },
+    {
+      "id": "bug",
+      "prompt": "This JavaScript intermittently throws \"cannot read property 'map' of undefined\". List the 3 most likely causes and the one-line fix for each:\n\nconst rows = data.results.map(r => r.value);"
+    },
+    {
+      "id": "explain",
+      "prompt": "Explain the difference between a process and a thread to a junior engineer in under 120 words, using one concrete analogy."
+    },
+    {
+      "id": "plan",
+      "prompt": "Draft a step-by-step plan to add token-bucket rate limiting to a REST API. Keep it to exactly 6 numbered steps."
+    }
+  ]
+}

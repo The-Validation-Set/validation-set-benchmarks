@@ -1,0 +1,59 @@
+{
+ "note": "EP008 pricing INPUTS. Rates pulled from PRIMARY vendor pages on 2026-06-14 (URLs below). Plan floors + Supabase compute ladder are published and exact. Pinecone per-unit $/RU,$/WU,$/GB-mo and Qdrant Standard $/mo are NOT published on the pricing pages (calculator-gated) -> left null; confirm in each vendor calculator at record time and screenshot for b-roll. No stale dollars in a render.",
+ "verified_on": "2026-06-14 (assistant pull from primary pages; the author to re-glance + screenshot at record)",
+ "managed": {
+  "pinecone_serverless": {
+   "starter_free_tier": "Free: 2GB storage, 2M write units/mo, 1M read units/mo, AWS us-east-1 only, up to 5 indexes",
+   "builder_usd_mo_flat": 20,
+   "standard_usd_mo_min": 50,
+   "enterprise_usd_mo_min": 500,
+   "usd_read_unit": null,
+   "usd_write_unit": null,
+   "usd_storage_gb_mo": null,
+   "unit_model": "query = 1 RU per 1GB namespace (min 0.25 RU); upsert = 1 WU per 1KB (min 5 WU); storage billed per-GB-month. Index size = records x (ID bytes + metadata bytes + dims x 4 bytes).",
+   "per_unit_note": "Per-unit $ rates are NOT on the pricing page -> use https://www.pinecone.io/pricing/estimate/ . Story: at ~1M x 384-dim (~1.5GB) you sit under the 2GB Starter FREE tier, or pay the $50 Standard floor; per-unit rates only bite at 10M+ vectors.",
+   "source_url": "https://www.pinecone.io/pricing/",
+   "docs_url": "https://docs.pinecone.io/guides/manage-cost/understanding-cost",
+   "verified_on": "2026-06-14"
+  },
+  "qdrant_cloud": {
+   "free_tier_limit": "0.5 vCPU / 1GB RAM / 4GB disk, single-node",
+   "standard_pricing_model": "usage-based: vCPU + RAM + storage billed hourly; NO flat $/mo published",
+   "smallest_paid_cluster_usd_mo": null,
+   "calculator_url": "https://cloud.qdrant.io/calculator",
+   "note": "qdrant.tech/pricing shows no flat number; must size in calculator. 3rd-party blogs estimate ~$25-45/mo for ~1M vectors -- UNVERIFIED, do NOT render as fact.",
+   "source_url": "https://qdrant.tech/pricing/",
+   "verified_on": "2026-06-14"
+  },
+  "supabase_pgvector": {
+   "pgvector_charge": "INCLUDED free on all plans (no separate vector charge)",
+   "pro_base_usd_mo": 25,
+   "pro_included_compute_credit_usd": 10,
+   "compute_addons_usd_mo": {
+    "micro_1gb": 10,
+    "small_2gb": 15,
+    "medium_4gb": 60,
+    "large_8gb": 110,
+    "xl_16gb": 210,
+    "xxl_32gb": 410,
+    "4xl_64gb": 960,
+    "8xl_128gb": 1870,
+    "12xl_192gb": 2800,
+    "16xl_256gb": 3730
+   },
+   "disk_usd_gb_mo_over_8gb_included": 0.125,
+   "cost_model": "monthly = $25 Pro base + compute tier sized to hold the HNSW index in RAM (minus $10 included credit) + disk over 8GB. Vector workloads are RAM-bound, so the compute tier is the cost driver.",
+   "source_url": "https://supabase.com/pricing",
+   "verified_on": "2026-06-14"
+  }
+ },
+ "self_hosted_basis": {
+  "note": "reuse EP002/EP007 electricity basis (run_benchmark.py helpers) + RAM-bound sizing: vectors_gb = n * dim * 4 / 1e9; HNSW overhead ~1.5x",
+  "kwh_rate_source": "EP002"
+ },
+ "modeled_scales": [
+  1000000,
+  10000000,
+  100000000
+ ]
+}

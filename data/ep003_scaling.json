@@ -1,0 +1,271 @@
+{
+  "episode": {
+    "id": "EP003",
+    "working_title": "How many agents can one cheap rig run?",
+    "locked_at_utc": "2026-06-06T13:05:40Z"
+  },
+  "mode": "concurrency",
+  "bench_config": {
+    "model": "llama3.2:3b",
+    "ollama_url": "http://localhost:11434",
+    "levels": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
+    "runs": 2,
+    "max_tokens": 192,
+    "ollama_num_parallel_env": "server-default",
+    "usable_floor_tok_s": 6.0,
+    "measurement_host": "macOS-26.3.2-arm64-arm-64bit-Mach-O"
+  },
+  "levels": [
+    {
+      "n": 1,
+      "agg_tok_s": 15.57,
+      "effective_per_agent_tok_s": 15.57,
+      "per_agent_tok_s_mean": 16.69,
+      "per_agent_tok_s_min": 15.54,
+      "latency_ms_p50": 5819.1,
+      "latency_ms_p95": 6086.1,
+      "latency_ms_p99": 6109.9,
+      "wall_s": 5.85,
+      "swap_used_mb": 3507.4,
+      "samples": 2
+    },
+    {
+      "n": 2,
+      "agg_tok_s": 16.17,
+      "effective_per_agent_tok_s": 8.09,
+      "per_agent_tok_s_mean": 16.88,
+      "per_agent_tok_s_min": 15.36,
+      "latency_ms_p50": 12351.1,
+      "latency_ms_p95": 17751.8,
+      "latency_ms_p99": 17760.6,
+      "wall_s": 17.75,
+      "swap_used_mb": 3654.9,
+      "samples": 4
+    },
+    {
+      "n": 3,
+      "agg_tok_s": 17.5,
+      "effective_per_agent_tok_s": 5.83,
+      "per_agent_tok_s_mean": 18.05,
+      "per_agent_tok_s_min": 17.45,
+      "latency_ms_p50": 18891.9,
+      "latency_ms_p95": 27989.6,
+      "latency_ms_p99": 28068.1,
+      "wall_s": 27.91,
+      "swap_used_mb": 3752.2,
+      "samples": 6
+    },
+    {
+      "n": 4,
+      "agg_tok_s": 17.17,
+      "effective_per_agent_tok_s": 4.29,
+      "per_agent_tok_s_mean": 17.6,
+      "per_agent_tok_s_min": 17.2,
+      "latency_ms_p50": 20270.5,
+      "latency_ms_p95": 34849.0,
+      "latency_ms_p99": 34992.0,
+      "wall_s": 34.79,
+      "swap_used_mb": 3835.2,
+      "samples": 8
+    },
+    {
+      "n": 6,
+      "agg_tok_s": 16.95,
+      "effective_per_agent_tok_s": 2.82,
+      "per_agent_tok_s_mean": 17.47,
+      "per_agent_tok_s_min": 16.49,
+      "latency_ms_p50": 26437.5,
+      "latency_ms_p95": 50097.3,
+      "latency_ms_p99": 51259.8,
+      "wall_s": 50.26,
+      "swap_used_mb": 3987.5,
+      "samples": 12
+    },
+    {
+      "n": 8,
+      "agg_tok_s": 15.74,
+      "effective_per_agent_tok_s": 1.97,
+      "per_agent_tok_s_mean": 16.4,
+      "per_agent_tok_s_min": 12.52,
+      "latency_ms_p50": 42111.0,
+      "latency_ms_p95": 76856.5,
+      "latency_ms_p99": 80510.7,
+      "wall_s": 78.44,
+      "swap_used_mb": 4563.2,
+      "samples": 16
+    }
+  ],
+  "knee": {
+    "n": 2,
+    "effective_per_agent_tok_s": 8.09,
+    "eval_per_agent_tok_s": 16.88,
+    "agg_tok_s": 16.17,
+    "p99_ms": 17760.6
+  },
+  "scaling_curve": {
+    "title": "One 8GB rig under load: agents vs throughput",
+    "x_label": "concurrent agents (N)",
+    "n": [
+      1,
+      2,
+      3,
+      4,
+      6,
+      8
+    ],
+    "agg_tok_s": [
+      15.57,
+      16.17,
+      17.5,
+      17.17,
+      16.95,
+      15.74
+    ],
+    "effective_per_agent_tok_s": [
+      15.57,
+      8.09,
+      5.83,
+      4.29,
+      2.82,
+      1.97
+    ],
+    "eval_per_agent_tok_s": [
+      16.69,
+      16.88,
+      18.05,
+      17.6,
+      17.47,
+      16.4
+    ],
+    "p99_ms": [
+      6109.9,
+      17760.6,
+      28068.1,
+      34992.0,
+      51259.8,
+      80510.7
+    ],
+    "usable_floor_tok_s": 6.0,
+    "knee_n": 2
+  },
+  "cost_per_agent": {
+    "knee_agents": 2,
+    "rig_year1_usd_modeled": 2652.79,
+    "local_usd_per_agent_year1_modeled": 1326.39,
+    "managed_usd_per_agent_year": 7200.0,
+    "savings_per_agent_year": 5873.61,
+    "fleet_breakeven_month": 3,
+    "fleet_year1_savings_usd": 11747.21
+  },
+  "fleet_cost_compare": {
+    "title": "12-month cost of a 2-agent fleet: own one rig vs rent each",
+    "unit": "USD",
+    "x_labels": [
+      "M0",
+      "M1",
+      "M2",
+      "M3",
+      "M4",
+      "M5",
+      "M6",
+      "M7",
+      "M8",
+      "M9",
+      "M10",
+      "M11",
+      "M12"
+    ],
+    "series": [
+      {
+        "label": "Rent 2 managed agents",
+        "kind": "cloud",
+        "values": [
+          0.0,
+          1200.0,
+          2400.0,
+          3600.0,
+          4800.0,
+          6000.0,
+          7200.0,
+          8400.0,
+          9600.0,
+          10800.0,
+          12000.0,
+          13200.0,
+          14400.0
+        ]
+      },
+      {
+        "label": "Own one rig (hardware + power)",
+        "kind": "local",
+        "values": [
+          2500.0,
+          2512.73,
+          2525.46,
+          2538.2,
+          2550.93,
+          2563.66,
+          2576.39,
+          2589.13,
+          2601.86,
+          2614.59,
+          2627.32,
+          2640.05,
+          2652.79
+        ]
+      }
+    ],
+    "breakout_index": 3
+  },
+  "hero_metrics": [
+    {
+      "id": "knee_agents",
+      "label": "Usable agents on one rig",
+      "value": "2",
+      "context": "each still >= 6 tok/s on llama3.2:3b",
+      "kind": "count"
+    },
+    {
+      "id": "single_tok_s",
+      "label": "Single agent",
+      "value": "17",
+      "context": "tok/s, N=1 baseline on llama3.2:3b",
+      "kind": "rate"
+    },
+    {
+      "id": "cost_per_agent",
+      "label": "Local $/agent (yr 1)",
+      "value": "$1,326",
+      "context": "one rig split 2 ways (modeled)",
+      "kind": "currency"
+    },
+    {
+      "id": "managed_per_agent",
+      "label": "Managed $/agent (yr)",
+      "value": "$7,200",
+      "context": "rent, per agent, every year (EP001 basis)",
+      "kind": "currency"
+    },
+    {
+      "id": "fleet_breakeven",
+      "label": "2-agent fleet break-even",
+      "value": "~Month 3",
+      "context": "own one rig vs renting the whole fleet",
+      "kind": "month"
+    }
+  ],
+  "integrity_notes": [
+    "throughput (aggregate + per-agent) and tail latency are MEASURED via Ollama telemetry; swap is read from macOS `sysctl vm.swapusage`.",
+    "real parallelism is server-side (OLLAMA_NUM_PARALLEL=server-default); if the server serialized, aggregate stays flat while p99 latency climbs -- that regime is recorded, not hidden.",
+    "cost-per-agent is MODELED: rig $2,500 one-time + 30.0W @ $0.17/kWh, amortized across the measured knee (2); managed $7,200/agent/yr is the EP001/EP002 rent basis -- not a live call.",
+    "concurrent throughput != N equally-SMART agents; output quality is a separate test (EP004)."
+  ],
+  "eyebrow": "DATA_MEASURED // 13:05 UTC // ONE RIG UNDER LOAD"
+}

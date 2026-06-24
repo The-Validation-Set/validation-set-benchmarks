@@ -1,0 +1,25 @@
+{
+  "name": "validation-set-benchmarks",
+  "version": "1.0.0",
+  "description": "Raw benchmark data and the Remotion render engine behind The Validation Set.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render ValidationSetVideo out/video.mp4",
+    "still": "remotion still Thumbnail out/thumbnail.png --scale=2 --image-format=jpeg --jpeg-quality=92",
+    "build": "remotion bundle",
+    "lint": "tsc"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.470",
+    "@remotion/fonts": "^4.0.470",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "remotion": "4.0.470"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.7",
+    "typescript": "5.9.3"
+  }
+}
