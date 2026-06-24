@@ -2,7 +2,7 @@
 
 > Test the hype against real data. This repo holds the **raw measured data** and the
 > **React / [Remotion](https://www.remotion.dev) render code** behind the benchmarks on
-> **[The Validation Set]([CHANNEL_URL])** — so you can re-run, re-chart, and argue with
+> **[The Validation Set](https://www.youtube.com/@TheValidationSet)** — so you can re-run, re-chart, and argue with
 > every number in the videos.
 
 **No vibes, just data.** Across the series, accuracy and throughput are **MEASURED**;
@@ -40,7 +40,7 @@ The method is deliberately boring so it's checkable:
 
 - **Local models** run on [Ollama](https://ollama.com): e.g. `ollama pull llama3.2:3b`, then fire `workload.json` at it and read tok/s + latency straight off the engine.
 - **The exam (EP04/06)** is in `data/eval_tasks.json`: 15 tasks, each graded by a deterministic checker (a number, an A–D letter, a JSON shape, or code that must pass asserts) at **temperature 0**. No LLM-as-judge. Re-run it and you get the same score.
-- **The cloud / hosted lane** needs rented compute — see *Infrastructure* below.
+- **The cloud / hosted lane** needs rented compute — see *Reproduce the cloud lane* below.
 - Every chart reads its numbers from the matching `data/*.json`, so you can change an input and re-render to see the chart move.
 
 ## Reproduce the cloud lane
@@ -82,4 +82,4 @@ and wire the `<Audio>` line noted in [`src/components/TimelineManager.tsx`](./sr
 
 ---
 
-*Built by [The Validation Set]([CHANNEL_URL]). Found a flaw in a benchmark? Open an issue or PR — that's the whole point.*
+*Built by [The Validation Set](https://www.youtube.com/@TheValidationSet). Found a flaw in a benchmark? Open an issue or PR — that's the whole point.*
