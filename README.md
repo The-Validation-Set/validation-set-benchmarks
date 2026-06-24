@@ -43,27 +43,18 @@ The method is deliberately boring so it's checkable:
 - **The cloud / hosted lane** needs rented compute — see *Infrastructure* below.
 - Every chart reads its numbers from the matching `data/*.json`, so you can change an input and re-render to see the chart move.
 
-## Infrastructure to run it yourself
+## Reproduce the cloud lane
 
-Reproducing the **cloud** side of any episode needs rented compute. These are the kinds
-of providers used across the series. Links tagged _(affiliate)_ help fund the benchmarks
-**at no extra cost to you** (see the disclosure below) — or ignore them and go direct;
-the data and code don't depend on them.
+Most episodes pit a **local** model (Ollama on an 8GB Apple Silicon laptop) against a
+**cloud / hosted** lane. To re-run the cloud side you'll need rented compute — any of
+these work; pick on price, nothing here depends on a specific provider:
 
-**Rent a cloud GPU** — the "cloud" lane in EP02/03/07:
-- RunPod — per-second GPU rental _(affiliate)_: `[AFFILIATE_RUNPOD]`
-- Vast.ai — cheapest spot GPUs _(affiliate)_: `[AFFILIATE_VASTAI]`
-- Lambda — on-demand A100/H100: `[LINK_LAMBDA]`
+- **Rent a GPU** (the "cloud" lane in EP02/03/07): [RunPod](https://runpod.io), [Vast.ai](https://vast.ai), or [Lambda](https://lambda.ai).
+- **Hosted inference API** (EP07's 8B ran on Groq): [Groq](https://groq.com), [Together AI](https://together.ai), or [Fireworks](https://fireworks.ai).
+- **Local rig:** any 8GB+ Apple Silicon Mac (16GB+ for the models that won't fit 8GB).
 
-**Hosted inference API** — EP07 used Groq for the same 8B:
-- Groq: `[LINK_GROQ]` · Together AI _(affiliate, if approved)_: `[AFFILIATE_TOGETHER]` · Fireworks: `[LINK_FIREWORKS]`
-
-**Deploy / host** the render output or a demo:
-- DigitalOcean — $200 free credit for 60 days _(affiliate)_: `[AFFILIATE_DIGITALOCEAN]`
-
-**The local rig** — the "own it" lane:
-- 8GB Apple Silicon (what most episodes test on) _(affiliate)_: `[AFFILIATE_AMZN_8GB]`
-- 32GB+ Apple Silicon (for models that won't fit 8GB) _(affiliate)_: `[AFFILIATE_AMZN_32GB]`
+These are plain references, not endorsements — there are no referral links here, and the
+published numbers are whatever the data says.
 
 ## The render engine
 
@@ -84,13 +75,10 @@ To render a real episode: produce your own aligned script in the schema above (o
 the example), point `TimelineManager`'s import at it, drop your voiceover in `public/`,
 and wire the `<Audio>` line noted in [`src/components/TimelineManager.tsx`](./src/components/TimelineManager.tsx).
 
-## License & disclosure
+## License
 
 - **Code** (`src/`): MIT — see [LICENSE](./LICENSE).
 - **Data** (`data/`): free to use with attribution to The Validation Set.
-- **Affiliate disclosure:** some hardware/infrastructure links above are affiliate links.
-  If you sign up through them the channel may earn a commission at no additional cost to
-  you. They're labelled `(affiliate)` so you always know which is which.
 
 ---
 
