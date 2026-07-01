@@ -1,0 +1,219 @@
+{
+  "episode": {
+    "id": "EP013",
+    "working_title": "Keep it local, or pay the cloud? (routing, per task)",
+    "locked_at_utc": "2026-06-27T18:09:59Z"
+  },
+  "mode": "frontier_exam",
+  "model": "Gemini 3 Pro (Google AI Pro app, free)",
+  "eyebrow": "DATA_MEASURED // 18:09 UTC // FRONTIER EXAM",
+  "accuracy_pct": 100.0,
+  "correct": 15,
+  "total": 15,
+  "by_bucket": {
+    "math": {
+      "correct": 4,
+      "total": 4,
+      "pct": 100.0
+    },
+    "reasoning": {
+      "correct": 3,
+      "total": 3,
+      "pct": 100.0
+    },
+    "code": {
+      "correct": 4,
+      "total": 4,
+      "pct": 100.0
+    },
+    "format": {
+      "correct": 3,
+      "total": 3,
+      "pct": 100.0
+    },
+    "extract": {
+      "correct": 1,
+      "total": 1,
+      "pct": 100.0
+    }
+  },
+  "results": [
+    {
+      "id": "math_throughput",
+      "bucket": "math",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 55,
+      "output_tokens": 2,
+      "answer_excerpt": "600000"
+    },
+    {
+      "id": "math_team_loc",
+      "bucket": "math",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 82,
+      "output_tokens": 1,
+      "answer_excerpt": "3600"
+    },
+    {
+      "id": "math_token_cost",
+      "bucket": "math",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 62,
+      "output_tokens": 1,
+      "answer_excerpt": "7"
+    },
+    {
+      "id": "math_gen_time",
+      "bucket": "math",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 56,
+      "output_tokens": 1,
+      "answer_excerpt": "60"
+    },
+    {
+      "id": "reason_race_order",
+      "bucket": "reasoning",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 70,
+      "output_tokens": 1,
+      "answer_excerpt": "D"
+    },
+    {
+      "id": "reason_largest_power",
+      "bucket": "reasoning",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 49,
+      "output_tokens": 1,
+      "answer_excerpt": "A"
+    },
+    {
+      "id": "reason_units",
+      "bucket": "reasoning",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 76,
+      "output_tokens": 1,
+      "answer_excerpt": "C"
+    },
+    {
+      "id": "code_sum_to_n",
+      "bucket": "code",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 60,
+      "output_tokens": 22,
+      "answer_excerpt": "```python\ndef solve(n):\n    if n < 1:\n        return 0\n    return n * (n + 1) // 2\n```"
+    },
+    {
+      "id": "code_count_vowels",
+      "bucket": "code",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 63,
+      "output_tokens": 24,
+      "answer_excerpt": "```python\ndef count_vowels(s):\n    return sum(1 for char in s.lower() if char in 'aeiou')\n"
+    },
+    {
+      "id": "code_palindrome",
+      "bucket": "code",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 69,
+      "output_tokens": 35,
+      "answer_excerpt": "```python\ndef is_palindrome(s):\n    cleaned = ''.join(char.lower() for char in s if char.i"
+    },
+    {
+      "id": "code_two_sum",
+      "bucket": "code",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 78,
+      "output_tokens": 50,
+      "answer_excerpt": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n    "
+    },
+    {
+      "id": "format_extract_person",
+      "bucket": "format",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 75,
+      "output_tokens": 7,
+      "answer_excerpt": "{\"name\": \"Maria\", \"age\": 34}"
+    },
+    {
+      "id": "format_sentiment",
+      "bucket": "format",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 71,
+      "output_tokens": 7,
+      "answer_excerpt": "{\"sentiment\": \"negative\"}"
+    },
+    {
+      "id": "format_prime_array",
+      "bucket": "format",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 55,
+      "output_tokens": 4,
+      "answer_excerpt": "[11, 13, 17, 19]"
+    },
+    {
+      "id": "extract_http_code",
+      "bucket": "extract",
+      "completed": true,
+      "correct": true,
+      "latency_ms": null,
+      "input_tokens": 45,
+      "output_tokens": 1,
+      "answer_excerpt": "503"
+    }
+  ],
+  "cost_modeled": {
+    "note": "Answers captured in the model's free window ($0). At-scale cost modelled at paid rates; tokens estimated (see basis).",
+    "total_input_tokens": 966,
+    "total_output_tokens": 158,
+    "tokens_measured": false,
+    "usd_per_1m_in_at_scale": 2.0,
+    "usd_per_1m_out_at_scale": 12.0,
+    "exam_usd_at_scale_modeled": 0.00383,
+    "usd_per_correct_at_scale_modeled": 0.00026,
+    "frontier_vs_3b_local_ratio_modeled": 107.8
+  },
+  "integrity_notes": [
+    "accuracy MEASURED by the same deterministic graders as EP004 (run_quality.grade imported directly).",
+    "no LLM-as-judge. Every task has a verifiable answer.",
+    "model: Gemini 3 Pro (Google AI Pro app, free).",
+    "cost comparison uses $2.0/$12.0 per 1M (in/out) for at-scale modelling; actual run cost $0.",
+    "token counts ESTIMATED at ~4 chars/token (no usage meter on the chat/paste path) -- labelled MODELED.",
+    "capture: all 15 eval_tasks.json prompts (verbatim, standard one-line wrapper) sent in ONE shared Gemini 3 Pro chat; model saw every question at once (looser than EP004/EP006 isolated contexts). Captured by the human; no API/usage meter."
+  ],
+  "capture_config": {
+    "subject": "Gemini 3 Pro (Google AI Pro app, free)",
+    "method": "all 15 eval_tasks.json prompts (verbatim, standard one-line wrapper) sent in ONE shared Gemini 3 Pro chat; model saw every question at once (looser than EP004/EP006 isolated contexts). Captured by the human; no API/usage meter.",
+    "wrapper_text_verbatim": "You are being asked a single question. Reply with only your answer -- no preamble, no explanation.\n\n",
+    "captured_utc": "2026-06-27",
+    "answers_source": "ep013_frontier_answers.txt",
+    "grader": "run_quality.grade() imported directly -- identical code path to EP004"
+  }
+}

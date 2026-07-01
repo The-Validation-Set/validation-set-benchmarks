@@ -33,6 +33,9 @@ Each JSON file in [`data/`](./data) is the exact source the charts are rendered 
 | 09 | Is one local runtime secretly faster? | Same 3B, same Mac: **Ollama 23.95 vs MLX 23.8 tok/s — a dead heat** (~0% apart). The real gap is cost: **~$0.12 per 1M tokens** on the laptop's electricity vs rented GPUs. | `ep009_runtimes.json` |
 | 10 | How many prompt injections get through your agent? | Indirect injection on a local model: **80% obeyed undefended → 0%** after one defense (context segregation). Honest caveat on screen: 0% ≠ "solved". Defensive, OWASP LLM01. | `ep010_injection.json` |
 | 11 | Which quant actually fits an 8GB laptop? | Same 8B at FP16 / Q8 / Q4: FP16 (~16GB) & Q8 (~8.5GB) **won't fit** (Q8 swap-thrashed to ~0.03 tok/s); **only Q4 (~4.8GB) runs — and scored 87%** on the 15-task exam. | `ep011_quant.json` |
+| 12 | Does training-aware 4-bit (QAT) beat naive 4-bit (PTQ)? | Same Gemma 12B, both 4-bit, one box: a **flat 80% / 80% tie** on the 15-task exam — QAT buys **~9% faster** (32 vs 29 tok/s) for ~0.8GB more, not accuracy. h/t @skmineforever. | `ep012_qat.json` |
+| 13 | Keep it local, or pay the cloud? | Local 3B (80%, only multi-step math weak) + a frontier cloud model (100%): a router escalating **only** the measured-weak math bucket hits **100% at 27% cloud calls = ~73% lower cloud bill**. | `ep013_routing.json`, `ep013_frontier.json` |
+| 14 | Does a RAG re-ranker actually help? | Bi-encoder already nails rank-1: recall@1 **92→100** on an easy corpus (fixed 1 of 12) and **100→100** on a hard one (added 0), ~38ms/query. It fixes **order, not recall**. | `ep014_rerank.json` |
 
 ## Reproduce a benchmark
 

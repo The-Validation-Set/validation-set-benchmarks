@@ -1,0 +1,52 @@
+{
+  "metadata": {
+    "episode": "EP012 — PTQ vs QAT: does training-aware 4-bit beat naive 4-bit? (the @skmineforever payoff)",
+    "provenance": "MEASURED 2026-06-27 on GCP L4 (24 GB VRAM). Gemma 12B, two 4-bit builds (PTQ-Q4 vs QAT-Q4), same 15-task graded exam, temp 0, deterministic graders (run_quality.py) — no LLM-judge. Both builds run on the SAME box so hardware is held constant; the only variable is how the 4-bit was made.",
+    "rig": "GCP L4 (24 GB VRAM); both builds on the same box.",
+    "generated": "2026-06-27",
+    "model": "Gemma 3 12B — ollama tags: gemma3:12b (PTQ-Q4, naive) vs gemma3:12b-it-qat (QAT-Q4, training-aware)",
+    "exam": "same 15-task graded exam as EP004/EP011 (temp 0, deterministic graders, no LLM-judge)",
+    "credit": "viewer @skmineforever (suggested QAT in EP011 comments; on-air promise paid off)",
+    "the_one_variable": "how the 4-bit was made: PTQ (round a finished model down) vs QAT (train it to live at 4-bit). Same model, ~same footprint, same exam."
+  },
+  "builds": [
+    {
+      "name": "PTQ-Q4",
+      "kind": "post-training quantization (naive 4-bit, the everyday tool / what EP011 ran)",
+      "bits": 4,
+      "size_gb": 8.1,
+      "tok_s": 29.0,
+      "accuracy_pct": 80.0,
+      "correct": "12/15",
+      "by_bucket": null
+    },
+    {
+      "name": "QAT-Q4",
+      "kind": "quantization-aware training (smart 4-bit, only where the maker ships it — Gemma)",
+      "bits": 4,
+      "size_gb": 8.9,
+      "tok_s": 32.0,
+      "accuracy_pct": 80.0,
+      "correct": "12/15",
+      "by_bucket": null
+    }
+  ],
+  "_by_bucket_note": "This episode's published claim is OVERALL accuracy (the video shows the 80%/80% tie + speed/size, no per-bucket chart), so the per-bucket split is recorded as null here rather than guessed. run_quality.py emits a full by_bucket on every run — re-run the two ollama tags above to regenerate it for either build.",
+  "derived": {
+    "qat_recovers_pts": 0.0,
+    "size_delta_gb": 0.8,
+    "speed_delta_tok_s": 3.0,
+    "speed_delta_pct": 9.0,
+    "verdict": "Accuracy is a flat tie (0 pts at the same 4-bit class). QAT-Q4 is ~0.8 GB larger on disk but runs ~9% faster (32 vs 29 tok/s). Net: grab QAT for the free speed where the maker ships it; PTQ-Q4 stays the everyday tool everywhere else."
+  },
+  "modeled_labelled": {
+    "cost_per_acceptable_answer": "~8% cheaper for QAT — MODELED from +9% speed at equal accuracy (less machine-time per correct answer); say 'modeled' on camera.",
+    "note": "at ~the same size and equal accuracy, the faster build is cheaper per CORRECT answer."
+  },
+  "honest_caveats": [
+    "QAT only exists where the model maker ships an official build (Google does for Gemma). PTQ-Q4 stays the everyday tool for everything else.",
+    "Same model size at both builds (12B PTQ-Q4 vs 12B QAT-Q4). Comparing across sizes would confound the variable.",
+    "QAT-Q4 is slightly LARGER on disk (8.9 vs 8.1 GB), not identical — the win is speed at equal accuracy, not size.",
+    "Both builds loaded and completed all 15 tasks (0 timeouts); nothing fabricated."
+  ]
+}
