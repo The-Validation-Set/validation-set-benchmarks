@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep005_fable5.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What does Claude Fable 5 cost?", "acceptedAnswer": {"@type": "Answer", "text": "$10 in / $50 out per 1M tokens \u2014 exactly 2\u00d7 Opus 4.8 (public launch prices)."}},{"@type": "Question", "name": "Does price per token decide which model is worth it?", "acceptedAnswer": {"@type": "Answer", "text": "No. Cost per CORRECT answer is the decision metric \u2014 see the frontier-exam page for the measured version."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>What does Claude Fable 5 cost?</h3><p>$10 in / $50 out per 1M tokens — exactly 2× Opus 4.8 (public launch prices).</p></div><div class="faq"><h3>Does price per token decide which model is worth it?</h3><p>No. Cost per CORRECT answer is the decision metric — see the frontier-exam page for the measured version.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;$10 in / $50 out per 1M tokens — exactly 2× Opus 4.8. Whether that matters depends on cost per correct answer, not per token.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-fable-5-pricing.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-fable-5-pricing</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep005_fable5.json">data/ep005_fable5.json</a></div></div>
 <h2>Reproduce it</h2>

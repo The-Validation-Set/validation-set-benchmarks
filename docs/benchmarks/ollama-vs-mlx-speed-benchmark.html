@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep009_runtimes.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Is MLX faster than Ollama on Apple Silicon?", "acceptedAnswer": {"@type": "Answer", "text": "A measured dead heat in our run: 23.95 vs 23.8 tok/s \u2014 same 3B Q4 model, same base M3 8GB."}},{"@type": "Question", "name": "Does runtime choice ever matter?", "acceptedAnswer": {"@type": "Answer", "text": "At small dense-model sizes both are memory-bandwidth-bound, so no. Community reports suggest large MoE models diverge \u2014 that follow-up is on the bench."}},{"@type": "Question", "name": "What's the cost lever that actually matters?", "acceptedAnswer": {"@type": "Answer", "text": "Local vs cloud: ~$0.12 per 1M tokens on laptop electricity vs ~$8 per 1M on a rented H100 (both modeled from labelled inputs)."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Is MLX faster than Ollama on Apple Silicon?</h3><p>A measured dead heat in our run: 23.95 vs 23.8 tok/s — same 3B Q4 model, same base M3 8GB.</p></div><div class="faq"><h3>Does runtime choice ever matter?</h3><p>At small dense-model sizes both are memory-bandwidth-bound, so no. Community reports suggest large MoE models diverge — that follow-up is on the bench.</p></div><div class="faq"><h3>What&#x27;s the cost lever that actually matters?</h3><p>Local vs cloud: ~$0.12 per 1M tokens on laptop electricity vs ~$8 per 1M on a rented H100 (both modeled from labelled inputs).</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;Same 3B, same base M3: Ollama 23.95 vs MLX 23.8 tok/s — 0% apart, within noise. The real lever is local vs cloud, not runtime.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep009_runtimes.json">data/ep009_runtimes.json</a></div></div>
 <h2>Reproduce it</h2>

@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_scaling.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_sizewall.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "How many AI agents can an 8GB laptop run at once?", "acceptedAnswer": {"@type": "Answer", "text": "2 usable agents, measured \u2014 Ollama serialises requests, so tail latency climbs from ~6s toward 60s+ beyond that."}},{"@type": "Question", "name": "What does an owned agent cost vs a rented one?", "acceptedAnswer": {"@type": "Answer", "text": "\u2248 $1,326/agent/yr owned vs \u2248 $7,200/yr rented (modeled from labelled inputs)."}},{"@type": "Question", "name": "Can an 8GB laptop serve agents on an 8B model?", "acceptedAnswer": {"@type": "Answer", "text": "The 8B wouldn't load at all under 8GB in our run."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>How many AI agents can an 8GB laptop run at once?</h3><p>2 usable agents, measured — Ollama serialises requests, so tail latency climbs from ~6s toward 60s+ beyond that.</p></div><div class="faq"><h3>What does an owned agent cost vs a rented one?</h3><p>≈ $1,326/agent/yr owned vs ≈ $7,200/yr rented (modeled from labelled inputs).</p></div><div class="faq"><h3>Can an 8GB laptop serve agents on an 8B model?</h3><p>The 8B wouldn&#x27;t load at all under 8GB in our run.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;Usable knee = 2 agents (Ollama serialises; tail latency ~6s → 60s+). The 8B won&#x27;t even load. ≈ $1,326/agent/yr vs $7,200 rented.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_scaling.json">data/ep003_scaling.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_sizewall.json">data/ep003_sizewall.json</a></div></div>
 <h2>Reproduce it</h2>

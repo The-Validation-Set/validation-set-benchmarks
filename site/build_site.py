@@ -200,6 +200,117 @@ REGISTRY = [
     },
 ]
 
+# Long-tail Q&A per episode — every answer is a published measured/modeled claim.
+# Rendered as an FAQ section + schema.org FAQPage (rich results + LLM citation).
+FAQS = {
+    "ep001": [
+        ("How much does one always-on AI agent cost on a managed cloud API?",
+         "≈ $7,200/yr, modeled from provider price pages for a steady agent workload (inputs labelled in the data file)."),
+        ("Is the cloud faster than local for the same model?",
+         "Yes — ~4.3× faster in our measured run. Speed and cost are separate questions; the break-even math is what decides."),
+        ("When does buying hardware beat renting?",
+         "Modeled break-even ≈ month 5 for the measured always-on workload."),
+    ],
+    "ep002": [
+        ("What speed gap did the same model show local vs cloud?",
+         "16.5 vs 70.9 tok/s, measured on both sides with the same model."),
+        ("How much do you save in year one by self-hosting?",
+         "≈ $4,500 modeled, after the ~month-5 break-even."),
+        ("Does this hold for every workload?",
+         "No — scope: steady always-on agents. Bursty workloads favour renting; see the self-host-vs-API page."),
+    ],
+    "ep003": [
+        ("How many AI agents can an 8GB laptop run at once?",
+         "2 usable agents, measured — Ollama serialises requests, so tail latency climbs from ~6s toward 60s+ beyond that."),
+        ("What does an owned agent cost vs a rented one?",
+         "≈ $1,326/agent/yr owned vs ≈ $7,200/yr rented (modeled from labelled inputs)."),
+        ("Can an 8GB laptop serve agents on an 8B model?",
+         "The 8B wouldn't load at all under 8GB in our run."),
+    ],
+    "ep004": [
+        ("Is a 3B model good enough for real tasks?",
+         "80% on our 15-task graded exam at ~26 tok/s on an 8GB laptop — and every miss was multi-step arithmetic."),
+        ("How much better is an 8B on the same exam?",
+         "87% — one extra correct answer — at ~4× the wait (~6 tok/s measured)."),
+        ("What happened with a 14B?",
+         "qwen2.5:14b never finished a run on 8GB (swap-thrash timeout). That's a stated outcome, not a score."),
+        ("What's the cheapest fix for the 3B's weakness?",
+         "Its misses were all arithmetic — a calculator tool patches that for free, versus paying 4× the wait for +7 points."),
+    ],
+    "ep005": [
+        ("What does Claude Fable 5 cost?",
+         "$10 in / $50 out per 1M tokens — exactly 2× Opus 4.8 (public launch prices)."),
+        ("Does price per token decide which model is worth it?",
+         "No. Cost per CORRECT answer is the decision metric — see the frontier-exam page for the measured version."),
+    ],
+    "ep006": [
+        ("Did the frontier model beat the local one?",
+         "15/15 vs 80% on the same graded exam — at ≈657× the modeled cost per correct answer."),
+        ("How much did the whole exam cost via the API?",
+         "≈ $0.02 measured for all 15 tasks."),
+        ("Where did the local model actually lose points?",
+         "Entirely on multi-step arithmetic — the frontier premium bought math, nothing else on this exam."),
+    ],
+    "ep007": [
+        ("Is self-hosting an 8B cheaper than a hosted API?",
+         "Not at any volume for this workload — hosted was ~56× faster AND cheaper per token ($0.065 vs $0.34 per 1M, modeled)."),
+        ("When does owning hardware still win?",
+         "Privacy, workloads a hosted API won't take, and steady always-on agents — the regime measured on the local-vs-cloud pages."),
+    ],
+    "ep008": [
+        ("Do I need a vector database for RAG?",
+         "Below ~200k vectors, brute-force NumPy held 100% recall at ~23ms/query in our run — the database added operations, not recall."),
+        ("What happens to recall at scale on default settings?",
+         "Measured slide: ~97% → 76.6% → 49.5% recall@10 at 10k / 50k / 200k vectors (Chroma defaults)."),
+        ("Does the database warn you when recall degrades?",
+         "No — no error, no slowdown. Ten confident results come back with half the right answers silently missing."),
+        ("Was the corpus real?",
+         "Synthetic seeded clusters (generator in the repo — best case for brute force, stated openly). Tuned HNSW parameters recover recall; that run is in the data too."),
+    ],
+    "ep009": [
+        ("Is MLX faster than Ollama on Apple Silicon?",
+         "A measured dead heat in our run: 23.95 vs 23.8 tok/s — same 3B Q4 model, same base M3 8GB."),
+        ("Does runtime choice ever matter?",
+         "At small dense-model sizes both are memory-bandwidth-bound, so no. Community reports suggest large MoE models diverge — that follow-up is on the bench."),
+        ("What's the cost lever that actually matters?",
+         "Local vs cloud: ~$0.12 per 1M tokens on laptop electricity vs ~$8 per 1M on a rented H100 (both modeled from labelled inputs)."),
+    ],
+    "ep010": [
+        ("How vulnerable is an undefended local agent to prompt injection?",
+         "80% of textbook OWASP LLM01 payloads were obeyed in our measured run."),
+        ("Does one defense fix prompt injection?",
+         "Context segregation took our set to 0% — but 0% on textbook payloads ≠ solved. Cap the agent's privileges and assume some attacks get through."),
+    ],
+    "ep011": [
+        ("Which quantization fits an 8GB laptop?",
+         "Only Q4 (~4.8GB). FP16 (~16GB) won't load; Q8 (~8.5GB) swap-thrashed to ~0.03 tok/s."),
+        ("How much accuracy does Q4 keep?",
+         "87% on the 15-task graded exam in our run."),
+    ],
+    "ep012": [
+        ("Is QAT more accurate than naive PTQ?",
+         "Not in our run: a flat 80% vs 80% tie — Gemma 3 12B, both builds at 4-bit, same box, same exam."),
+        ("What does QAT actually buy?",
+         "~9% more speed (32 vs 29 tok/s) for ~0.8GB more disk — a free speed bump, not an accuracy upgrade."),
+        ("Should you switch to a QAT build?",
+         "When the maker ships one, yes. Most models don't have one — naive PTQ-Q4 remains the everyday tool; don't wait."),
+        ("What about Gemma 4's QAT?",
+         "Its checkpoints shipped 2026-06-05. The same exam on Gemma 4 PTQ-vs-QAT is on the bench."),
+    ],
+    "ep013": [
+        ("What's the cheapest way to get frontier accuracy?",
+         "Route only your measured-weak task types to the cloud: 100% accuracy at 27% cloud calls ≈ 73% off the modeled bill in our run."),
+        ("What's the catch with routing?",
+         "The router is only as good as your benchmark of local weaknesses — measure before you route."),
+    ],
+    "ep014": [
+        ("Do RAG re-rankers improve recall?",
+         "No — a re-ranker reorders the pool you retrieved. Measured: recall@1 92→100 on an easy corpus (fixed 1 of 12) and 100→100 on a hard one (added 0), ~38ms/query."),
+        ("What should you fix first in a RAG pipeline?",
+         "Retrieval recall (see the vector-database page). Ordering comes after there's something worth ordering."),
+    ],
+}
+
 # The exam leaderboard (the homepage hero). Cost multiples are MODELED and
 # expressed vs the free local 3B baseline; accuracy is MEASURED (temp 0,
 # deterministic graders). "pending" rows render as on-the-bench.
@@ -268,6 +379,11 @@ font-family:var(--mono);font-size:.82rem;color:var(--text)}
 .btn{display:inline-block;padding:10px 18px;border-radius:10px;font-weight:600;font-size:.92rem}
 .btn.primary{background:var(--accent);color:#04211C}.btn.primary:hover{text-decoration:none;filter:brightness(1.08)}
 .btn.ghost{border:1px solid var(--border);color:var(--text)}.btn.ghost:hover{text-decoration:none;border-color:var(--accent)}
+.faq{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:6px 18px 12px;margin:10px 0}
+.faq h3{margin:10px 0 4px;font-size:.98rem}.faq p{margin:0;color:var(--muted);font-size:.9rem}
+.cite{border:1px dashed var(--border);border-radius:10px;padding:12px 16px;margin:26px 0;background:rgba(124,108,255,.05)}
+.cite .cite-label{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;color:var(--accent2)}
+.cite p{margin:6px 0 0;font-size:.9rem;color:var(--muted)}
 .next{display:flex;justify-content:space-between;gap:10px;margin-top:34px;font-size:.9rem}
 footer{border-top:1px solid var(--border);margin-top:40px;padding:26px 0;color:var(--muted);font-size:.85rem}
 footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
@@ -476,6 +592,16 @@ def build_episode(e: dict, prev_e: dict, next_e: dict) -> str:
     prev_link = ('← <a href="%s.html">%s</a>' % (prev_e["slug"], esc(prev_e["question"]))) if prev_e else ""
     next_link = ('<a href="%s.html">%s</a> →' % (next_e["slug"], esc(next_e["question"]))) if next_e else ""
     nav = f'<div class="next"><span>{prev_link}</span><span>{next_link}</span></div>'
+    faqs = FAQS.get(e["id"], [])
+    faq_html = ""
+    if faqs:
+        items = "".join(
+            f'<div class="faq"><h3>{esc(q)}</h3><p>{esc(a)}</p></div>' for q, a in faqs)
+        faq_html = f'<h2>Questions this answers</h2>{items}'
+    cite_html = (
+        f'<div class="cite"><span class="cite-label">CITE THIS RESULT</span>'
+        f'<p>&ldquo;{esc(e["verdict"])}&rdquo; &mdash; {SITE_NAME}, open data at '
+        f'<a href="{BASE_URL}/benchmarks/{e["slug"]}.html">{BASE_URL.replace("https://","")}/benchmarks/{e["slug"]}</a></p></div>')
     body = f"""
 <div class="hero"><div class="wrap">
 <div class="badges"><span class="badge">{esc(e["id"].upper())}</span><span class="badge m">measured</span></div>
@@ -489,6 +615,8 @@ def build_episode(e: dict, prev_e: dict, next_e: dict) -> str:
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+{faq_html}
+{cite_html}
 <h2>Raw data</h2>
 <div class="filelist">{files}</div>
 <h2>Reproduce it</h2>
@@ -507,6 +635,14 @@ Hardware and exact model tags are recorded inside each data file. Full protocol:
 "distribution":[{",".join(f'{{"@type":"DataDownload","contentUrl":"{REPO_URL}/blob/main/data/{f}"}}' for f in e["files"])}],
 "creator":{{"@type":"Organization","name":"{SITE_NAME}","url":"{BASE_URL}/"}}}}
 </script>"""
+    if faqs:
+        faq_entities = ",".join(
+            json.dumps({"@type": "Question", "name": q,
+                        "acceptedAnswer": {"@type": "Answer", "text": a}})
+            for q, a in faqs)
+        jsonld += (f'\n<script type="application/ld+json">'
+                   f'{{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{faq_entities}]}}'
+                   f'</script>')
     return page(f'{e["title"]} — {SITE_NAME}', e["verdict"], body,
                 f'{BASE_URL}/benchmarks/{e["slug"]}.html', 1, jsonld)
 

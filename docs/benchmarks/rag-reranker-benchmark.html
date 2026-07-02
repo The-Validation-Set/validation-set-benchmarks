@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep014_rerank.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Do RAG re-rankers improve recall?", "acceptedAnswer": {"@type": "Answer", "text": "No \u2014 a re-ranker reorders the pool you retrieved. Measured: recall@1 92\u2192100 on an easy corpus (fixed 1 of 12) and 100\u2192100 on a hard one (added 0), ~38ms/query."}},{"@type": "Question", "name": "What should you fix first in a RAG pipeline?", "acceptedAnswer": {"@type": "Answer", "text": "Retrieval recall (see the vector-database page). Ordering comes after there's something worth ordering."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Do RAG re-rankers improve recall?</h3><p>No — a re-ranker reorders the pool you retrieved. Measured: recall@1 92→100 on an easy corpus (fixed 1 of 12) and 100→100 on a hard one (added 0), ~38ms/query.</p></div><div class="faq"><h3>What should you fix first in a RAG pipeline?</h3><p>Retrieval recall (see the vector-database page). Ordering comes after there&#x27;s something worth ordering.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep014_rerank.json">data/ep014_rerank.json</a></div></div>
 <h2>Reproduce it</h2>

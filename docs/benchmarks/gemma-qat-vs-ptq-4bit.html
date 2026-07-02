@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep012_qat.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Is QAT more accurate than naive PTQ?", "acceptedAnswer": {"@type": "Answer", "text": "Not in our run: a flat 80% vs 80% tie \u2014 Gemma 3 12B, both builds at 4-bit, same box, same exam."}},{"@type": "Question", "name": "What does QAT actually buy?", "acceptedAnswer": {"@type": "Answer", "text": "~9% more speed (32 vs 29 tok/s) for ~0.8GB more disk \u2014 a free speed bump, not an accuracy upgrade."}},{"@type": "Question", "name": "Should you switch to a QAT build?", "acceptedAnswer": {"@type": "Answer", "text": "When the maker ships one, yes. Most models don't have one \u2014 naive PTQ-Q4 remains the everyday tool; don't wait."}},{"@type": "Question", "name": "What about Gemma 4's QAT?", "acceptedAnswer": {"@type": "Answer", "text": "Its checkpoints shipped 2026-06-05. The same exam on Gemma 4 PTQ-vs-QAT is on the bench."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Is QAT more accurate than naive PTQ?</h3><p>Not in our run: a flat 80% vs 80% tie — Gemma 3 12B, both builds at 4-bit, same box, same exam.</p></div><div class="faq"><h3>What does QAT actually buy?</h3><p>~9% more speed (32 vs 29 tok/s) for ~0.8GB more disk — a free speed bump, not an accuracy upgrade.</p></div><div class="faq"><h3>Should you switch to a QAT build?</h3><p>When the maker ships one, yes. Most models don&#x27;t have one — naive PTQ-Q4 remains the everyday tool; don&#x27;t wait.</p></div><div class="faq"><h3>What about Gemma 4&#x27;s QAT?</h3><p>Its checkpoints shipped 2026-06-05. The same exam on Gemma 4 PTQ-vs-QAT is on the bench.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;A flat 80% / 80% tie on accuracy. QAT buys ~9% speed (32 vs 29 tok/s) for ~0.8GB more — not accuracy. Grab it where it&#x27;s shipped.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/gemma-qat-vs-ptq-4bit.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/gemma-qat-vs-ptq-4bit</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep012_qat.json">data/ep012_qat.json</a></div></div>
 <h2>Reproduce it</h2>

@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep011_quant.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Which quantization fits an 8GB laptop?", "acceptedAnswer": {"@type": "Answer", "text": "Only Q4 (~4.8GB). FP16 (~16GB) won't load; Q8 (~8.5GB) swap-thrashed to ~0.03 tok/s."}},{"@type": "Question", "name": "How much accuracy does Q4 keep?", "acceptedAnswer": {"@type": "Answer", "text": "87% on the 15-task graded exam in our run."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Which quantization fits an 8GB laptop?</h3><p>Only Q4 (~4.8GB). FP16 (~16GB) won&#x27;t load; Q8 (~8.5GB) swap-thrashed to ~0.03 tok/s.</p></div><div class="faq"><h3>How much accuracy does Q4 keep?</h3><p>87% on the 15-task graded exam in our run.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;FP16 (~16GB) and Q8 (~8.5GB) don&#x27;t fit — Q8 swap-thrashed to ~0.03 tok/s. Q4 (~4.8GB) runs and scored 87% on the exam.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/llm-quantization-8gb-laptop.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/llm-quantization-8gb-laptop</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep011_quant.json">data/ep011_quant.json</a></div></div>
 <h2>Reproduce it</h2>

@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep001_local-vs-cloud.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep002_bench.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "How much does one always-on AI agent cost on a managed cloud API?", "acceptedAnswer": {"@type": "Answer", "text": "\u2248 $7,200/yr, modeled from provider price pages for a steady agent workload (inputs labelled in the data file)."}},{"@type": "Question", "name": "Is the cloud faster than local for the same model?", "acceptedAnswer": {"@type": "Answer", "text": "Yes \u2014 ~4.3\u00d7 faster in our measured run. Speed and cost are separate questions; the break-even math is what decides."}},{"@type": "Question", "name": "When does buying hardware beat renting?", "acceptedAnswer": {"@type": "Answer", "text": "Modeled break-even \u2248 month 5 for the measured always-on workload."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>How much does one always-on AI agent cost on a managed cloud API?</h3><p>≈ $7,200/yr, modeled from provider price pages for a steady agent workload (inputs labelled in the data file).</p></div><div class="faq"><h3>Is the cloud faster than local for the same model?</h3><p>Yes — ~4.3× faster in our measured run. Speed and cost are separate questions; the break-even math is what decides.</p></div><div class="faq"><h3>When does buying hardware beat renting?</h3><p>Modeled break-even ≈ month 5 for the measured always-on workload.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;A managed API ≈ $7,200/yr per always-on agent; an owned rig breaks even ~month 5.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-ai-vs-cloud-api-cost.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-ai-vs-cloud-api-cost</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep001_local-vs-cloud.json">data/ep001_local-vs-cloud.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep002_bench.json">data/ep002_bench.json</a></div></div>
 <h2>Reproduce it</h2>

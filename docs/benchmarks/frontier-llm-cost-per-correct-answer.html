@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable_exam.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable5_exam_answers.raw.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Did the frontier model beat the local one?", "acceptedAnswer": {"@type": "Answer", "text": "15/15 vs 80% on the same graded exam \u2014 at \u2248657\u00d7 the modeled cost per correct answer."}},{"@type": "Question", "name": "How much did the whole exam cost via the API?", "acceptedAnswer": {"@type": "Answer", "text": "\u2248 $0.02 measured for all 15 tasks."}},{"@type": "Question", "name": "Where did the local model actually lose points?", "acceptedAnswer": {"@type": "Answer", "text": "Entirely on multi-step arithmetic \u2014 the frontier premium bought math, nothing else on this exam."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Did the frontier model beat the local one?</h3><p>15/15 vs 80% on the same graded exam — at ≈657× the modeled cost per correct answer.</p></div><div class="faq"><h3>How much did the whole exam cost via the API?</h3><p>≈ $0.02 measured for all 15 tasks.</p></div><div class="faq"><h3>Where did the local model actually lose points?</h3><p>Entirely on multi-step arithmetic — the frontier premium bought math, nothing else on this exam.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;Claude Fable 5: 15/15, whole exam ≈ $0.02 — but ≈657× the free local 3B&#x27;s cost per correct answer. Everything it fixed was math.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable_exam.json">data/ep006_fable_exam.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable5_exam_answers.raw.json">data/ep006_fable5_exam_answers.raw.json</a></div></div>
 <h2>Reproduce it</h2>

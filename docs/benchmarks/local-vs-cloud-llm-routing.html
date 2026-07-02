@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep013_routing.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep013_frontier.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What's the cheapest way to get frontier accuracy?", "acceptedAnswer": {"@type": "Answer", "text": "Route only your measured-weak task types to the cloud: 100% accuracy at 27% cloud calls \u2248 73% off the modeled bill in our run."}},{"@type": "Question", "name": "What's the catch with routing?", "acceptedAnswer": {"@type": "Answer", "text": "The router is only as good as your benchmark of local weaknesses \u2014 measure before you route."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>What&#x27;s the cheapest way to get frontier accuracy?</h3><p>Route only your measured-weak task types to the cloud: 100% accuracy at 27% cloud calls ≈ 73% off the modeled bill in our run.</p></div><div class="faq"><h3>What&#x27;s the catch with routing?</h3><p>The router is only as good as your benchmark of local weaknesses — measure before you route.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;Local 3B is only weak on math. Escalating just that bucket to a frontier model: 100% accuracy at 27% cloud calls ≈ 73% off the modeled bill.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-vs-cloud-llm-routing.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-vs-cloud-llm-routing</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep013_routing.json">data/ep013_routing.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep013_frontier.json">data/ep013_frontier.json</a></div></div>
 <h2>Reproduce it</h2>

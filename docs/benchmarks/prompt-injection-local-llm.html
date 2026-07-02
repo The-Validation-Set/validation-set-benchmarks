@@ -18,6 +18,7 @@
 "distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep010_injection.json"}],
 "creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
 </script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "How vulnerable is an undefended local agent to prompt injection?", "acceptedAnswer": {"@type": "Answer", "text": "80% of textbook OWASP LLM01 payloads were obeyed in our measured run."}},{"@type": "Question", "name": "Does one defense fix prompt injection?", "acceptedAnswer": {"@type": "Answer", "text": "Context segregation took our set to 0% \u2014 but 0% on textbook payloads \u2260 solved. Cap the agent's privileges and assume some attacks get through."}}]}</script>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -43,6 +44,8 @@
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
 Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>How vulnerable is an undefended local agent to prompt injection?</h3><p>80% of textbook OWASP LLM01 payloads were obeyed in our measured run.</p></div><div class="faq"><h3>Does one defense fix prompt injection?</h3><p>Context segregation took our set to 0% — but 0% on textbook payloads ≠ solved. Cap the agent&#x27;s privileges and assume some attacks get through.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;Undefended: 80% of textbook OWASP LLM01 payloads obeyed. One defense (context segregation): 0% — and 0% still ≠ solved.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm</a></p></div>
 <h2>Raw data</h2>
 <div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep010_injection.json">data/ep010_injection.json</a></div></div>
 <h2>Reproduce it</h2>
