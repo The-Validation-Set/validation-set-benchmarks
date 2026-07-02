@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/methodology.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-ai-vs-cloud-api-cost.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/self-hosting-llm-break-even.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/small-vs-big-local-llm-graded.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-fable-5-pricing.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/self-host-vs-hosted-api-break-even.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/vector-database-recall-benchmark.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/llm-quantization-8gb-laptop.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/gemma-qat-vs-ptq-4bit.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-vs-cloud-llm-routing.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark.html</loc></url>
+</urlset>

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://the-validation-set.github.io/validation-set-benchmarks/sitemap.xml

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Methodology — The Validation Set</title>
+<meta name="description" content="How The Validation Set measures LLM benchmarks: deterministic graders, temperature 0, labelled cost models, open data, no LLM-as-judge, no sponsors.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/methodology.html">
+<meta property="og:title" content="Methodology — The Validation Set">
+<meta property="og:description" content="How The Validation Set measures LLM benchmarks: deterministic graders, temperature 0, labelled cost models, open data, no LLM-as-judge, no sponsors.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/methodology.html">
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="index.html#benchmarks">Benchmarks</a>
+<a href="methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap"><h1>Methodology</h1>
+<p class="lead">The rules every number on this site obeys — and the labels that keep measured and modeled honest.</p>
+</div></div>
+<section><div class="wrap">
+<h2>Measured means measured</h2>
+<p>Accuracy and throughput come from real runs on named hardware with exact model tags, recorded inside each data file.
+Runs use fixed prompts and temperature 0 so anyone can reproduce them bit-for-bit where the backend allows it.</p>
+<h2>Graded by code, never by vibes</h2>
+<p>The 15-task exam covers arithmetic, logic, code, format-following, and extraction. Every answer is checked by a
+deterministic grader — an exact number, a letter, JSON asserts. No LLM-as-judge anywhere in the pipeline, because a
+judge model smuggles its own biases into the score.</p>
+<h2>Modeled means labelled</h2>
+<p>Dollar figures (electricity, cloud pricing, cost per correct answer) are <em>models</em> built from labelled public
+inputs — utility tariffs, provider price pages — cited inside the data files. They are marked
+<span class="badge mo">modeled</span> wherever they appear, so you always know which kind of number you're reading.</p>
+<h2>Scope is part of the result</h2>
+<p>A result on a 3B dense model on an 8GB laptop is claimed for that regime, not for the frontier. Where a finding
+stopped generalising in our own testing, the page says so.</p>
+<h2>Zero sponsorship</h2>
+<p>No vendor pays for placement or verdicts. When that ever changes for a specific piece of content, it will be
+disclosed on the content itself.</p>
+<h2>Break it, get credited</h2>
+<p>Every harness is public. Run it on your hardware; if your numbers corroborate or contradict ours, open an issue —
+you get a row in <a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/CONTRIBUTORS.md">CONTRIBUTORS.md</a>. Contradictions are the most
+valuable thing you can send.</p>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

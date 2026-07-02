@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RAG re-rankers fix order, not recall — measured — The Validation Set</title>
+<meta name="description" content="The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark.html">
+<meta property="og:title" content="RAG re-rankers fix order, not recall — measured — The Validation Set">
+<meta property="og:description" content="The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"RAG re-rankers fix order, not recall — measured",
+"description":"The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/rag-reranker-benchmark.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep014_rerank.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP014</span><span class="badge m">measured</span></div>
+<h1>RAG re-rankers fix order, not recall — measured</h1>
+<p class="lead">Does a re-ranker actually help your RAG?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.</div>
+<div class="nums"><div class="num"><div class="v">92→100</div><div class="l">recall@1, easy corpus</div><span class="tag m">measured</span></div><div class="num"><div class="v">100→100</div><div class="l">recall@1, hard corpus (+0)</div><span class="tag m">measured</span></div><div class="num"><div class="v">~38ms</div><div class="l">per query</div><span class="tag m">measured</span></div></div>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep014_rerank.json">data/ep014_rerank.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="local-vs-cloud-llm-routing.html">Keep it local, or pay the cloud?</a></span><span></span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

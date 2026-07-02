@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vector DB vs 10 lines of NumPy: the silent recall collapse — The Validation Set</title>
+<meta name="description" content="Chroma (defaults) slid to ~49.5% recall@10 by 200k vectors — no error, no warning. Brute-force NumPy held 100% at ~23ms.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/vector-database-recall-benchmark.html">
+<meta property="og:title" content="Vector DB vs 10 lines of NumPy: the silent recall collapse — The Validation Set">
+<meta property="og:description" content="Chroma (defaults) slid to ~49.5% recall@10 by 200k vectors — no error, no warning. Brute-force NumPy held 100% at ~23ms.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/vector-database-recall-benchmark.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"Vector DB vs 10 lines of NumPy: the silent recall collapse",
+"description":"Chroma (defaults) slid to ~49.5% recall@10 by 200k vectors — no error, no warning. Brute-force NumPy held 100% at ~23ms.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/vector-database-recall-benchmark.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep008_vectordb.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep008_vectordb_pricing.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP008</span><span class="badge m">measured</span></div>
+<h1>Vector DB vs 10 lines of NumPy: the silent recall collapse</h1>
+<p class="lead">Do you even need a vector database?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> Chroma (defaults) slid to ~49.5% recall@10 by 200k vectors — no error, no warning. Brute-force NumPy held 100% at ~23ms.</div>
+<div class="nums"><div class="num"><div class="v">49.5%</div><div class="l">recall@10 at 200k vectors, defaults</div><span class="tag m">measured</span></div><div class="num"><div class="v">100%</div><div class="l">NumPy exact search, all sizes</div><span class="tag m">measured</span></div><div class="num"><div class="v">~23ms</div><div class="l">NumPy p50 per query at 200k</div><span class="tag m">measured</span></div></div>
+<div class="chart"><svg viewBox="0 0 760 320" role="img" xmlns="http://www.w3.org/2000/svg"><line x1="60" x2="730" y1="264" y2="264" stroke="#1E2A45" stroke-width="1"/><text x="50" y="269" text-anchor="end" font-size="12" fill="#8A94AD">0</text><line x1="60" x2="730" y1="206" y2="206" stroke="#1E2A45" stroke-width="1"/><text x="50" y="210" text-anchor="end" font-size="12" fill="#8A94AD">25</text><line x1="60" x2="730" y1="147" y2="147" stroke="#1E2A45" stroke-width="1"/><text x="50" y="152" text-anchor="end" font-size="12" fill="#8A94AD">50</text><line x1="60" x2="730" y1="88" y2="88" stroke="#1E2A45" stroke-width="1"/><text x="50" y="94" text-anchor="end" font-size="12" fill="#8A94AD">75</text><line x1="60" x2="730" y1="30" y2="30" stroke="#1E2A45" stroke-width="1"/><text x="50" y="35" text-anchor="end" font-size="12" fill="#8A94AD">100</text><path d="M60,37 L395,85 L730,148" fill="none" stroke="#FB7185" stroke-width="3"/><circle cx="60" cy="37" r="6" fill="#FB7185"/><text x="74" y="42" text-anchor="start" font-size="14" font-weight="700" fill="#FB7185">97%</text><circle cx="395" cy="85" r="6" fill="#FB7185"/><text x="395" y="71" text-anchor="middle" font-size="14" font-weight="700" fill="#FB7185">76.6%</text><circle cx="730" cy="148" r="6" fill="#FB7185"/><text x="730" y="134" text-anchor="middle" font-size="14" font-weight="700" fill="#FB7185">49.5%</text><text x="60" y="294" text-anchor="middle" font-size="13" fill="#8A94AD" font-family="monospace">10k</text><text x="395" y="294" text-anchor="middle" font-size="13" fill="#8A94AD" font-family="monospace">50k</text><text x="730" y="294" text-anchor="middle" font-size="13" fill="#8A94AD" font-family="monospace">200k</text><text x="20" y="22" font-size="12" fill="#2DD4BF" font-family="monospace">recall@10 % (chroma defaults)</text></svg></div>
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep008_vectordb.json">data/ep008_vectordb.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep008_vectordb_pricing.json">data/ep008_vectordb_pricing.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="self-host-vs-hosted-api-break-even.html">Does self-hosting ever beat a hosted API?</a></span><span><a href="ollama-vs-mlx-speed-benchmark.html">Is one local runtime secretly faster?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

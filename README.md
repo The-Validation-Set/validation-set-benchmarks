@@ -1,5 +1,7 @@
 # The Validation Set — benchmark data & render engine
 
+> 📊 **Browse every benchmark as a website:** https://the-validation-set.github.io/validation-set-benchmarks/ — the exam leaderboard (cost per correct answer), one page per teardown, generated from this repo's `data/` by `site/build_site.py`.
+
 > Test the hype against real data. This repo holds the **raw measured data** and the
 > **React / [Remotion](https://www.remotion.dev) render code** behind the benchmarks on
 > **[The Validation Set](https://www.youtube.com/@TheValidationSet)** — so you can re-run, re-chart, and argue with

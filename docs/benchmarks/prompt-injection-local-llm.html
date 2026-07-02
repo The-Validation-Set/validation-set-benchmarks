@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Indirect prompt injection on a local model: 80% obeyed the attacker — The Validation Set</title>
+<meta name="description" content="Undefended: 80% of textbook OWASP LLM01 payloads obeyed. One defense (context segregation): 0% — and 0% still ≠ solved.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm.html">
+<meta property="og:title" content="Indirect prompt injection on a local model: 80% obeyed the attacker — The Validation Set">
+<meta property="og:description" content="Undefended: 80% of textbook OWASP LLM01 payloads obeyed. One defense (context segregation): 0% — and 0% still ≠ solved.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"Indirect prompt injection on a local model: 80% obeyed the attacker",
+"description":"Undefended: 80% of textbook OWASP LLM01 payloads obeyed. One defense (context segregation): 0% — and 0% still ≠ solved.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/prompt-injection-local-llm.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep010_injection.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP010</span><span class="badge m">measured</span></div>
+<h1>Indirect prompt injection on a local model: 80% obeyed the attacker</h1>
+<p class="lead">How many injections get through an undefended agent?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> Undefended: 80% of textbook OWASP LLM01 payloads obeyed. One defense (context segregation): 0% — and 0% still ≠ solved.</div>
+<div class="nums"><div class="num"><div class="v">80%</div><div class="l">payloads obeyed, undefended</div><span class="tag m">measured</span></div><div class="num"><div class="v">0%</div><div class="l">after context segregation</div><span class="tag m">measured</span></div></div>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep010_injection.json">data/ep010_injection.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="ollama-vs-mlx-speed-benchmark.html">Is one local runtime secretly faster?</a></span><span><a href="llm-quantization-8gb-laptop.html">Which quantization actually fits consumer hardware?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A frontier model took the local exam: 15/15 — at 657× the cost per answer — The Validation Set</title>
+<meta name="description" content="Claude Fable 5: 15/15, whole exam ≈ $0.02 — but ≈657× the free local 3B&#x27;s cost per correct answer. Everything it fixed was math.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer.html">
+<meta property="og:title" content="A frontier model took the local exam: 15/15 — at 657× the cost per answer — The Validation Set">
+<meta property="og:description" content="Claude Fable 5: 15/15, whole exam ≈ $0.02 — but ≈657× the free local 3B&#x27;s cost per correct answer. Everything it fixed was math.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"A frontier model took the local exam: 15/15 — at 657× the cost per answer",
+"description":"Claude Fable 5: 15/15, whole exam ≈ $0.02 — but ≈657× the free local 3B&#x27;s cost per correct answer. Everything it fixed was math.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/frontier-llm-cost-per-correct-answer.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable_exam.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable5_exam_answers.raw.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP006</span><span class="badge m">measured</span></div>
+<h1>A frontier model took the local exam: 15/15 — at 657× the cost per answer</h1>
+<p class="lead">How much better is the frontier, per dollar?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> Claude Fable 5: 15/15, whole exam ≈ $0.02 — but ≈657× the free local 3B&#x27;s cost per correct answer. Everything it fixed was math.</div>
+<div class="nums"><div class="num"><div class="v">15/15</div><div class="l">Fable 5 on the same exam</div><span class="tag m">measured</span></div><div class="num"><div class="v">~657×</div><div class="l">cost per correct answer vs local 3B</div><span class="tag mo">modeled</span></div><div class="num"><div class="v">~$0.02</div><div class="l">whole 15-task exam via API</div><span class="tag m">measured</span></div></div>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable_exam.json">data/ep006_fable_exam.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep006_fable5_exam_answers.raw.json">data/ep006_fable5_exam_answers.raw.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://youtu.be/9RJcnsh3W44">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="claude-fable-5-pricing.html">What does the newest frontier model actually cost?</a></span><span><a href="self-host-vs-hosted-api-break-even.html">Does self-hosting ever beat a hosted API?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

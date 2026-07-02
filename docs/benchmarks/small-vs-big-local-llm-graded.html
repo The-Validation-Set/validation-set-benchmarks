@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3B vs 8B vs 14B on one 8GB laptop — the same graded exam — The Validation Set</title>
+<meta name="description" content="3B: 80% at ~26 tok/s. 8B: 87% at ~6 tok/s — one extra answer for 4× the wait. 14B: never finished. The gap is all multi-step math.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/small-vs-big-local-llm-graded.html">
+<meta property="og:title" content="3B vs 8B vs 14B on one 8GB laptop — the same graded exam — The Validation Set">
+<meta property="og:description" content="3B: 80% at ~26 tok/s. 8B: 87% at ~6 tok/s — one extra answer for 4× the wait. 14B: never finished. The gap is all multi-step math.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/small-vs-big-local-llm-graded.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"3B vs 8B vs 14B on one 8GB laptop — the same graded exam",
+"description":"3B: 80% at ~26 tok/s. 8B: 87% at ~6 tok/s — one extra answer for 4× the wait. 14B: never finished. The gap is all multi-step math.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/small-vs-big-local-llm-graded.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep004_quality.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/eval_tasks.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/workload.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP004</span><span class="badge m">measured</span></div>
+<h1>3B vs 8B vs 14B on one 8GB laptop — the same graded exam</h1>
+<p class="lead">Is a cheap local model actually smart enough?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> 3B: 80% at ~26 tok/s. 8B: 87% at ~6 tok/s — one extra answer for 4× the wait. 14B: never finished. The gap is all multi-step math.</div>
+<div class="nums"><div class="num"><div class="v">80%</div><div class="l">llama3.2:3b, 15-task exam</div><span class="tag m">measured</span></div><div class="num"><div class="v">87%</div><div class="l">llama3.1:8b, same exam</div><span class="tag m">measured</span></div><div class="num"><div class="v">4×</div><div class="l">slower for those 7 points</div><span class="tag m">measured</span></div></div>
+<div class="chart"><svg viewBox="0 0 760 300" role="img" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="6" fill="#2DD4BF"/><text x="26" y="19" font-size="13" fill="#8A94AD">accuracy %</text><circle cx="150" cy="14" r="6" fill="#7C6CFF"/><text x="162" y="19" font-size="13" fill="#8A94AD">tok/s</text><rect x="144" y="95" width="40" height="155" rx="6" fill="#2DD4BF" opacity="0.9"/><text x="164" y="87" text-anchor="middle" font-size="15" font-weight="700" fill="#2DD4BF">80</text><rect x="196" y="200" width="40" height="50" rx="6" fill="#7C6CFF" opacity="0.9"/><text x="216" y="192" text-anchor="middle" font-size="15" font-weight="700" fill="#7C6CFF">25.6</text><rect x="524" y="82" width="40" height="168" rx="6" fill="#2DD4BF" opacity="0.9"/><text x="544" y="74" text-anchor="middle" font-size="15" font-weight="700" fill="#2DD4BF">86.7</text><rect x="576" y="238" width="40" height="12" rx="6" fill="#7C6CFF" opacity="0.9"/><text x="596" y="230" text-anchor="middle" font-size="15" font-weight="700" fill="#7C6CFF">6.3</text><text x="190" y="276" text-anchor="middle" font-size="13" fill="#8A94AD" font-family="monospace">llama3.2:3b</text><text x="570" y="276" text-anchor="middle" font-size="13" fill="#8A94AD" font-family="monospace">llama3.1:8b</text></svg></div>
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep004_quality.json">data/ep004_quality.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/eval_tasks.json">data/eval_tasks.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/workload.json">data/workload.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="how-many-ai-agents-8gb-laptop.html">How many agents before a cheap rig chokes?</a></span><span><a href="claude-fable-5-pricing.html">What does the newest frontier model actually cost?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

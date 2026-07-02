@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollama vs MLX on Apple Silicon: a measured dead heat — The Validation Set</title>
+<meta name="description" content="Same 3B, same base M3: Ollama 23.95 vs MLX 23.8 tok/s — 0% apart, within noise. The real lever is local vs cloud, not runtime.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark.html">
+<meta property="og:title" content="Ollama vs MLX on Apple Silicon: a measured dead heat — The Validation Set">
+<meta property="og:description" content="Same 3B, same base M3: Ollama 23.95 vs MLX 23.8 tok/s — 0% apart, within noise. The real lever is local vs cloud, not runtime.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"Ollama vs MLX on Apple Silicon: a measured dead heat",
+"description":"Same 3B, same base M3: Ollama 23.95 vs MLX 23.8 tok/s — 0% apart, within noise. The real lever is local vs cloud, not runtime.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/ollama-vs-mlx-speed-benchmark.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep009_runtimes.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP009</span><span class="badge m">measured</span></div>
+<h1>Ollama vs MLX on Apple Silicon: a measured dead heat</h1>
+<p class="lead">Is one local runtime secretly faster?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> Same 3B, same base M3: Ollama 23.95 vs MLX 23.8 tok/s — 0% apart, within noise. The real lever is local vs cloud, not runtime.</div>
+<div class="nums"><div class="num"><div class="v">23.95 vs 23.8</div><div class="l">tok/s, same model &amp; machine</div><span class="tag m">measured</span></div><div class="num"><div class="v">~$0.12</div><div class="l">per 1M tokens on laptop electricity</div><span class="tag mo">modeled</span></div><div class="num"><div class="v">~$8</div><div class="l">per 1M tokens on a rented H100</div><span class="tag mo">modeled</span></div></div>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep009_runtimes.json">data/ep009_runtimes.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="vector-database-recall-benchmark.html">Do you even need a vector database?</a></span><span><a href="prompt-injection-local-llm.html">How many injections get through an undefended agent?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

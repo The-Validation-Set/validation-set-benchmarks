@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How many AI agents can an 8GB laptop actually run? — The Validation Set</title>
+<meta name="description" content="Usable knee = 2 agents (Ollama serialises; tail latency ~6s → 60s+). The 8B won&#x27;t even load. ≈ $1,326/agent/yr vs $7,200 rented.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html">
+<meta property="og:title" content="How many AI agents can an 8GB laptop actually run? — The Validation Set">
+<meta property="og:description" content="Usable knee = 2 agents (Ollama serialises; tail latency ~6s → 60s+). The 8B won&#x27;t even load. ≈ $1,326/agent/yr vs $7,200 rented.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"How many AI agents can an 8GB laptop actually run?",
+"description":"Usable knee = 2 agents (Ollama serialises; tail latency ~6s → 60s+). The 8B won&#x27;t even load. ≈ $1,326/agent/yr vs $7,200 rented.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_scaling.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_sizewall.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP003</span><span class="badge m">measured</span></div>
+<h1>How many AI agents can an 8GB laptop actually run?</h1>
+<p class="lead">How many agents before a cheap rig chokes?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> Usable knee = 2 agents (Ollama serialises; tail latency ~6s → 60s+). The 8B won&#x27;t even load. ≈ $1,326/agent/yr vs $7,200 rented.</div>
+<div class="nums"><div class="num"><div class="v">2 agents</div><div class="l">usable concurrency knee</div><span class="tag m">measured</span></div><div class="num"><div class="v">$1,326/yr</div><div class="l">per owned agent</div><span class="tag mo">modeled</span></div><div class="num"><div class="v">$7,200/yr</div><div class="l">per rented agent</div><span class="tag mo">modeled</span></div></div>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_scaling.json">data/ep003_scaling.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep003_sizewall.json">data/ep003_sizewall.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="self-hosting-llm-break-even.html">Where is the break-even between renting and owning?</a></span><span><a href="small-vs-big-local-llm-graded.html">Is a cheap local model actually smart enough?</a> →</span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>
