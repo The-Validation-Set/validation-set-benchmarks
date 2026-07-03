@@ -25,7 +25,7 @@ SITE_NAME = "The Validation Set"
 TAGLINE = "Reproducible AI benchmarks. Measured, not guessed."
 
 # Set to the Substack URL once it exists; the email box renders only when set.
-NEWSLETTER_URL = ""
+NEWSLETTER_URL = "https://thevalidationset.substack.com"
 
 # Per-episode YouTube URLs (fill as they're supplied; falls back to channel).
 VIDEO_URLS = {
