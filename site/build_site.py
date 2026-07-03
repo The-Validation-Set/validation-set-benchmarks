@@ -29,7 +29,17 @@ NEWSLETTER_URL = ""
 
 # Per-episode YouTube URLs (fill as they're supplied; falls back to channel).
 VIDEO_URLS = {
+    "ep001": "https://youtu.be/z1SoM8poVgc",
+    "ep002": "https://youtu.be/mCyl1YJCmuw",
+    "ep003": "https://youtu.be/2aDlOvu8jcc",
+    "ep004": "https://youtu.be/SMr9o7ZECyc",
+    "ep005": "https://youtu.be/hI15-Ja71oM",
     "ep006": "https://youtu.be/9RJcnsh3W44",
+    "ep007": "https://youtu.be/ZHV_EdqEaf8",
+    "ep008": "https://youtu.be/4TjaWVoBPiE",
+    "ep009": "https://youtu.be/ttwDVH_jFs4",
+    "ep010": "https://youtu.be/hsE2o2gtV98",
+    "ep011": "https://youtu.be/jIwKEnhbbRo",
     "ep012": "https://youtu.be/w4Rfa_ryymM",
 }
 
