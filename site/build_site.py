@@ -441,12 +441,6 @@ def esc(s: str) -> str:
     return html.escape(s, quote=True)
 
 
-def usd(v: float) -> str:
-    """$ formatting that survives the tiny local-electricity numbers ($0.000002)."""
-    s = f"{v:.6f}".rstrip("0").rstrip(".")
-    return f"${s}"
-
-
 def faq_section(faqs) -> str:
     if not faqs:
         return ""
