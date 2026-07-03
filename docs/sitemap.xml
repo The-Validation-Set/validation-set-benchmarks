@@ -2,6 +2,8 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/</loc></url>
   <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/methodology.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/is-8gb-mac-enough-for-local-llm.html</loc></url>
+  <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/cost-per-correct-answer.html</loc></url>
   <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/local-ai-vs-cloud-api-cost.html</loc></url>
   <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/self-hosting-llm-break-even.html</loc></url>
   <url><loc>https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/how-many-ai-agents-8gb-laptop.html</loc></url>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cost per correct answer: the number per-token pricing hides — The Validation Set</title>
+<meta name="description" content="Cost per correct answer: run cost divided by grader-accepted answers. Why per-token pricing misleads (measured multiples: ~657x and ~108x vs a free local 3B), how it&#x27;s computed, and its honest limits.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/cost-per-correct-answer.html">
+<meta property="og:title" content="Cost per correct answer: the number per-token pricing hides — The Validation Set">
+<meta property="og:description" content="Cost per correct answer: run cost divided by grader-accepted answers. Why per-token pricing misleads (measured multiples: ~657x and ~108x vs a free local 3B), how it&#x27;s computed, and its honest limits.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/cost-per-correct-answer.html">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "What is cost per correct answer?", "acceptedAnswer": {"@type": "Answer", "text": "The total price of running a model through a graded exam, divided by the number of answers a deterministic grader accepted. It prices the outcome you actually want \u2014 a correct answer \u2014 instead of the token, which is just the raw material."}},{"@type": "Question", "name": "Why not just compare price per token?", "acceptedAnswer": {"@type": "Answer", "text": "Because tokens aren't the product. A model with cheap tokens that gets more answers wrong can cost more per correct answer than a pricier model \u2014 and against a $0 local baseline, per-token prices understate the real multiple. Measured on the same 15-task exam, frontier models landed at roughly 657\u00d7 and 108\u00d7 the cost per correct answer of a free local 3B that scores 80%."}},{"@type": "Question", "name": "Is cost per correct answer measured or modeled?", "acceptedAnswer": {"@type": "Answer", "text": "Both, and the labels matter: exam accuracy is MEASURED (temperature 0, deterministic graders, no LLM judge); the dollar side is MODELED from labelled public inputs \u2014 provider price pages, electricity tariffs \u2014 cited inside each data file."}},{"@type": "Question", "name": "What are the metric's limits?", "acceptedAnswer": {"@type": "Answer", "text": "It inherits the exam's task mix \u2014 15 verifiable tasks skewed to arithmetic, logic, code, formatting, and extraction. It says nothing about long-context or creative work, and the dollar side drifts whenever providers reprice. That's why multiples are quoted against a stable $0-hardware baseline and re-run when prices move."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="index.html#benchmarks">Benchmarks</a>
+<a href="methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap"><h1>Cost per correct answer</h1>
+<p class="lead">The number per-token pricing hides — and the metric behind
+<a href="index.html">this site's leaderboard</a>.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Definition:</strong> what a model run costs, divided by the answers a deterministic
+grader accepted. Accuracy is measured; dollars are modeled from labelled public inputs. It prices the outcome, not
+the token.</div>
+<h2>Why per-token pricing misleads</h2>
+<p>Price pages sell tokens; you are buying correct answers. The same 15-task graded exam, run everywhere from a free
+3B on an 8GB laptop to frontier APIs, produces multiples that per-token pages never show: one frontier model priced
+out at ~657× the cost per correct answer of the free local baseline, another at ~108× — for exams the local model
+already passes at 80%. When the denominator is "answers you can keep," cheap tokens and cheap results turn out to be
+different claims.</p>
+<h2>How it's computed</h2>
+<p>1) Run the fixed 15-task exam at temperature 0. 2) Grade every answer with deterministic code — an exact number, a
+letter, JSON asserts; never an LLM judge. 3) Price the run from labelled inputs (provider price pages for APIs;
+measured wattage × utility tariff for local hardware). 4) Divide. The accuracy half is
+<span class="badge m">measured</span>; the dollar half is <span class="badge mo">modeled</span> — the
+<a href="methodology.html">methodology</a> keeps the two labels honest.</p>
+<h2>Read the numbers yourself</h2>
+<p>The multiples above come from <a href="benchmarks/frontier-llm-cost-per-correct-answer.html">the frontier exam</a> and
+<a href="benchmarks/local-vs-cloud-llm-routing.html">the routing teardown</a>; every input sits in the raw JSON in
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">the repo</a>, so you can re-price the whole leaderboard when a provider changes its rates.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>What is cost per correct answer?</h3><p>The total price of running a model through a graded exam, divided by the number of answers a deterministic grader accepted. It prices the outcome you actually want — a correct answer — instead of the token, which is just the raw material.</p></div><div class="faq"><h3>Why not just compare price per token?</h3><p>Because tokens aren&#x27;t the product. A model with cheap tokens that gets more answers wrong can cost more per correct answer than a pricier model — and against a $0 local baseline, per-token prices understate the real multiple. Measured on the same 15-task exam, frontier models landed at roughly 657× and 108× the cost per correct answer of a free local 3B that scores 80%.</p></div><div class="faq"><h3>Is cost per correct answer measured or modeled?</h3><p>Both, and the labels matter: exam accuracy is MEASURED (temperature 0, deterministic graders, no LLM judge); the dollar side is MODELED from labelled public inputs — provider price pages, electricity tariffs — cited inside each data file.</p></div><div class="faq"><h3>What are the metric&#x27;s limits?</h3><p>It inherits the exam&#x27;s task mix — 15 verifiable tasks skewed to arithmetic, logic, code, formatting, and extraction. It says nothing about long-context or creative work, and the dollar side drifts whenever providers reprice. That&#x27;s why multiples are quoted against a stable $0-hardware baseline and re-run when prices move.</p></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

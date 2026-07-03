@@ -39,7 +39,9 @@
 </div></div>
 <section><div class="wrap">
 <div class="verdict"><strong>Verdict:</strong> Same 8B, laptop vs hosted: hosted ~56× faster AND cheaper per token → no break-even at any volume for this workload.</div>
+
 <div class="nums"><div class="num"><div class="v">8.5 vs ~472</div><div class="l">tok/s local vs hosted</div><span class="tag m">measured</span></div><div class="num"><div class="v">$0.34 vs $0.065</div><div class="l">per 1M tokens</div><span class="tag mo">modeled</span></div><div class="num"><div class="v">none</div><div class="l">break-even point</div><span class="tag mo">modeled</span></div></div>
+
 
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.

@@ -39,7 +39,9 @@
 </div></div>
 <section><div class="wrap">
 <div class="verdict"><strong>Verdict:</strong> FP16 (~16GB) and Q8 (~8.5GB) don&#x27;t fit — Q8 swap-thrashed to ~0.03 tok/s. Q4 (~4.8GB) runs and scored 87% on the exam.</div>
+
 <div class="nums"><div class="num"><div class="v">only Q4</div><div class="l">loads on 8GB</div><span class="tag m">measured</span></div><div class="num"><div class="v">87%</div><div class="l">Q4 on the 15-task exam</div><span class="tag m">measured</span></div><div class="num"><div class="v">~0.03 tok/s</div><div class="l">Q8 swap-thrash</div><span class="tag m">measured</span></div></div>
+<p class="sub">Field guide: <a href="../is-8gb-mac-enough-for-local-llm.html">Is an 8GB Mac enough to run a local LLM? (measured)</a></p>
 
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.

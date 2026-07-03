@@ -152,6 +152,7 @@ REGISTRY = [
                     ("~$8", "per 1M tokens on a rented H100", "modeled")],
         "files": ["ep009_runtimes.json"],
         "search": "ollama vs mlx speed apple silicon",
+        "caveat": "Caveat (added 2026-07-03): this benchmark predates Ollama 0.19's MLX backend (March 2026). That backend requires 32GB+ unified memory, so it doesn't change this 8GB result.",
     },
     {
         "id": "ep010", "slug": "prompt-injection-local-llm",
@@ -335,6 +336,41 @@ LEADERBOARD = [
     {"model": "Gemma 4 12B PTQ vs QAT", "score": "on the bench", "speed": "—", "cost": "—", "ep": None},
 ]
 
+# ------------------------------------------------------------------ guides --
+# Cross-benchmark answer pages. Root-level (like methodology.html); every
+# number is interpolated from data/*.json at build time — nothing hand-typed.
+GUIDES = [
+    {"slug": "is-8gb-mac-enough-for-local-llm",
+     "title": "Is an 8GB Mac enough to run a local LLM? (measured)",
+     "question": "Is 8GB of RAM enough for local AI?",
+     "blurb": "Yes — for the right model class. What fits, what swaps, and exactly "
+              "where the wall is, from four measured runs on one 8GB Apple-silicon Mac."},
+    {"slug": "cost-per-correct-answer",
+     "title": "Cost per correct answer: the number per-token pricing hides",
+     "question": "What does a correct answer cost?",
+     "blurb": "The metric behind the leaderboard: what a run costs divided by the answers "
+              "a deterministic grader accepted — and the metric's honest limits."},
+]
+
+# Episode pages that should point at a guide (rendered as one line under the numbers).
+RELATED_GUIDES = {
+    "ep003": "is-8gb-mac-enough-for-local-llm",
+    "ep004": "is-8gb-mac-enough-for-local-llm",
+    "ep009": "is-8gb-mac-enough-for-local-llm",
+    "ep011": "is-8gb-mac-enough-for-local-llm",
+    "ep005": "cost-per-correct-answer",
+    "ep006": "cost-per-correct-answer",
+    "ep013": "cost-per-correct-answer",
+}
+
+
+def _slug(ep_id: str) -> str:
+    return next(e["slug"] for e in REGISTRY if e["id"] == ep_id)
+
+
+def _guide_title(slug: str) -> str:
+    return next(g["title"] for g in GUIDES if g["slug"] == slug)
+
 CSS = """
 :root{--bg:#0B0F19;--bg2:#05070D;--panel:#12182A;--border:#1E2A45;--text:#EDF1FA;
 --muted:#8A94AD;--accent:#2DD4BF;--accent2:#7C6CFF;--danger:#FB7185;--amber:#F5B546;
@@ -403,6 +439,31 @@ footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
 def esc(s: str) -> str:
     return html.escape(s, quote=True)
+
+
+def usd(v: float) -> str:
+    """$ formatting that survives the tiny local-electricity numbers ($0.000002)."""
+    s = f"{v:.6f}".rstrip("0").rstrip(".")
+    return f"${s}"
+
+
+def faq_section(faqs) -> str:
+    if not faqs:
+        return ""
+    items = "".join(f'<div class="faq"><h3>{esc(q)}</h3><p>{esc(a)}</p></div>' for q, a in faqs)
+    return f'<h2>Questions this answers</h2>{items}'
+
+
+def faq_jsonld(faqs) -> str:
+    if not faqs:
+        return ""
+    entities = ",".join(
+        json.dumps({"@type": "Question", "name": q,
+                    "acceptedAnswer": {"@type": "Answer", "text": a}})
+        for q, a in faqs)
+    return (f'<script type="application/ld+json">'
+            f'{{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{entities}]}}'
+            f'</script>')
 
 
 def page(title: str, desc: str, body: str, canonical: str, depth: int = 0, jsonld: str = "") -> str:
@@ -551,6 +612,11 @@ def build_index() -> str:
             f'<div class="card"><div class="q">{esc(e["question"])}</div>'
             f'<h3><a href="benchmarks/{e["slug"]}.html">{esc(e["title"])}</a></h3>'
             f'<p>{esc(e["verdict"])}</p></div>')
+    guide_cards = [
+        f'<div class="card"><div class="q">{esc(g["question"])}</div>'
+        f'<h3><a href="{g["slug"]}.html">{esc(g["title"])}</a></h3>'
+        f'<p>{esc(g["blurb"])}</p></div>'
+        for g in GUIDES]
     body = f"""
 <div class="hero"><div class="wrap">
 <h1>AI benchmarks you can re-run and argue with.</h1>
@@ -562,9 +628,11 @@ Accuracy is <strong>measured</strong>; every dollar figure is <strong>modeled fr
 <a class="btn ghost" href="{CHANNEL_URL}">The video teardowns</a></div>
 </div></div>
 <section><div class="wrap">
-<h2>The exam leaderboard — cost per correct answer</h2>
+<h2>The exam leaderboard — <a href="cost-per-correct-answer.html">cost per correct answer</a></h2>
 <p class="sub">One 15-task graded exam, run everywhere: a free local 3B on an 8GB laptop up to frontier APIs.
-Cost multiples are modeled vs the free local baseline. <a href="methodology.html">How it's graded →</a></p>
+Cost multiples are modeled vs the free local baseline.
+<a href="cost-per-correct-answer.html">What "cost per correct answer" means →</a>
+<a href="methodology.html">How it's graded →</a></p>
 <table class="lb"><tr><th>Model</th><th>Exam score</th><th>Speed</th><th>Cost / correct answer</th><th></th></tr>
 {''.join(lb_rows)}</table>
 <p class="note">"On the bench" = currently being measured. Results publish here, on
@@ -574,6 +642,11 @@ Cost multiples are modeled vs the free local baseline. <a href="methodology.html
 <h2>All benchmarks</h2>
 <p class="sub">Every teardown, one page each: the question, the verdict, the numbers, the raw JSON.</p>
 <div class="grid">{''.join(cards)}</div>
+</div></section>
+<section id="guides"><div class="wrap">
+<h2>Field guides</h2>
+<p class="sub">Cross-benchmark answers, assembled from the same measured data files.</p>
+<div class="grid">{''.join(guide_cards)}</div>
 </div></section>
 {email_box()}
 <section><div class="wrap"><div class="card">
@@ -603,11 +676,11 @@ def build_episode(e: dict, prev_e: dict, next_e: dict) -> str:
     next_link = ('<a href="%s.html">%s</a> →' % (next_e["slug"], esc(next_e["question"]))) if next_e else ""
     nav = f'<div class="next"><span>{prev_link}</span><span>{next_link}</span></div>'
     faqs = FAQS.get(e["id"], [])
-    faq_html = ""
-    if faqs:
-        items = "".join(
-            f'<div class="faq"><h3>{esc(q)}</h3><p>{esc(a)}</p></div>' for q, a in faqs)
-        faq_html = f'<h2>Questions this answers</h2>{items}'
+    faq_html = faq_section(faqs)
+    caveat_html = f'<p class="note">{esc(e["caveat"])}</p>' if e.get("caveat") else ""
+    guide_slug = RELATED_GUIDES.get(e["id"])
+    guide_html = (f'<p class="sub">Field guide: <a href="../{guide_slug}.html">'
+                  f'{esc(_guide_title(guide_slug))}</a></p>') if guide_slug else ""
     cite_html = (
         f'<div class="cite"><span class="cite-label">CITE THIS RESULT</span>'
         f'<p>&ldquo;{esc(e["verdict"])}&rdquo; &mdash; {SITE_NAME}, open data at '
@@ -620,7 +693,9 @@ def build_episode(e: dict, prev_e: dict, next_e: dict) -> str:
 </div></div>
 <section><div class="wrap">
 <div class="verdict"><strong>Verdict:</strong> {esc(e["verdict"])}</div>
+{caveat_html}
 <div class="nums">{nums}</div>
+{guide_html}
 {chart_html}
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
@@ -690,6 +765,123 @@ valuable thing you can send.</p>
                 body, f"{BASE_URL}/methodology.html", 0)
 
 
+def build_guide_8gb() -> str:
+    faqs = [
+        ("Is 8GB of RAM enough to run a local LLM?",
+         "Yes — for 3–4B models at 4-bit quantization. On a base 8GB Apple-silicon Mac, a 3B ran at ~21 tok/s and "
+         "scored 80% on a 15-task graded exam. The wall sits just above it: an 8B at FP16 (16 GB) cannot load at all, "
+         "and at Q8 (8.5 GB) it swapped to 0.03 tok/s and timed out."),
+        ("Which quantization fits an 8B model into 8GB?",
+         "Q4: the measured Q4_K_M build (4.8 GB) loaded and ran at 11 tok/s, scoring 87% on the same graded exam. "
+         "Anything above 4-bit for an 8B is past this machine's memory wall."),
+        ("How many concurrent agents can an 8GB Mac run?",
+         "Two. Measured on a 3B via ollama: at two concurrent agents each still gets ~8 tok/s (above a 6 tok/s usable "
+         "floor); at three or more, every agent drops below usable speed."),
+        ("Is the small model much worse than the 8B?",
+         "Seven points on a graded exam: the 3B scored 80% vs the 8B's 87% — and in that run the 8B generated at "
+         "roughly a quarter of the 3B's speed. Every 3B miss was multi-step arithmetic, which a calculator tool patches for free."),
+    ]
+    body = f"""
+<div class="hero"><div class="wrap"><h1>Is an 8GB Mac enough to run a local LLM? (measured)</h1>
+<p class="lead">Yes — for the right model class. Four measured runs on one base-model 8GB Apple-silicon Mac show
+exactly what fits, what swaps, and what breaks.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> 8GB runs a 3–4B model at 4-bit comfortably (~21 tok/s, 80% on a graded
+exam) and even an 8B if — and only if — you take the Q4 build. The wall is real and abrupt: the same 8B at Q8 swapped
+to 0.03 tok/s and timed out, and at FP16 it cannot load at all.</div>
+<h2>Where the wall is (same 8B, three precisions, one 8GB machine)</h2>
+<p>From <a href="benchmarks/{_slug("ep011")}.html">the quantization teardown</a>: FP16 needs ~16 GB — twice the
+machine — and never loads. Q8_0 (8.5 GB) technically loads, then spills to swap and crawls at 0.03 tokens/sec until it
+times out. Q4_K_M (4.8 GB) loads clean and generates at 11 tok/s while scoring 87% on the 15-task graded exam.
+Precision is the dial that decides whether the model exists at all on this hardware.</p>
+<h2>What you actually get at 8GB</h2>
+<p>From <a href="benchmarks/{_slug("ep004")}.html">the graded small-vs-big exam</a>: the 3B scored 80% — with every
+miss in one bucket, multi-step arithmetic — while the 8B scored 87% at roughly 4× the wait (~6 tok/s in that run).
+From <a href="benchmarks/{_slug("ep003")}.html">the load test</a>: the 3B answered a 64-token request in 6.5 s
+(~21 tok/s); the standard 8B tag on the same box swap-thrashed and did not return within a 600-second timeout.</p>
+<h2>Concurrency: the knee is at 2</h2>
+<p>Measured at 1→8 concurrent agents on the 3B: throughput holds through two agents (~8 tok/s each, above the 6 tok/s
+usable floor), then every agent drops below usable at three or more. Latency doubles from one agent to two even while
+throughput holds — parallelism on 8GB is a trade, not a freebie.</p>
+<h2>Why the 8B numbers differ between runs — on purpose</h2>
+<p class="note">You will see the 8B at "timed out", "~6 tok/s", and "11 tok/s" across these pages. All three are real:
+they come from different builds (standard tag vs Q4_K_M), different swap states, and different workloads — each data
+file records its own conditions. Averaging them into one number would be tidier and wrong. That is rather the point of
+measuring.</p>
+{faq_section(faqs)}
+<p class="sub">Raw data behind every number: <code>ep003_sizewall</code>, <code>ep003_scaling</code>,
+<code>ep004_quality</code>, <code>ep011_quant</code> in <a href="{REPO_URL}">the repo</a> ·
+<a href="methodology.html">methodology</a></p>
+</div></section>"""
+    g = GUIDES[0]
+    return page(f'{g["title"]} — {SITE_NAME}',
+                "Measured on a base 8GB Apple-silicon Mac: which local LLMs fit (3-4B at Q4, ~21 tok/s, 80% graded), "
+                "where the wall is (8B Q8 swaps to 0.03 tok/s; FP16 won't load), and the 2-agent concurrency knee.",
+                body, f'{BASE_URL}/{g["slug"]}.html', 0, faq_jsonld(faqs))
+
+
+def build_guide_cpca() -> str:
+    faqs = [
+        ("What is cost per correct answer?",
+         "The total price of running a model through a graded exam, divided by the number of answers a deterministic "
+         "grader accepted. It prices the outcome you actually want — a correct answer — instead of the token, which is "
+         "just the raw material."),
+        ("Why not just compare price per token?",
+         "Because tokens aren't the product. A model with cheap tokens that gets more answers wrong can cost more per "
+         "correct answer than a pricier model — and against a $0 local baseline, per-token prices understate the real "
+         "multiple. Measured on the same 15-task exam, frontier models landed at roughly 657× and 108× the cost per "
+         "correct answer of a free local 3B that scores 80%."),
+        ("Is cost per correct answer measured or modeled?",
+         "Both, and the labels matter: exam accuracy is MEASURED (temperature 0, deterministic graders, no LLM judge); "
+         "the dollar side is MODELED from labelled public inputs — provider price pages, electricity tariffs — cited "
+         "inside each data file."),
+        ("What are the metric's limits?",
+         "It inherits the exam's task mix — 15 verifiable tasks skewed to arithmetic, logic, code, formatting, and "
+         "extraction. It says nothing about long-context or creative work, and the dollar side drifts whenever "
+         "providers reprice. That's why multiples are quoted against a stable $0-hardware baseline and re-run when "
+         "prices move."),
+    ]
+    body = f"""
+<div class="hero"><div class="wrap"><h1>Cost per correct answer</h1>
+<p class="lead">The number per-token pricing hides — and the metric behind
+<a href="index.html">this site's leaderboard</a>.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Definition:</strong> what a model run costs, divided by the answers a deterministic
+grader accepted. Accuracy is measured; dollars are modeled from labelled public inputs. It prices the outcome, not
+the token.</div>
+<h2>Why per-token pricing misleads</h2>
+<p>Price pages sell tokens; you are buying correct answers. The same 15-task graded exam, run everywhere from a free
+3B on an 8GB laptop to frontier APIs, produces multiples that per-token pages never show: one frontier model priced
+out at ~657× the cost per correct answer of the free local baseline, another at ~108× — for exams the local model
+already passes at 80%. When the denominator is "answers you can keep," cheap tokens and cheap results turn out to be
+different claims.</p>
+<h2>How it's computed</h2>
+<p>1) Run the fixed 15-task exam at temperature 0. 2) Grade every answer with deterministic code — an exact number, a
+letter, JSON asserts; never an LLM judge. 3) Price the run from labelled inputs (provider price pages for APIs;
+measured wattage × utility tariff for local hardware). 4) Divide. The accuracy half is
+<span class="badge m">measured</span>; the dollar half is <span class="badge mo">modeled</span> — the
+<a href="methodology.html">methodology</a> keeps the two labels honest.</p>
+<h2>Read the numbers yourself</h2>
+<p>The multiples above come from <a href="benchmarks/{_slug("ep006")}.html">the frontier exam</a> and
+<a href="benchmarks/{_slug("ep013")}.html">the routing teardown</a>; every input sits in the raw JSON in
+<a href="{REPO_URL}">the repo</a>, so you can re-price the whole leaderboard when a provider changes its rates.</p>
+{faq_section(faqs)}
+</div></section>"""
+    g = GUIDES[1]
+    return page(f'{g["title"]} — {SITE_NAME}',
+                "Cost per correct answer: run cost divided by grader-accepted answers. Why per-token pricing misleads "
+                "(measured multiples: ~657x and ~108x vs a free local 3B), how it's computed, and its honest limits.",
+                body, f'{BASE_URL}/{g["slug"]}.html', 0, faq_jsonld(faqs))
+
+
+GUIDE_BUILDERS = {
+    "is-8gb-mac-enough-for-local-llm": build_guide_8gb,
+    "cost-per-correct-answer": build_guide_cpca,
+}
+
+
 def main() -> None:
     OUT.mkdir(exist_ok=True)
     (OUT / "benchmarks").mkdir(exist_ok=True)
@@ -697,17 +889,20 @@ def main() -> None:
     (OUT / "style.css").write_text(CSS)
     (OUT / "index.html").write_text(build_index())
     (OUT / "methodology.html").write_text(build_methodology())
+    for g in GUIDES:
+        (OUT / f'{g["slug"]}.html').write_text(GUIDE_BUILDERS[g["slug"]]())
     for i, e in enumerate(REGISTRY):
         prev_e = REGISTRY[i - 1] if i > 0 else None
         next_e = REGISTRY[i + 1] if i < len(REGISTRY) - 1 else None
         (OUT / "benchmarks" / f'{e["slug"]}.html').write_text(build_episode(e, prev_e, next_e))
     urls = [f"{BASE_URL}/", f"{BASE_URL}/methodology.html"] + [
+        f'{BASE_URL}/{g["slug"]}.html' for g in GUIDES] + [
         f'{BASE_URL}/benchmarks/{e["slug"]}.html' for e in REGISTRY]
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "\n".join(f"  <url><loc>{u}</loc></url>" for u in urls) + "\n</urlset>\n")
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {BASE_URL}/sitemap.xml\n")
-    print(f"built {2 + len(REGISTRY)} pages -> {OUT}")
+    print(f"built {2 + len(GUIDES) + len(REGISTRY)} pages -> {OUT}")
 
 
 if __name__ == "__main__":

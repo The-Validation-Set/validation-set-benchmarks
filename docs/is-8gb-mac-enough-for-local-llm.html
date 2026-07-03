@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Is an 8GB Mac enough to run a local LLM? (measured) — The Validation Set</title>
+<meta name="description" content="Measured on a base 8GB Apple-silicon Mac: which local LLMs fit (3-4B at Q4, ~21 tok/s, 80% graded), where the wall is (8B Q8 swaps to 0.03 tok/s; FP16 won&#x27;t load), and the 2-agent concurrency knee.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/is-8gb-mac-enough-for-local-llm.html">
+<meta property="og:title" content="Is an 8GB Mac enough to run a local LLM? (measured) — The Validation Set">
+<meta property="og:description" content="Measured on a base 8GB Apple-silicon Mac: which local LLMs fit (3-4B at Q4, ~21 tok/s, 80% graded), where the wall is (8B Q8 swaps to 0.03 tok/s; FP16 won&#x27;t load), and the 2-agent concurrency knee.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/is-8gb-mac-enough-for-local-llm.html">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Is 8GB of RAM enough to run a local LLM?", "acceptedAnswer": {"@type": "Answer", "text": "Yes \u2014 for 3\u20134B models at 4-bit quantization. On a base 8GB Apple-silicon Mac, a 3B ran at ~21 tok/s and scored 80% on a 15-task graded exam. The wall sits just above it: an 8B at FP16 (16 GB) cannot load at all, and at Q8 (8.5 GB) it swapped to 0.03 tok/s and timed out."}},{"@type": "Question", "name": "Which quantization fits an 8B model into 8GB?", "acceptedAnswer": {"@type": "Answer", "text": "Q4: the measured Q4_K_M build (4.8 GB) loaded and ran at 11 tok/s, scoring 87% on the same graded exam. Anything above 4-bit for an 8B is past this machine's memory wall."}},{"@type": "Question", "name": "How many concurrent agents can an 8GB Mac run?", "acceptedAnswer": {"@type": "Answer", "text": "Two. Measured on a 3B via ollama: at two concurrent agents each still gets ~8 tok/s (above a 6 tok/s usable floor); at three or more, every agent drops below usable speed."}},{"@type": "Question", "name": "Is the small model much worse than the 8B?", "acceptedAnswer": {"@type": "Answer", "text": "Seven points on a graded exam: the 3B scored 80% vs the 8B's 87% \u2014 and in that run the 8B generated at roughly a quarter of the 3B's speed. Every 3B miss was multi-step arithmetic, which a calculator tool patches for free."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="index.html#benchmarks">Benchmarks</a>
+<a href="methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap"><h1>Is an 8GB Mac enough to run a local LLM? (measured)</h1>
+<p class="lead">Yes — for the right model class. Four measured runs on one base-model 8GB Apple-silicon Mac show
+exactly what fits, what swaps, and what breaks.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> 8GB runs a 3–4B model at 4-bit comfortably (~21 tok/s, 80% on a graded
+exam) and even an 8B if — and only if — you take the Q4 build. The wall is real and abrupt: the same 8B at Q8 swapped
+to 0.03 tok/s and timed out, and at FP16 it cannot load at all.</div>
+<h2>Where the wall is (same 8B, three precisions, one 8GB machine)</h2>
+<p>From <a href="benchmarks/llm-quantization-8gb-laptop.html">the quantization teardown</a>: FP16 needs ~16 GB — twice the
+machine — and never loads. Q8_0 (8.5 GB) technically loads, then spills to swap and crawls at 0.03 tokens/sec until it
+times out. Q4_K_M (4.8 GB) loads clean and generates at 11 tok/s while scoring 87% on the 15-task graded exam.
+Precision is the dial that decides whether the model exists at all on this hardware.</p>
+<h2>What you actually get at 8GB</h2>
+<p>From <a href="benchmarks/small-vs-big-local-llm-graded.html">the graded small-vs-big exam</a>: the 3B scored 80% — with every
+miss in one bucket, multi-step arithmetic — while the 8B scored 87% at roughly 4× the wait (~6 tok/s in that run).
+From <a href="benchmarks/how-many-ai-agents-8gb-laptop.html">the load test</a>: the 3B answered a 64-token request in 6.5 s
+(~21 tok/s); the standard 8B tag on the same box swap-thrashed and did not return within a 600-second timeout.</p>
+<h2>Concurrency: the knee is at 2</h2>
+<p>Measured at 1→8 concurrent agents on the 3B: throughput holds through two agents (~8 tok/s each, above the 6 tok/s
+usable floor), then every agent drops below usable at three or more. Latency doubles from one agent to two even while
+throughput holds — parallelism on 8GB is a trade, not a freebie.</p>
+<h2>Why the 8B numbers differ between runs — on purpose</h2>
+<p class="note">You will see the 8B at "timed out", "~6 tok/s", and "11 tok/s" across these pages. All three are real:
+they come from different builds (standard tag vs Q4_K_M), different swap states, and different workloads — each data
+file records its own conditions. Averaging them into one number would be tidier and wrong. That is rather the point of
+measuring.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Is 8GB of RAM enough to run a local LLM?</h3><p>Yes — for 3–4B models at 4-bit quantization. On a base 8GB Apple-silicon Mac, a 3B ran at ~21 tok/s and scored 80% on a 15-task graded exam. The wall sits just above it: an 8B at FP16 (16 GB) cannot load at all, and at Q8 (8.5 GB) it swapped to 0.03 tok/s and timed out.</p></div><div class="faq"><h3>Which quantization fits an 8B model into 8GB?</h3><p>Q4: the measured Q4_K_M build (4.8 GB) loaded and ran at 11 tok/s, scoring 87% on the same graded exam. Anything above 4-bit for an 8B is past this machine&#x27;s memory wall.</p></div><div class="faq"><h3>How many concurrent agents can an 8GB Mac run?</h3><p>Two. Measured on a 3B via ollama: at two concurrent agents each still gets ~8 tok/s (above a 6 tok/s usable floor); at three or more, every agent drops below usable speed.</p></div><div class="faq"><h3>Is the small model much worse than the 8B?</h3><p>Seven points on a graded exam: the 3B scored 80% vs the 8B&#x27;s 87% — and in that run the 8B generated at roughly a quarter of the 3B&#x27;s speed. Every 3B miss was multi-step arithmetic, which a calculator tool patches for free.</p></div>
+<p class="sub">Raw data behind every number: <code>ep003_sizewall</code>, <code>ep003_scaling</code>,
+<code>ep004_quality</code>, <code>ep011_quant</code> in <a href="https://github.com/The-Validation-Set/validation-set-benchmarks">the repo</a> ·
+<a href="methodology.html">methodology</a></p>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

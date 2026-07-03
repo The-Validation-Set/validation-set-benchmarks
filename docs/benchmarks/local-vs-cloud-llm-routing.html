@@ -39,7 +39,9 @@
 </div></div>
 <section><div class="wrap">
 <div class="verdict"><strong>Verdict:</strong> Local 3B is only weak on math. Escalating just that bucket to a frontier model: 100% accuracy at 27% cloud calls ≈ 73% off the modeled bill.</div>
+
 <div class="nums"><div class="num"><div class="v">100%</div><div class="l">routed accuracy (3B + frontier)</div><span class="tag m">measured</span></div><div class="num"><div class="v">27%</div><div class="l">of calls that need the cloud</div><span class="tag m">measured</span></div><div class="num"><div class="v">−73%</div><div class="l">modeled cloud bill</div><span class="tag mo">modeled</span></div></div>
+<p class="sub">Field guide: <a href="../cost-per-correct-answer.html">Cost per correct answer: the number per-token pricing hides</a></p>
 
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.

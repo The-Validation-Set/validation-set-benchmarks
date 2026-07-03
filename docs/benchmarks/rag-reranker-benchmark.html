@@ -39,7 +39,9 @@
 </div></div>
 <section><div class="wrap">
 <div class="verdict"><strong>Verdict:</strong> The bi-encoder already nailed rank-1 (easy 92→100; hard 100→100 — re-ranker added 0) at ~38ms/query. Fix recall first; order later.</div>
+
 <div class="nums"><div class="num"><div class="v">92→100</div><div class="l">recall@1, easy corpus</div><span class="tag m">measured</span></div><div class="num"><div class="v">100→100</div><div class="l">recall@1, hard corpus (+0)</div><span class="tag m">measured</span></div><div class="num"><div class="v">~38ms</div><div class="l">per query</div><span class="tag m">measured</span></div></div>
+
 
 <h2>How it was measured</h2>
 <p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
