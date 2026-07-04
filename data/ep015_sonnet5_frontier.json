@@ -1,0 +1,219 @@
+{
+ "episode": {
+  "id": "EP015",
+  "working_title": "Claude Sonnet 5 sits the exam (cost per correct answer)",
+  "locked_at_utc": "2026-07-03T23:42:15Z"
+ },
+ "mode": "frontier_exam",
+ "model": "Claude Sonnet 5 (claude.ai)",
+ "eyebrow": "DATA_MEASURED // 23:42 UTC // FRONTIER EXAM",
+ "accuracy_pct": 100.0,
+ "correct": 15,
+ "total": 15,
+ "by_bucket": {
+  "math": {
+   "correct": 4,
+   "total": 4,
+   "pct": 100.0
+  },
+  "reasoning": {
+   "correct": 3,
+   "total": 3,
+   "pct": 100.0
+  },
+  "code": {
+   "correct": 4,
+   "total": 4,
+   "pct": 100.0
+  },
+  "format": {
+   "correct": 3,
+   "total": 3,
+   "pct": 100.0
+  },
+  "extract": {
+   "correct": 1,
+   "total": 1,
+   "pct": 100.0
+  }
+ },
+ "results": [
+  {
+   "id": "math_throughput",
+   "bucket": "math",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 55,
+   "output_tokens": 2,
+   "answer_excerpt": "600000"
+  },
+  {
+   "id": "math_team_loc",
+   "bucket": "math",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 82,
+   "output_tokens": 1,
+   "answer_excerpt": "3600"
+  },
+  {
+   "id": "math_token_cost",
+   "bucket": "math",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 62,
+   "output_tokens": 1,
+   "answer_excerpt": "7"
+  },
+  {
+   "id": "math_gen_time",
+   "bucket": "math",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 56,
+   "output_tokens": 1,
+   "answer_excerpt": "60"
+  },
+  {
+   "id": "reason_race_order",
+   "bucket": "reasoning",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 70,
+   "output_tokens": 1,
+   "answer_excerpt": "D"
+  },
+  {
+   "id": "reason_largest_power",
+   "bucket": "reasoning",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 49,
+   "output_tokens": 1,
+   "answer_excerpt": "A"
+  },
+  {
+   "id": "reason_units",
+   "bucket": "reasoning",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 76,
+   "output_tokens": 1,
+   "answer_excerpt": "C"
+  },
+  {
+   "id": "code_sum_to_n",
+   "bucket": "code",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 60,
+   "output_tokens": 19,
+   "answer_excerpt": "```python\ndef solve(n):\n    return sum(range(1, n + 1)) if n >= 1 else 0\n```"
+  },
+  {
+   "id": "code_count_vowels",
+   "bucket": "code",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 63,
+   "output_tokens": 22,
+   "answer_excerpt": "```python\ndef count_vowels(s):\n    return sum(1 for c in s.lower() if c in 'aeiou')\n```"
+  },
+  {
+   "id": "code_palindrome",
+   "bucket": "code",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 69,
+   "output_tokens": 27,
+   "answer_excerpt": "```python\ndef is_palindrome(s):\n    t = [c.lower() for c in s if c.isalnum()]\n    return t"
+  },
+  {
+   "id": "code_two_sum",
+   "bucket": "code",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 78,
+   "output_tokens": 55,
+   "answer_excerpt": "```python\ndef two_sum(nums, target):\n    seen = {}\n    for i, num in enumerate(nums):\n    "
+  },
+  {
+   "id": "format_extract_person",
+   "bucket": "format",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 75,
+   "output_tokens": 7,
+   "answer_excerpt": "{\"name\": \"Maria\", \"age\": 34}"
+  },
+  {
+   "id": "format_sentiment",
+   "bucket": "format",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 71,
+   "output_tokens": 7,
+   "answer_excerpt": "{\"sentiment\": \"negative\"}"
+  },
+  {
+   "id": "format_prime_array",
+   "bucket": "format",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 55,
+   "output_tokens": 4,
+   "answer_excerpt": "[11,13,17,19]"
+  },
+  {
+   "id": "extract_http_code",
+   "bucket": "extract",
+   "completed": true,
+   "correct": true,
+   "latency_ms": null,
+   "input_tokens": 45,
+   "output_tokens": 1,
+   "answer_excerpt": "503"
+  }
+ ],
+ "cost_modeled": {
+  "note": "Answers captured in the model's free window ($0). At-scale cost modelled at paid rates; tokens estimated (see basis).",
+  "total_input_tokens": 966,
+  "total_output_tokens": 150,
+  "tokens_measured": false,
+  "usd_per_1m_in_at_scale": 2.0,
+  "usd_per_1m_out_at_scale": 10.0,
+  "exam_usd_at_scale_modeled": 0.00343,
+  "usd_per_correct_at_scale_modeled": 0.00023,
+  "frontier_vs_3b_local_ratio_modeled": 96.6
+ },
+ "integrity_notes": [
+  "accuracy MEASURED by the same deterministic graders as EP004 (run_quality.grade imported directly).",
+  "no LLM-as-judge. Every task has a verifiable answer.",
+  "model: Claude Sonnet 5 (claude.ai).",
+  "cost comparison uses $2.0/$10.0 per 1M (in/out) for at-scale modelling; actual run cost $0.",
+  "token counts ESTIMATED at ~4 chars/token (no usage meter on the chat/paste path) -- labelled MODELED.",
+  "capture: each eval_tasks.json prompt sent verbatim (with the standard one-line wrapper) to the subject in a fresh chat; one answer captured per task, run by the human. No API/usage meter on this path."
+ ],
+ "capture_config": {
+  "subject": "Claude Sonnet 5 (claude.ai)",
+  "method": "each eval_tasks.json prompt sent verbatim (with the standard one-line wrapper) to the subject in a fresh chat; one answer captured per task, run by the human. No API/usage meter on this path.",
+  "wrapper_text_verbatim": "You are being asked a single question. Reply with only your answer -- no preamble, no explanation.\n\n",
+  "captured_utc": "2026-07-03",
+  "answers_source": "ep015_sonnet5_frontier_answers.txt",
+  "grader": "run_quality.grade() imported directly -- identical code path to EP004"
+ }
+}

@@ -209,6 +209,17 @@ REGISTRY = [
         "files": ["ep014_rerank.json"],
         "search": "rag reranker worth it benchmark",
     },
+    {
+        "id": "ep015", "slug": "claude-sonnet-5-cost-per-correct-answer",
+        "title": "Claude Sonnet 5: a perfect score at ~97× the cost per correct answer",
+        "question": "Is the cheapest frontier model actually cheap?",
+        "verdict": "15/15 on the graded exam — and the cheapest frontier cost-per-correct we've measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.",
+        "numbers": [("15/15", "graded exam (isolated chats, deterministic graders)", "measured"),
+                    ("~97×", "cost per correct answer vs the free local 3B", "modeled"),
+                    ("−72.6%", "modeled bill with measured-weakness routing", "modeled")],
+        "files": ["ep015_sonnet5_frontier.json", "ep015_routing.json"],
+        "search": "claude sonnet 5 benchmark cost per answer",
+    },
 ]
 
 # Long-tail Q&A per episode — every answer is a published measured/modeled claim.
@@ -320,6 +331,14 @@ FAQS = {
         ("What should you fix first in a RAG pipeline?",
          "Retrieval recall (see the vector-database page). Ordering comes after there's something worth ordering."),
     ],
+    "ep015": [
+        ("How did Claude Sonnet 5 score on the exam?",
+         "15/15 — run as 15 isolated chats (no shared context), graded by the same deterministic code as every other row. It's the third frontier model to ace the exam a free local 3B passes at 80%."),
+        ("Is Sonnet 5 the cheapest frontier model?",
+         "Of the ones we've measured, yes: ~97× the local 3B's cost per correct answer (modeled at its $2/$10 per-1M list prices), vs ~108× for Gemini 3 Pro and ~657× for Fable 5."),
+        ("Does the cheaper price change the local-vs-cloud routing math?",
+         "Barely — that's the finding. The measured-weakness router still escalates the same 26.7% of calls, and the modeled bill still lands ~72.6% below all-cloud. Cheaper cloud prices lower the bill; they don't change which calls need the cloud."),
+    ],
 }
 
 # The exam leaderboard (the homepage hero). Cost multiples are MODELED and
@@ -332,7 +351,7 @@ LEADERBOARD = [
     {"model": "Gemma 3 12B QAT-Q4 (rented L4)", "score": "80%", "speed": "32 tok/s", "cost": "—", "ep": "ep012"},
     {"model": "Gemini 3 Pro (cloud)", "score": "100%", "speed": "n/a", "cost": "~108×", "ep": "ep013"},
     {"model": "Claude Fable 5 (cloud API)", "score": "100%", "speed": "n/a", "cost": "~657×", "ep": "ep006"},
-    {"model": "Claude Sonnet 5 (cloud)", "score": "on the bench", "speed": "—", "cost": "—", "ep": None},
+    {"model": "Claude Sonnet 5 (cloud)", "score": "100%", "speed": "n/a", "cost": "~97×", "ep": "ep015"},
     {"model": "Gemma 4 12B PTQ vs QAT", "score": "on the bench", "speed": "—", "cost": "—", "ep": None},
 ]
 
@@ -371,6 +390,7 @@ RELATED_GUIDES = {
     "ep005": "cost-per-correct-answer",
     "ep006": "cost-per-correct-answer",
     "ep013": "cost-per-correct-answer",
+    "ep015": "cost-per-correct-answer",
 }
 
 

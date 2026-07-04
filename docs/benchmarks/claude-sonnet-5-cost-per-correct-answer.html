@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Sonnet 5: a perfect score at ~97× the cost per correct answer — The Validation Set</title>
+<meta name="description" content="15/15 on the graded exam — and the cheapest frontier cost-per-correct we&#x27;ve measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-sonnet-5-cost-per-correct-answer.html">
+<meta property="og:title" content="Claude Sonnet 5: a perfect score at ~97× the cost per correct answer — The Validation Set">
+<meta property="og:description" content="15/15 on the graded exam — and the cheapest frontier cost-per-correct we&#x27;ve measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-sonnet-5-cost-per-correct-answer.html">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Dataset","name":"Claude Sonnet 5: a perfect score at ~97× the cost per correct answer",
+"description":"15/15 on the graded exam — and the cheapest frontier cost-per-correct we&#x27;ve measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.","url":"https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-sonnet-5-cost-per-correct-answer.html",
+"license":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/LICENSE",
+"distribution":[{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep015_sonnet5_frontier.json"},{"@type":"DataDownload","contentUrl":"https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep015_routing.json"}],
+"creator":{"@type":"Organization","name":"The Validation Set","url":"https://the-validation-set.github.io/validation-set-benchmarks/"}}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "How did Claude Sonnet 5 score on the exam?", "acceptedAnswer": {"@type": "Answer", "text": "15/15 \u2014 run as 15 isolated chats (no shared context), graded by the same deterministic code as every other row. It's the third frontier model to ace the exam a free local 3B passes at 80%."}},{"@type": "Question", "name": "Is Sonnet 5 the cheapest frontier model?", "acceptedAnswer": {"@type": "Answer", "text": "Of the ones we've measured, yes: ~97\u00d7 the local 3B's cost per correct answer (modeled at its $2/$10 per-1M list prices), vs ~108\u00d7 for Gemini 3 Pro and ~657\u00d7 for Fable 5."}},{"@type": "Question", "name": "Does the cheaper price change the local-vs-cloud routing math?", "acceptedAnswer": {"@type": "Answer", "text": "Barely \u2014 that's the finding. The measured-weakness router still escalates the same 26.7% of calls, and the modeled bill still lands ~72.6% below all-cloud. Cheaper cloud prices lower the bill; they don't change which calls need the cloud."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="../index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="../index.html#benchmarks">Benchmarks</a>
+<a href="../methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+<a href="https://thevalidationset.substack.com">Email drops</a>
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap">
+<div class="badges"><span class="badge">EP015</span><span class="badge m">measured</span></div>
+<h1>Claude Sonnet 5: a perfect score at ~97× the cost per correct answer</h1>
+<p class="lead">Is the cheapest frontier model actually cheap?</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> 15/15 on the graded exam — and the cheapest frontier cost-per-correct we&#x27;ve measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.</div>
+
+<div class="nums"><div class="num"><div class="v">15/15</div><div class="l">graded exam (isolated chats, deterministic graders)</div><span class="tag m">measured</span></div><div class="num"><div class="v">~97×</div><div class="l">cost per correct answer vs the free local 3B</div><span class="tag mo">modeled</span></div><div class="num"><div class="v">−72.6%</div><div class="l">modeled bill with measured-weakness routing</div><span class="tag mo">modeled</span></div></div>
+<p class="sub">Field guide: <a href="../cost-per-correct-answer.html">Cost per correct answer: the number per-token pricing hides</a></p>
+
+<h2>How it was measured</h2>
+<p class="sub">Fixed prompts, temperature 0, answers graded by deterministic code (a number, a letter, JSON asserts) — never an LLM judge.
+Hardware and exact model tags are recorded inside each data file. Full protocol: <a href="../methodology.html">methodology</a>.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>How did Claude Sonnet 5 score on the exam?</h3><p>15/15 — run as 15 isolated chats (no shared context), graded by the same deterministic code as every other row. It&#x27;s the third frontier model to ace the exam a free local 3B passes at 80%.</p></div><div class="faq"><h3>Is Sonnet 5 the cheapest frontier model?</h3><p>Of the ones we&#x27;ve measured, yes: ~97× the local 3B&#x27;s cost per correct answer (modeled at its $2/$10 per-1M list prices), vs ~108× for Gemini 3 Pro and ~657× for Fable 5.</p></div><div class="faq"><h3>Does the cheaper price change the local-vs-cloud routing math?</h3><p>Barely — that&#x27;s the finding. The measured-weakness router still escalates the same 26.7% of calls, and the modeled bill still lands ~72.6% below all-cloud. Cheaper cloud prices lower the bill; they don&#x27;t change which calls need the cloud.</p></div>
+<div class="cite"><span class="cite-label">CITE THIS RESULT</span><p>&ldquo;15/15 on the graded exam — and the cheapest frontier cost-per-correct we&#x27;ve measured (~97× the free local 3B; Gemini 3 Pro sits at ~108×, Fable 5 at ~657×). At the new prices routing barely moves: the same 26.7% of calls escalate, for −72.6% off the modeled all-cloud bill.&rdquo; &mdash; The Validation Set, open data at <a href="https://the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-sonnet-5-cost-per-correct-answer.html">the-validation-set.github.io/validation-set-benchmarks/benchmarks/claude-sonnet-5-cost-per-correct-answer</a></p></div>
+<h2>Raw data</h2>
+<div class="filelist"><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep015_sonnet5_frontier.json">data/ep015_sonnet5_frontier.json</a></div><div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks/blob/main/data/ep015_routing.json">data/ep015_routing.json</a></div></div>
+<h2>Reproduce it</h2>
+<pre>git clone https://github.com/The-Validation-Set/validation-set-benchmarks.git
+# each benchmark's runner + inputs are documented in data/README.md</pre>
+<div class="cta">
+<a class="btn primary" href="https://www.youtube.com/@TheValidationSet">Watch the teardown</a>
+<a class="btn ghost" href="https://github.com/The-Validation-Set/validation-set-benchmarks">Get the data</a>
+</div>
+<div class="next"><span>← <a href="rag-reranker-benchmark.html">Does a re-ranker actually help your RAG?</a></span><span></span></div>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>

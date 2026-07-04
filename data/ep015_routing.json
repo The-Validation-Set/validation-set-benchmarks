@@ -1,0 +1,110 @@
+{
+ "metadata": {
+  "episode": "EP015 -- Sonnet 5 reprice: does cheaper cloud change the routing?",
+  "provenance": "MEASURED: local from ep004_quality.json (run_quality.py); cloud per-bucket supplied. Routing is deterministic arithmetic over those measured splits.",
+  "generated": "2026-07-03",
+  "exam": "same 15-task graded exam as EP004/EP006 (temp 0, deterministic graders)",
+  "policy": "escalate ['math'] to cloud; rest stays local. Policy fixed in advance from EP004's measured weak bucket -- NOT by peeking at grades.",
+  "honesty": "Routing is only as good as your benchmark of where the small model breaks. Without that map you overpay (escalate all) or eat errors (escalate none)."
+ },
+ "cascade": {
+  "buckets": [
+   "math",
+   "reasoning",
+   "code",
+   "format",
+   "extract"
+  ],
+  "total_tasks": 15,
+  "escalate_buckets": [
+   "math"
+  ],
+  "escalated_tasks": 4,
+  "escalated_pct": 26.7,
+  "cost_ratio_cloud_over_local": 96.6,
+  "strategies": {
+   "all_local": {
+    "accuracy_pct": 80.0,
+    "correct": 12,
+    "cloud_calls_per_100": 0.0,
+    "cost_units": 15.0
+   },
+   "routing": {
+    "accuracy_pct": 100.0,
+    "correct": 15,
+    "cloud_calls_per_100": 26.7,
+    "cost_units": 397.4
+   },
+   "all_cloud": {
+    "accuracy_pct": 100.0,
+    "correct": 15,
+    "cloud_calls_per_100": 100.0,
+    "cost_units": 1449.0
+   }
+  },
+  "headline": {
+   "routing_vs_local_pts": 20.0,
+   "routing_matches_cloud": true,
+   "cloud_spend_pct_of_allcloud": 27.4,
+   "cloud_spend_cut_pct": 72.6
+  }
+ },
+ "accuracy_compare": {
+  "title": "Same 15-task exam: accuracy by strategy",
+  "unit": "%",
+  "x_labels": [
+   "All local",
+   "Smart routing",
+   "All cloud"
+  ],
+  "series": [
+   {
+    "label": "tasks correct",
+    "kind": "quality",
+    "values": [
+     80.0,
+     100.0,
+     100.0
+    ]
+   }
+  ],
+  "breakout_index": 1
+ },
+ "cost_bars": {
+  "title": "Cloud calls per 100 tasks (modeled spend)",
+  "localLabel": "Smart routing",
+  "cloudLabel": "All cloud",
+  "metrics": [
+   {
+    "label": "cloud calls / 100 tasks",
+    "local": 26.7,
+    "cloud": 100.0,
+    "better": "lower",
+    "unit": "",
+    "decimals": 0
+   }
+  ]
+ },
+ "cards": {
+  "local": {
+   "label": "All-local (3B) accuracy",
+   "value": "80%",
+   "context": "free on an 8GB laptop, but weak on its weak bucket"
+  },
+  "routing": {
+   "label": "Smart routing accuracy",
+   "value": "100%",
+   "context": "escalates only 27% of tasks to the cloud"
+  },
+  "cloud": {
+   "label": "All-cloud accuracy",
+   "value": "100%",
+   "context": "top score, but the frontier price on every call (~97x)"
+  },
+  "savings": {
+   "label": "Cloud bill cut by routing",
+   "value": "73%",
+   "context": "same accuracy as all-cloud, a fraction of the cloud calls"
+  }
+ }
+}
