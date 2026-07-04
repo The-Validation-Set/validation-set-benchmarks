@@ -1,0 +1,44 @@
+name: "Benchmark result from your rig"
+description: "Ran one of our harnesses on your hardware? Report your numbers — confirmations AND contradictions get credited in CONTRIBUTORS.md."
+title: "[result] <harness> on <your hardware>"
+labels: ["community-result"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for running it. Exact specs matter more than good news — contradictions are the most valuable entries we get.
+  - type: input
+    id: hardware
+    attributes:
+      label: Hardware (exact)
+      description: "Machine, chip, RAM — e.g. 'Mac mini M4, 16GB unified'"
+      placeholder: "base M3 MacBook Air, 8GB unified"
+    validations:
+      required: true
+  - type: input
+    id: harness
+    attributes:
+      label: Which harness / benchmark
+      placeholder: "run_quality.py (15-task exam) · run_scaling.py (concurrency) · ..."
+    validations:
+      required: true
+  - type: input
+    id: model
+    attributes:
+      label: Exact model tag(s)
+      placeholder: "llama3.2:3b (ollama, Q4_K_M)"
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Your output JSON (or the headline numbers)
+      description: "Paste the harness output. If you had to change anything to make it run, say what."
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything that differs from our setup
+      placeholder: "OLLAMA_NUM_PARALLEL=4, external cooling, etc."

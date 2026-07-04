@@ -4,6 +4,8 @@
 
 **Benchmark drops by email:** https://thevalidationset.substack.com — one short email per drop, data-first.
 
+**🖥️ Run it on your rig:** every harness here runs on your machine too — and your 16GB/32GB/GPU numbers extend a leaderboard our 8GB box can't. [Report your result](../../issues/new?template=benchmark-result.yml) (confirmations *and* contradictions get credited in [CONTRIBUTORS.md](./CONTRIBUTORS.md); open bounties listed there).
+
 > Test the hype against real data. This repo holds the **raw measured data** and the
 > **React / [Remotion](https://www.remotion.dev) render code** behind the benchmarks on
 > **[The Validation Set](https://www.youtube.com/@TheValidationSet)** — so you can re-run, re-chart, and argue with
