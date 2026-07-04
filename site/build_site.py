@@ -27,6 +27,20 @@ TAGLINE = "Reproducible AI benchmarks. Measured, not guessed."
 # Set to the Substack URL once it exists; the email box renders only when set.
 NEWSLETTER_URL = "https://thevalidationset.substack.com"
 
+# MONEY_ROADMAP lever 3 — GPU-rental referrals on COST-lane pages only.
+# Leave the URLs empty and NOTHING renders anywhere on the site. Fill them the
+# day the dedicated referral accounts exist (Vast.ai: clean separate account,
+# 3% lifetime, 75% cashable; RunPod: credits) and rebuild. Disclosure is
+# mandatory, links are price-unchanged, and referrals NEVER touch results —
+# payment buys a run, never a verdict.
+REFERRALS = {
+    "Vast.ai": "",   # e.g. "https://cloud.vast.ai/?ref_id=XXXXX"
+    "RunPod": "",    # e.g. "https://runpod.io?ref=XXXXX"
+}
+# Episodes whose finding is about renting/owning compute — the only pages
+# where the referral box may appear (reader is closest to a rental decision).
+REFERRAL_EPISODES = {"ep001", "ep002", "ep007", "ep012", "ep013", "ep016"}
+
 # Per-episode YouTube URLs (fill as they're supplied; falls back to channel).
 VIDEO_URLS = {
     "ep001": "https://youtu.be/z1SoM8poVgc",
@@ -687,6 +701,21 @@ Cost multiples are modeled vs the free local baseline.
                 body, f"{BASE_URL}/", 0, jsonld)
 
 
+def referral_html(e: dict) -> str:
+    """Disclosed GPU-rental referral box, cost-lane pages only. Renders
+    NOTHING while every REFERRALS url is empty (lever 3 staged dark)."""
+    live = {name: url for name, url in REFERRALS.items() if url}
+    if not live or e["id"] not in REFERRAL_EPISODES:
+        return ""
+    links = " · ".join(f'<a href="{url}" rel="sponsored noopener">{esc(name)}</a>'
+                       for name, url in live.items())
+    return ('<div class="card"><h3>Rent this experiment&#x27;s class of hardware</h3>'
+            f'<p class="sub">Hourly GPU rentals (the L4/cloud runs in this data came from boxes like these): {links}. '
+            '<em>Disclosure: referral links — the price you pay is unchanged; a small credit '
+            'supports the benchmarks. Referrals never touch results: payment buys a run, '
+            'never a verdict.</em></p></div>\n')
+
+
 def build_episode(e: dict, prev_e: dict, next_e: dict) -> str:
     nums = "".join(
         f'<div class="num"><div class="v">{esc(v)}</div><div class="l">{esc(l)}</div>'
@@ -731,7 +760,7 @@ Hardware and exact model tags are recorded inside each data file. Full protocol:
 <h2>Reproduce it</h2>
 <pre>git clone {REPO_URL}.git
 # each benchmark's runner + inputs are documented in data/README.md</pre>
-<div class="cta">
+{referral_html(e)}<div class="cta">
 <a class="btn primary" href="{video}">Watch the teardown</a>
 <a class="btn ghost" href="{REPO_URL}">Get the data</a>
 </div>
