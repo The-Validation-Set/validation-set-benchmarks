@@ -350,13 +350,23 @@ GUIDES = [
      "question": "What does a correct answer cost?",
      "blurb": "The metric behind the leaderboard: what a run costs divided by the answers "
               "a deterministic grader accepted — and the metric's honest limits."},
+    {"slug": "how-many-ai-agents-can-an-8gb-mac-run",
+     "title": "How many AI agents can an 8GB Mac actually run? (measured)",
+     "question": "How many concurrent AI agents fit on 8GB?",
+     "blurb": "Two — measured, not guessed. Where per-agent speed falls below usable, why "
+              "latency breaks before throughput, and why the bigger-model escape hatch is shut."},
+    {"slug": "ollama-vs-mlx-speed",
+     "title": "Ollama vs MLX on Apple silicon: which is faster? (measured)",
+     "question": "Is MLX faster than Ollama?",
+     "blurb": "A dead heat — 23.95 vs 23.8 tok/s on the same 3B, same Mac. What the runtime "
+              "swap actually buys you, and the cost math that matters more."},
 ]
 
 # Episode pages that should point at a guide (rendered as one line under the numbers).
 RELATED_GUIDES = {
-    "ep003": "is-8gb-mac-enough-for-local-llm",
+    "ep003": "how-many-ai-agents-can-an-8gb-mac-run",
     "ep004": "is-8gb-mac-enough-for-local-llm",
-    "ep009": "is-8gb-mac-enough-for-local-llm",
+    "ep009": "ollama-vs-mlx-speed",
     "ep011": "is-8gb-mac-enough-for-local-llm",
     "ep005": "cost-per-correct-answer",
     "ep006": "cost-per-correct-answer",
@@ -870,9 +880,123 @@ measured wattage × utility tariff for local hardware). 4) Divide. The accuracy 
                 body, f'{BASE_URL}/{g["slug"]}.html', 0, faq_jsonld(faqs))
 
 
+def build_guide_agents() -> str:
+    faqs = [
+        ("How many concurrent AI agents can an 8GB Mac run?",
+         "Two. Measured on a 3B via ollama (server-default parallelism): at two concurrent agents each still gets "
+         "~8.1 tok/s — above a 6 tok/s usable floor. At three, per-agent speed falls to ~5.8 tok/s, and it only gets "
+         "worse from there: ~2 tok/s each at eight agents."),
+        ("Does throughput or latency break first?",
+         "Latency. Aggregate throughput barely moves from one agent to eight (~15.6 → ~15.7 tok/s aggregate), but "
+         "median latency doubles at just two agents (5.8 s → 12.4 s p50 on identical prompts) and reaches ~42 s at "
+         "eight. Parallelism on 8GB is a trade, not a freebie."),
+        ("Can I run more (or smarter) agents by using a bigger model?",
+         "Not on this hardware. The popular 8B tag on the same box swap-thrashed and never returned a 64-token "
+         "request within a 600-second timeout — a request the 3B answered in 6.5 seconds. The bigger-model escape "
+         "hatch is shut before concurrency even enters the picture."),
+        ("Is a 3B model smart enough for agent work?",
+         "For verifiable agent tasks — extraction, formatting, instruction-following, simple code — the measured 3B "
+         "scored 80% on a 15-task graded exam, with every miss in multi-step arithmetic, which a calculator tool "
+         "patches for free."),
+    ]
+    body = f"""
+<div class="hero"><div class="wrap"><h1>How many AI agents can an 8GB Mac actually run? (measured)</h1>
+<p class="lead">Two. Measured at 1→8 concurrent agents on one base-model 8GB Apple-silicon Mac — with the exact
+level where each agent drops below usable, and why the obvious upgrade path is closed.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> the knee is at 2 agents. Each still gets ~8.1 tok/s there (above a
+6 tok/s usable floor); at three agents per-agent speed falls to ~5.8 tok/s and keeps sliding to ~2 tok/s at eight.
+The hidden cost arrives earlier: median latency doubles the moment you add the second agent.</div>
+<h2>The knee (1 → 8 agents, same 3B, server-default parallelism)</h2>
+<p>From <a href="benchmarks/{_slug("ep003")}.html">the concurrency teardown</a>: effective per-agent speed measured
+at each level — 1 agent: 15.6 tok/s · 2: 8.1 · 3: 5.8 · 4: 4.3 · 6: 2.8 · 8: 2.0. Against a 6 tok/s usable floor,
+exactly one multi-agent level survives. Aggregate throughput stays nearly flat the whole way — the machine isn't
+giving you more compute, it's dividing the same compute more ways.</p>
+<h2>Latency breaks before throughput</h2>
+<p>On identical prompts, p50 latency went 5.8 s (one agent) → 12.4 s (two) → ~42 s (eight), with p95 at eight agents
+near 77 s. So "2 agents" is honest but not free: you pay roughly 2× median latency to hold per-agent throughput.
+Every level's p50/p95/p99 and swap readings are in the raw JSON.</p>
+<h2>The bigger-model escape hatch doesn't exist</h2>
+<p>The standard 8B tag on the same box is already past the memory wall: it swap-thrashed and never completed a
+64-token request inside a 600-second timeout — the 3B answered the same request in 6.5 s at ~21 tok/s. If you want
+smarter agents on 8GB, the fix is tooling (a calculator patches the 3B's one weak bucket, measured at 80% on a
+15-task graded exam in <a href="benchmarks/{_slug("ep004")}.html">the small-vs-big exam</a>), not parameters.</p>
+<p class="note">Config stated so you can argue with it: llama3.2:3b via ollama, server-default OLLAMA_NUM_PARALLEL,
+192-token responses, seeded workload, swap recorded per level. A 16GB machine will move the knee — if you run the
+same harness on one, the repo has an open invitation to publish your curve next to ours.</p>
+{faq_section(faqs)}
+<p class="sub">Raw data behind every number: <code>ep003_scaling</code>, <code>ep003_sizewall</code>,
+<code>ep004_quality</code> in <a href="{REPO_URL}">the repo</a> ·
+<a href="methodology.html">methodology</a></p>
+</div></section>"""
+    g = next(g for g in GUIDES if g["slug"] == "how-many-ai-agents-can-an-8gb-mac-run")
+    return page(f'{g["title"]} — {SITE_NAME}',
+                "Measured knee: 2 concurrent agents on an 8GB Mac (8.1 tok/s each; 5.8 at three — below usable). "
+                "Latency doubles before throughput breaks, and the 8B upgrade path never finishes a request.",
+                body, f'{BASE_URL}/{g["slug"]}.html', 0, faq_jsonld(faqs))
+
+
+def build_guide_mlx() -> str:
+    faqs = [
+        ("Is MLX faster than Ollama on Apple silicon?",
+         "Not measurably, for single-stream generation on a 3B: Ollama 23.95 tok/s vs MLX 23.8 tok/s on the same "
+         "Mac — a gap under 1%, inside run-to-run noise. The measurement method slightly disadvantages MLX "
+         "(wall-clock decode including prompt eval, vs Ollama's own eval counters), and even so there was no gap "
+         "worth switching for."),
+        ("Should I switch runtimes for speed?",
+         "Not for this workload class. The swap everyone recommends bought 0% in this measurement. Speed on cheap "
+         "hardware is decided by model size and quantization — whether the model fits in RAM at all — not by which "
+         "runtime launches it."),
+        ("What does local generation actually cost?",
+         "Modeled from measured draw (~30 W at ~24 tok/s) and the UK electricity price cap: ~$0.12 per million "
+         "tokens. Rented GPUs bill by the hour whether tokens flow or not — $0.34–$2.89/hr at the list prices "
+         "recorded in the data file."),
+        ("Could MLX win somewhere else?",
+         "Possibly — bigger models, batching, different quant formats, or prompt-heavy workloads are all outside "
+         "this run's scope, and the scope is stated deliberately. If you measure one of those and find a real gap, "
+         "the harness is public: reproduce it and open an issue."),
+    ]
+    body = f"""
+<div class="hero"><div class="wrap"><h1>Ollama vs MLX on Apple silicon: which is faster? (measured)</h1>
+<p class="lead">A dead heat. Same 3B model, same 8GB Mac, only the runtime changed — Ollama 23.95 tok/s,
+MLX 23.8 tok/s. The "free speedup" everyone recommends measured out at ~0%.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> for single-stream generation on a 3B, the runtime does not decide
+your speed — the gap was under 1%, inside noise. What decides speed on cheap hardware is whether the model fits in
+RAM (size × quantization). What decides your bill is where you run, not what launches the model.</div>
+<h2>The measurement — and its honest asymmetry</h2>
+<p>From <a href="benchmarks/{_slug("ep009")}.html">the runtime showdown</a>: llama3.2:3b generating ~256 tokens,
+seeded, on one base 8GB Apple-silicon Mac. Ollama reports 23.95 tok/s from its own eval counters; MLX was timed as
+wall-clock decode including prompt eval — a method that, if anything, understates MLX. It still landed at 23.8.
+We call that a tie, and the asymmetry is disclosed rather than averaged away.</p>
+<h2>What actually moves the needle</h2>
+<p>Two things this series has measured matter enormously more than the runtime: quantization — the difference
+between a model that generates at 11 tok/s and one that never loads, per
+<a href="is-8gb-mac-enough-for-local-llm.html">the 8GB field guide</a> — and concurrency, where per-agent speed
+halves with the second agent. Switching runtimes is a config change that feels like progress; changing what fits in
+memory is the progress.</p>
+<h2>The cost frame that outlives the tie</h2>
+<p>At ~24 tok/s and ~30 W measured draw, the laptop's marginal cost models to <strong>~$0.12 per million tokens</strong>
+of electricity (UK price cap, inputs and sources in the data file). Rented GPUs at list price run $0.34–$2.89/hr
+whether you're generating or thinking. The runtime question was a tie; the where-you-run question is not.</p>
+{faq_section(faqs)}
+<p class="sub">Raw data behind every number: <code>ep009_runtimes</code> in <a href="{REPO_URL}">the repo</a> ·
+<a href="methodology.html">methodology</a></p>
+</div></section>"""
+    g = next(g for g in GUIDES if g["slug"] == "ollama-vs-mlx-speed")
+    return page(f'{g["title"]} — {SITE_NAME}',
+                "Measured dead heat: Ollama 23.95 vs MLX 23.8 tok/s on the same 3B and Mac (~0% apart). Why "
+                "quantization and RAM decide local AI speed, and the ~$0.12/1M-token electricity cost model.",
+                body, f'{BASE_URL}/{g["slug"]}.html', 0, faq_jsonld(faqs))
+
+
 GUIDE_BUILDERS = {
     "is-8gb-mac-enough-for-local-llm": build_guide_8gb,
     "cost-per-correct-answer": build_guide_cpca,
+    "how-many-ai-agents-can-an-8gb-mac-run": build_guide_agents,
+    "ollama-vs-mlx-speed": build_guide_mlx,
 }
 
 

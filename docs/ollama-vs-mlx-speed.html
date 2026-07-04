@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ollama vs MLX on Apple silicon: which is faster? (measured) — The Validation Set</title>
+<meta name="description" content="Measured dead heat: Ollama 23.95 vs MLX 23.8 tok/s on the same 3B and Mac (~0% apart). Why quantization and RAM decide local AI speed, and the ~$0.12/1M-token electricity cost model.">
+<link rel="canonical" href="https://the-validation-set.github.io/validation-set-benchmarks/ollama-vs-mlx-speed.html">
+<meta property="og:title" content="Ollama vs MLX on Apple silicon: which is faster? (measured) — The Validation Set">
+<meta property="og:description" content="Measured dead heat: Ollama 23.95 vs MLX 23.8 tok/s on the same 3B and Mac (~0% apart). Why quantization and RAM decide local AI speed, and the ~$0.12/1M-token electricity cost model.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://the-validation-set.github.io/validation-set-benchmarks/ollama-vs-mlx-speed.html">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type": "Question", "name": "Is MLX faster than Ollama on Apple silicon?", "acceptedAnswer": {"@type": "Answer", "text": "Not measurably, for single-stream generation on a 3B: Ollama 23.95 tok/s vs MLX 23.8 tok/s on the same Mac \u2014 a gap under 1%, inside run-to-run noise. The measurement method slightly disadvantages MLX (wall-clock decode including prompt eval, vs Ollama's own eval counters), and even so there was no gap worth switching for."}},{"@type": "Question", "name": "Should I switch runtimes for speed?", "acceptedAnswer": {"@type": "Answer", "text": "Not for this workload class. The swap everyone recommends bought 0% in this measurement. Speed on cheap hardware is decided by model size and quantization \u2014 whether the model fits in RAM at all \u2014 not by which runtime launches it."}},{"@type": "Question", "name": "What does local generation actually cost?", "acceptedAnswer": {"@type": "Answer", "text": "Modeled from measured draw (~30 W at ~24 tok/s) and the UK electricity price cap: ~$0.12 per million tokens. Rented GPUs bill by the hour whether tokens flow or not \u2014 $0.34\u2013$2.89/hr at the list prices recorded in the data file."}},{"@type": "Question", "name": "Could MLX win somewhere else?", "acceptedAnswer": {"@type": "Answer", "text": "Possibly \u2014 bigger models, batching, different quant formats, or prompt-heavy workloads are all outside this run's scope, and the scope is stated deliberately. If you measure one of those and find a real gap, the harness is public: reproduce it and open an issue."}}]}</script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+<a class="logo" href="index.html">THE VALIDATION<span class="tick"> SET ▸</span></a>
+<nav>
+<a href="index.html#benchmarks">Benchmarks</a>
+<a href="methodology.html">Methodology</a>
+<a href="https://github.com/The-Validation-Set/validation-set-benchmarks">Data &amp; code</a>
+<a href="https://www.youtube.com/@TheValidationSet">YouTube</a>
+<a href="https://thevalidationset.substack.com">Email drops</a>
+</nav>
+</div></header>
+
+<div class="hero"><div class="wrap"><h1>Ollama vs MLX on Apple silicon: which is faster? (measured)</h1>
+<p class="lead">A dead heat. Same 3B model, same 8GB Mac, only the runtime changed — Ollama 23.95 tok/s,
+MLX 23.8 tok/s. The "free speedup" everyone recommends measured out at ~0%.</p>
+</div></div>
+<section><div class="wrap">
+<div class="verdict"><strong>Verdict:</strong> for single-stream generation on a 3B, the runtime does not decide
+your speed — the gap was under 1%, inside noise. What decides speed on cheap hardware is whether the model fits in
+RAM (size × quantization). What decides your bill is where you run, not what launches the model.</div>
+<h2>The measurement — and its honest asymmetry</h2>
+<p>From <a href="benchmarks/ollama-vs-mlx-speed-benchmark.html">the runtime showdown</a>: llama3.2:3b generating ~256 tokens,
+seeded, on one base 8GB Apple-silicon Mac. Ollama reports 23.95 tok/s from its own eval counters; MLX was timed as
+wall-clock decode including prompt eval — a method that, if anything, understates MLX. It still landed at 23.8.
+We call that a tie, and the asymmetry is disclosed rather than averaged away.</p>
+<h2>What actually moves the needle</h2>
+<p>Two things this series has measured matter enormously more than the runtime: quantization — the difference
+between a model that generates at 11 tok/s and one that never loads, per
+<a href="is-8gb-mac-enough-for-local-llm.html">the 8GB field guide</a> — and concurrency, where per-agent speed
+halves with the second agent. Switching runtimes is a config change that feels like progress; changing what fits in
+memory is the progress.</p>
+<h2>The cost frame that outlives the tie</h2>
+<p>At ~24 tok/s and ~30 W measured draw, the laptop's marginal cost models to <strong>~$0.12 per million tokens</strong>
+of electricity (UK price cap, inputs and sources in the data file). Rented GPUs at list price run $0.34–$2.89/hr
+whether you're generating or thinking. The runtime question was a tie; the where-you-run question is not.</p>
+<h2>Questions this answers</h2><div class="faq"><h3>Is MLX faster than Ollama on Apple silicon?</h3><p>Not measurably, for single-stream generation on a 3B: Ollama 23.95 tok/s vs MLX 23.8 tok/s on the same Mac — a gap under 1%, inside run-to-run noise. The measurement method slightly disadvantages MLX (wall-clock decode including prompt eval, vs Ollama&#x27;s own eval counters), and even so there was no gap worth switching for.</p></div><div class="faq"><h3>Should I switch runtimes for speed?</h3><p>Not for this workload class. The swap everyone recommends bought 0% in this measurement. Speed on cheap hardware is decided by model size and quantization — whether the model fits in RAM at all — not by which runtime launches it.</p></div><div class="faq"><h3>What does local generation actually cost?</h3><p>Modeled from measured draw (~30 W at ~24 tok/s) and the UK electricity price cap: ~$0.12 per million tokens. Rented GPUs bill by the hour whether tokens flow or not — $0.34–$2.89/hr at the list prices recorded in the data file.</p></div><div class="faq"><h3>Could MLX win somewhere else?</h3><p>Possibly — bigger models, batching, different quant formats, or prompt-heavy workloads are all outside this run&#x27;s scope, and the scope is stated deliberately. If you measure one of those and find a real gap, the harness is public: reproduce it and open an issue.</p></div>
+<p class="sub">Raw data behind every number: <code>ep009_runtimes</code> in <a href="https://github.com/The-Validation-Set/validation-set-benchmarks">the repo</a> ·
+<a href="methodology.html">methodology</a></p>
+</div></section>
+<footer><div class="wrap">
+<div>© 2026 The Validation Set — Reproducible AI benchmarks. Measured, not guessed.</div>
+<div><a href="https://github.com/The-Validation-Set/validation-set-benchmarks">GitHub</a> · <a href="https://www.youtube.com/@TheValidationSet">YouTube</a></div>
+</div></footer>
+</body></html>
